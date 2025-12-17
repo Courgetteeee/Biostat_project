@@ -1,0 +1,521 @@
+id_sujet;statut_cas_temoin;age;sexe;tabagisme;imc;hypertension;diabete;cholesterol_total;niveau_activite_physique;consommation_alcool;region
+1;Cas;68.2;Homme;Fumeur actuel;28.5;Oui;Oui;6.4;Faible;Modérée (2–3 verres/j);Provence-Alpes-Cote-d'azur
+2;Cas;53.3;Homme;Jamais;25.5;Non;Non;4.8;Modérée;Modérée (2–3 verres/j);Provence-Alpes-Cote-d'azur
+3;Cas;76.9;Homme;Ancien fumeur;26.5;Oui;Non;4.9;Faible;Élevée (>3 verres/j);Occitanie
+4;Cas;61.2;Femme;Fumeur actuel;29.4;Non;Oui;6.5;Faible;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+5;Cas;57.5;Homme;Ancien fumeur;28.4;Oui;Non;7.0;Faible;Modérée (2–3 verres/j);Nouvelle Aquitaine
+6;Cas;72.0;Homme;Ancien fumeur;22.2;Non;Non;7.7;Faible;Aucune ou occasionnelle;Occitanie
+7;Cas;71.7;Homme;Jamais;27.0;Non;Oui;7.3;Faible;Aucune ou occasionnelle;Occitanie
+8;Cas;58.3;Homme;Jamais;40.9;Oui;Oui;4.0;Faible;Élevée (>3 verres/j);Provence-Alpes-Cote-d'azur
+9;Cas;64.1;Homme;Fumeur actuel;26.0;Non;Non;5.6;Modérée;Aucune ou occasionnelle;Nouvelle Aquitaine
+10;Cas;43.8;Femme;Fumeur actuel;32.4;Oui;Non;5.7;Faible;Aucune ou occasionnelle;Nouvelle Aquitaine
+11;Cas;74.4;Homme;Jamais;29.1;Oui;Non;6.1;Faible;Modérée (2–3 verres/j);Nouvelle Aquitaine
+12;Cas;72.9;Homme;Fumeur actuel;24.6;Oui;Non;5.0;Faible;Élevée (>3 verres/j);Occitanie
+13;Cas;72.6;Homme;Jamais;27.1;Oui;Oui;6.8;Faible;Modérée (2–3 verres/j);Occitanie
+14;Cas;45.8;Homme;Ancien fumeur;34.5;Oui;Non;5.4;Faible;Modérée (2–3 verres/j);Nouvelle Aquitaine
+15;Cas;61.0;Homme;Ancien fumeur;29.2;Oui;Oui;5.8;Faible;Aucune ou occasionnelle;Nouvelle Aquitaine
+16;Cas;64.0;Femme;Fumeur actuel;25.4;Oui;Non;5.0;Modérée;Élevée (>3 verres/j);Occitanie
+17;Cas;67.6;Homme;Fumeur actuel;27.1;Non;Non;7.6;Faible;Aucune ou occasionnelle;Occitanie
+18;Cas;66.6;Homme;Fumeur actuel;30.0;Oui;Non;6.8;Faible;Aucune ou occasionnelle;Occitanie
+19;Cas;75.9;Homme;Ancien fumeur;29.7;Oui;Non;4.4;Faible;Modérée (2–3 verres/j);Nouvelle Aquitaine
+20;Cas;50.1;Homme;Ancien fumeur;34.3;Non;Non;7.5;Modérée;Aucune ou occasionnelle;Nouvelle Aquitaine
+21;Cas;62.2;Homme;Fumeur actuel;29.6;Non;Oui;7.3;Modérée;Modérée (2–3 verres/j);Nouvelle Aquitaine
+22;Cas;58.1;Homme;Fumeur actuel;36.9;Non;Oui;7.2;Modérée;Aucune ou occasionnelle;Occitanie
+23;Cas;65.7;Homme;Fumeur actuel;25.9;Non;Non;5.8;Faible;Élevée (>3 verres/j);Occitanie
+24;Cas;69.0;Homme;Ancien fumeur;31.6;Oui;Non;6.1;Faible;Élevée (>3 verres/j);Occitanie
+25;Cas;75.9;Homme;Fumeur actuel;25.8;Oui;Non;5.0;Modérée;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+26;Cas;59.8;Homme;Ancien fumeur;28.7;Oui;Non;6.0;Faible;Aucune ou occasionnelle;Nouvelle Aquitaine
+27;Cas;70.1;Femme;Ancien fumeur;25.5;Oui;Oui;6.8;Faible;Modérée (2–3 verres/j);Nouvelle Aquitaine
+28;Cas;47.6;Homme;Fumeur actuel;29.7;Oui;Non;6.1;Faible;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+29;Cas;62.4;Homme;Jamais;27.4;Oui;Non;5.9;Faible;Aucune ou occasionnelle;Occitanie
+30;Cas;73.5;Femme;Ancien fumeur;34.8;Oui;Non;6.9;Faible;Modérée (2–3 verres/j);Provence-Alpes-Cote-d'azur
+31;Cas;60.4;Homme;Fumeur actuel;24.4;Non;Non;7.1;Faible;Aucune ou occasionnelle;Nouvelle Aquitaine
+32;Cas;67.0;Homme;Fumeur actuel;34.0;Oui;Non;6.1;Faible;Modérée (2–3 verres/j);Nouvelle Aquitaine
+33;Cas;73.4;Homme;Fumeur actuel;31.1;Oui;Oui;5.9;Faible;Modérée (2–3 verres/j);Nouvelle Aquitaine
+34;Cas;73.4;Femme;Fumeur actuel;30.7;Oui;Non;5.1;Faible;Aucune ou occasionnelle;Nouvelle Aquitaine
+35;Cas;71.8;Homme;Fumeur actuel;26.8;Non;Non;5.3;Élevée;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+36;Cas;62.9;Femme;Fumeur actuel;28.9;Oui;Non;7.1;Faible;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+37;Cas;65.1;Homme;Fumeur actuel;27.3;Non;Oui;6.6;Faible;Aucune ou occasionnelle;Nouvelle Aquitaine
+38;Cas;61.1;Femme;Jamais;26.2;Oui;Non;4.7;Faible;Aucune ou occasionnelle;Nouvelle Aquitaine
+39;Cas;71.6;Femme;Fumeur actuel;29.0;Non;Non;6.9;Élevée;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+40;Cas;85.5;Femme;Fumeur actuel;25.9;Non;Non;4.0;Faible;Modérée (2–3 verres/j);Provence-Alpes-Cote-d'azur
+41;Cas;64.7;Homme;Fumeur actuel;32.3;Non;Non;6.3;Faible;Aucune ou occasionnelle;Nouvelle Aquitaine
+42;Cas;58.9;Homme;Ancien fumeur;31.9;Oui;Oui;5.7;Modérée;Aucune ou occasionnelle;Nouvelle Aquitaine
+43;Cas;64.3;Homme;Jamais;25.8;Non;Non;4.7;Élevée;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+44;Cas;45.3;Homme;Fumeur actuel;29.9;Non;Oui;5.7;Modérée;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+45;Cas;66.2;Femme;Fumeur actuel;24.5;Oui;Oui;5.2;Faible;Aucune ou occasionnelle;Nouvelle Aquitaine
+46;Cas;55.9;Femme;Fumeur actuel;24.9;Oui;Non;4.9;Modérée;Élevée (>3 verres/j);Nouvelle Aquitaine
+47;Cas;62.8;Femme;Ancien fumeur;38.0;Oui;Oui;7.0;Faible;Aucune ou occasionnelle;Occitanie
+48;Cas;64.2;Homme;Ancien fumeur;21.1;Oui;Non;5.9;Faible;Élevée (>3 verres/j);Occitanie
+49;Cas;70.8;Homme;Ancien fumeur;26.0;Non;Oui;5.7;Élevée;Modérée (2–3 verres/j);Provence-Alpes-Cote-d'azur
+50;Cas;65.9;Homme;Fumeur actuel;25.7;Non;Non;6.0;Faible;Aucune ou occasionnelle;Occitanie
+51;Cas;71.6;Homme;Ancien fumeur;27.8;Oui;Non;6.3;Faible;Élevée (>3 verres/j);Provence-Alpes-Cote-d'azur
+52;Cas;51.0;Femme;Fumeur actuel;20.9;Oui;Non;5.9;Faible;Modérée (2–3 verres/j);Occitanie
+53;Cas;51.4;Homme;Jamais;30.8;Non;Non;6.2;Modérée;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+54;Cas;63.1;Femme;Ancien fumeur;28.6;Non;Non;4.9;Faible;Aucune ou occasionnelle;Occitanie
+55;Cas;59.1;Femme;Fumeur actuel;31.4;Oui;Non;5.9;Faible;Modérée (2–3 verres/j);Nouvelle Aquitaine
+56;Cas;62.7;Homme;Fumeur actuel;31.0;Oui;Non;5.5;Faible;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+57;Cas;67.2;Femme;Ancien fumeur;24.1;Non;Non;5.1;Faible;Modérée (2–3 verres/j);Nouvelle Aquitaine
+58;Cas;63.7;Homme;Fumeur actuel;22.5;Oui;Oui;6.8;Faible;Élevée (>3 verres/j);Nouvelle Aquitaine
+59;Cas;69.1;Homme;Ancien fumeur;33.0;Oui;Non;6.1;Modérée;Aucune ou occasionnelle;Occitanie
+60;Cas;77.9;Homme;Ancien fumeur;32.6;Non;Non;5.6;Faible;Modérée (2–3 verres/j);Nouvelle Aquitaine
+61;Cas;55.2;Homme;Fumeur actuel;27.2;Non;Oui;6.0;Faible;Aucune ou occasionnelle;Nouvelle Aquitaine
+62;Cas;63.4;Homme;Fumeur actuel;26.3;Oui;Oui;6.1;Faible;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+63;Cas;66.8;Homme;Fumeur actuel;28.2;Oui;Non;4.4;Faible;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+64;Cas;62.1;Homme;Jamais;26.9;Oui;Non;5.8;Modérée;Modérée (2–3 verres/j);Occitanie
+65;Cas;73.3;Femme;Ancien fumeur;27.2;Non;Non;7.7;Faible;Modérée (2–3 verres/j);Nouvelle Aquitaine
+66;Cas;42.4;Homme;Ancien fumeur;32.3;Oui;Oui;6.9;Faible;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+67;Cas;82.3;Femme;Fumeur actuel;26.3;Oui;Oui;6.2;Faible;Élevée (>3 verres/j);Provence-Alpes-Cote-d'azur
+68;Cas;53.7;Homme;Jamais;27.3;Oui;Non;5.5;Faible;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+69;Cas;65.9;Homme;Ancien fumeur;28.2;Non;Oui;7.3;Modérée;Élevée (>3 verres/j);Nouvelle Aquitaine
+70;Cas;70.3;Homme;Fumeur actuel;34.1;Oui;Non;5.8;Faible;Aucune ou occasionnelle;Nouvelle Aquitaine
+71;Cas;56.9;Homme;Fumeur actuel;31.4;Oui;Non;5.1;Modérée;Modérée (2–3 verres/j);Provence-Alpes-Cote-d'azur
+72;Cas;68.2;Femme;Fumeur actuel;25.0;Oui;Oui;5.8;Modérée;Modérée (2–3 verres/j);Provence-Alpes-Cote-d'azur
+73;Cas;70.3;Femme;Ancien fumeur;28.3;Oui;Non;6.1;Modérée;Élevée (>3 verres/j);Nouvelle Aquitaine
+74;Cas;68.7;Femme;Fumeur actuel;25.5;Oui;Oui;5.8;Faible;Élevée (>3 verres/j);Nouvelle Aquitaine
+75;Cas;55.7;Homme;Ancien fumeur;26.0;Oui;Non;7.1;Faible;Aucune ou occasionnelle;Nouvelle Aquitaine
+76;Cas;82.1;Homme;Ancien fumeur;25.8;Oui;Non;6.0;Faible;Aucune ou occasionnelle;Nouvelle Aquitaine
+77;Cas;66.0;Femme;Fumeur actuel;22.5;Oui;Non;6.8;Faible;Aucune ou occasionnelle;Nouvelle Aquitaine
+78;Cas;53.6;Homme;Fumeur actuel;27.0;Oui;Oui;4.6;Modérée;Modérée (2–3 verres/j);Provence-Alpes-Cote-d'azur
+79;Cas;69.7;Homme;Ancien fumeur;27.1;Oui;Non;4.9;Faible;Modérée (2–3 verres/j);Occitanie
+80;Cas;64.4;Homme;Fumeur actuel;29.0;Non;Non;6.0;Faible;Aucune ou occasionnelle;Nouvelle Aquitaine
+81;Cas;68.2;Homme;Fumeur actuel;30.6;Non;Oui;5.7;Faible;Modérée (2–3 verres/j);Occitanie
+82;Cas;31.9;Homme;Jamais;31.5;Oui;Oui;6.3;Faible;Aucune ou occasionnelle;Nouvelle Aquitaine
+83;Cas;75.9;Homme;Jamais;25.3;Oui;Non;5.6;Modérée;Aucune ou occasionnelle;Occitanie
+84;Cas;65.4;Femme;Fumeur actuel;26.0;Oui;Oui;6.7;Faible;Modérée (2–3 verres/j);Occitanie
+85;Cas;65.5;Homme;Fumeur actuel;26.7;Oui;Non;4.7;Modérée;Modérée (2–3 verres/j);Provence-Alpes-Cote-d'azur
+86;Cas;60.1;Homme;Fumeur actuel;25.8;Oui;Non;7.2;Faible;Modérée (2–3 verres/j);Occitanie
+87;Cas;70.9;Homme;Jamais;29.3;Non;Non;3.7;Modérée;Aucune ou occasionnelle;Occitanie
+88;Cas;72.9;Homme;Fumeur actuel;30.4;Oui;Oui;6.2;Modérée;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+89;Cas;66.4;Femme;Jamais;29.1;Oui;Non;6.7;Faible;Élevée (>3 verres/j);Nouvelle Aquitaine
+90;Cas;76.5;Femme;Fumeur actuel;25.3;Oui;Non;5.6;Faible;Modérée (2–3 verres/j);Nouvelle Aquitaine
+91;Cas;64.7;Homme;Ancien fumeur;27.0;Oui;Oui;6.2;Élevée;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+92;Cas;60.4;Homme;Fumeur actuel;30.7;Oui;Non;5.5;Faible;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+93;Cas;54.7;Homme;Ancien fumeur;29.9;Oui;Non;5.7;Modérée;Modérée (2–3 verres/j);Provence-Alpes-Cote-d'azur
+94;Cas;58.7;Femme;Ancien fumeur;28.8;Oui;Non;5.2;Modérée;Élevée (>3 verres/j);Nouvelle Aquitaine
+95;Cas;71.3;Homme;Ancien fumeur;26.0;Oui;Non;6.2;Faible;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+96;Cas;63.3;Homme;Fumeur actuel;24.9;Non;Non;6.5;Faible;Aucune ou occasionnelle;Occitanie
+97;Cas;60.9;Homme;Jamais;37.2;Oui;Non;6.1;Faible;Modérée (2–3 verres/j);Occitanie
+98;Cas;68.8;Homme;Jamais;28.3;Oui;Oui;3.9;Faible;Modérée (2–3 verres/j);Provence-Alpes-Cote-d'azur
+99;Cas;54.4;Homme;Ancien fumeur;34.7;Oui;Non;4.5;Faible;Aucune ou occasionnelle;Nouvelle Aquitaine
+100;Cas;59.4;Femme;Fumeur actuel;31.7;Oui;Non;6.8;Modérée;Élevée (>3 verres/j);Occitanie
+101;Cas;66.6;Femme;Ancien fumeur;26.3;Oui;Non;6.4;Modérée;Modérée (2–3 verres/j);Provence-Alpes-Cote-d'azur
+102;Cas;69.1;Femme;Fumeur actuel;21.0;Oui;Non;6.5;Modérée;Modérée (2–3 verres/j);Provence-Alpes-Cote-d'azur
+103;Cas;68.5;Homme;Jamais;26.3;Oui;Non;5.5;Modérée;Élevée (>3 verres/j);Provence-Alpes-Cote-d'azur
+104;Cas;66.6;Homme;Fumeur actuel;21.4;Oui;Non;7.7;Faible;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+105;Cas;68.4;Homme;Fumeur actuel;28.8;Oui;Non;6.2;Modérée;Aucune ou occasionnelle;Nouvelle Aquitaine
+106;Cas;76.3;Homme;Jamais;26.6;Non;Oui;5.4;Modérée;Aucune ou occasionnelle;Nouvelle Aquitaine
+107;Cas;57.0;Femme;Fumeur actuel;29.5;Oui;Non;5.2;Élevée;Élevée (>3 verres/j);Occitanie
+108;Cas;59.8;Homme;Fumeur actuel;24.1;Oui;Non;6.2;Modérée;Modérée (2–3 verres/j);Occitanie
+109;Cas;75.0;Homme;Fumeur actuel;28.1;Oui;Non;6.9;Faible;Aucune ou occasionnelle;Nouvelle Aquitaine
+110;Cas;52.5;Femme;Jamais;25.2;Oui;Non;5.9;Modérée;Aucune ou occasionnelle;Nouvelle Aquitaine
+111;Cas;71.9;Femme;Ancien fumeur;26.8;Non;Non;6.3;Faible;Modérée (2–3 verres/j);Nouvelle Aquitaine
+112;Cas;48.6;Homme;Fumeur actuel;31.9;Oui;Non;6.9;Faible;Modérée (2–3 verres/j);Nouvelle Aquitaine
+113;Cas;59.9;Femme;Ancien fumeur;31.0;Non;Non;5.4;Faible;Modérée (2–3 verres/j);Occitanie
+114;Cas;70.7;Homme;Jamais;27.5;Non;Non;5.6;Modérée;Modérée (2–3 verres/j);Provence-Alpes-Cote-d'azur
+115;Cas;62.2;Femme;Jamais;24.3;Non;Non;5.8;Faible;Élevée (>3 verres/j);Nouvelle Aquitaine
+116;Cas;62.4;Femme;Jamais;30.2;Oui;Non;5.0;Élevée;Modérée (2–3 verres/j);Provence-Alpes-Cote-d'azur
+117;Cas;70.1;Femme;Fumeur actuel;35.6;Non;Non;7.1;Faible;Aucune ou occasionnelle;Nouvelle Aquitaine
+118;Cas;47.6;Homme;Ancien fumeur;33.3;Non;Oui;5.3;Faible;Aucune ou occasionnelle;Nouvelle Aquitaine
+119;Cas;64.4;Homme;Fumeur actuel;24.7;Non;Non;4.5;Élevée;Aucune ou occasionnelle;Nouvelle Aquitaine
+120;Cas;67.6;Homme;Jamais;26.6;Non;Oui;6.7;Modérée;Aucune ou occasionnelle;Nouvelle Aquitaine
+121;Cas;61.8;Homme;Jamais;23.5;Oui;Non;3.8;Faible;Aucune ou occasionnelle;Occitanie
+122;Cas;58.4;Femme;Fumeur actuel;34.8;Non;Non;5.4;Faible;Modérée (2–3 verres/j);Nouvelle Aquitaine
+123;Cas;57.9;Homme;Ancien fumeur;26.3;Oui;Non;6.2;Élevée;Modérée (2–3 verres/j);Nouvelle Aquitaine
+124;Cas;67.9;Homme;Jamais;31.1;Non;Non;5.9;Faible;Aucune ou occasionnelle;Occitanie
+125;Cas;48.7;Femme;Ancien fumeur;31.9;Oui;Non;5.5;Élevée;Modérée (2–3 verres/j);Provence-Alpes-Cote-d'azur
+126;Cas;67.5;Homme;Fumeur actuel;35.8;Non;Non;5.2;Faible;Modérée (2–3 verres/j);Occitanie
+127;Cas;59.7;Homme;Ancien fumeur;29.6;Oui;Non;7.7;Modérée;Modérée (2–3 verres/j);Nouvelle Aquitaine
+128;Cas;61.3;Homme;Ancien fumeur;21.1;Non;Oui;4.4;Modérée;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+129;Cas;70.2;Femme;Ancien fumeur;25.5;Oui;Non;7.0;Faible;Aucune ou occasionnelle;Occitanie
+130;Cas;70.1;Homme;Fumeur actuel;27.4;Oui;Non;6.0;Faible;Modérée (2–3 verres/j);Occitanie
+131;Cas;66.2;Homme;Jamais;31.0;Oui;Oui;5.2;Faible;Modérée (2–3 verres/j);Nouvelle Aquitaine
+132;Cas;65.4;Homme;Fumeur actuel;28.2;Non;Oui;5.4;Faible;Élevée (>3 verres/j);Nouvelle Aquitaine
+133;Cas;71.3;Femme;Fumeur actuel;28.2;Oui;Non;4.9;Faible;Élevée (>3 verres/j);Nouvelle Aquitaine
+134;Cas;81.0;Homme;Fumeur actuel;27.8;Oui;Non;6.3;Faible;Élevée (>3 verres/j);Nouvelle Aquitaine
+135;Cas;69.8;Homme;Fumeur actuel;31.1;Non;Non;5.9;Faible;Aucune ou occasionnelle;Nouvelle Aquitaine
+136;Cas;55.3;Homme;Ancien fumeur;31.0;Oui;Non;5.4;Faible;Aucune ou occasionnelle;Nouvelle Aquitaine
+137;Cas;45.2;Homme;Jamais;29.1;Oui;Non;6.6;Faible;Aucune ou occasionnelle;Occitanie
+138;Cas;81.4;Homme;Jamais;33.1;Oui;Oui;8.1;Faible;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+139;Cas;48.4;Femme;Ancien fumeur;24.3;Non;Non;5.7;Faible;Aucune ou occasionnelle;Nouvelle Aquitaine
+140;Cas;74.9;Homme;Ancien fumeur;29.6;Non;Oui;5.2;Modérée;Aucune ou occasionnelle;Nouvelle Aquitaine
+141;Cas;71.2;Femme;Fumeur actuel;25.8;Oui;Oui;5.3;Modérée;Modérée (2–3 verres/j);Provence-Alpes-Cote-d'azur
+142;Cas;60.6;Homme;Jamais;33.8;Non;Non;7.6;Faible;Modérée (2–3 verres/j);Occitanie
+143;Cas;70.3;Homme;Jamais;24.7;Oui;Non;6.8;Faible;Modérée (2–3 verres/j);Nouvelle Aquitaine
+144;Cas;56.3;Femme;Jamais;25.3;Non;Non;6.7;Élevée;Aucune ou occasionnelle;Nouvelle Aquitaine
+145;Cas;74.6;Homme;Fumeur actuel;27.2;Oui;Non;5.0;Faible;Aucune ou occasionnelle;Nouvelle Aquitaine
+146;Cas;59.3;Homme;Ancien fumeur;32.2;Oui;Non;5.3;Élevée;Aucune ou occasionnelle;Occitanie
+147;Cas;70.3;Femme;Ancien fumeur;27.2;Oui;Non;4.9;Faible;Élevée (>3 verres/j);Provence-Alpes-Cote-d'azur
+148;Cas;72.9;Femme;Fumeur actuel;32.2;Oui;Non;6.5;Modérée;Modérée (2–3 verres/j);Occitanie
+149;Cas;62.9;Homme;Fumeur actuel;24.9;Oui;Non;6.0;Modérée;Aucune ou occasionnelle;Nouvelle Aquitaine
+150;Cas;85.3;Homme;Ancien fumeur;36.2;Non;Non;7.0;Faible;Modérée (2–3 verres/j);Nouvelle Aquitaine
+151;Cas;68.5;Homme;Fumeur actuel;32.2;Non;Oui;4.0;Modérée;Aucune ou occasionnelle;Occitanie
+152;Cas;71.2;Femme;Jamais;32.8;Oui;Non;7.0;Modérée;Modérée (2–3 verres/j);Provence-Alpes-Cote-d'azur
+153;Cas;59.7;Homme;Fumeur actuel;20.7;Oui;Non;5.6;Modérée;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+154;Cas;63.5;Homme;Jamais;22.9;Oui;Non;5.7;Élevée;Aucune ou occasionnelle;Nouvelle Aquitaine
+155;Cas;76.2;Homme;Fumeur actuel;35.2;Oui;Non;5.1;Faible;Aucune ou occasionnelle;Occitanie
+156;Cas;56.8;Homme;Ancien fumeur;33.0;Oui;Oui;5.0;Modérée;Élevée (>3 verres/j);Occitanie
+157;Cas;44.9;Homme;Ancien fumeur;29.9;Oui;Oui;4.9;Faible;Modérée (2–3 verres/j);Provence-Alpes-Cote-d'azur
+158;Cas;61.0;Homme;Ancien fumeur;25.9;Non;Non;6.4;Élevée;Élevée (>3 verres/j);Provence-Alpes-Cote-d'azur
+159;Cas;56.0;Homme;Jamais;24.4;Non;Non;6.2;Modérée;Aucune ou occasionnelle;Occitanie
+160;Cas;67.0;Homme;Fumeur actuel;21.0;Oui;Non;5.6;Faible;Élevée (>3 verres/j);Provence-Alpes-Cote-d'azur
+161;Cas;68.8;Femme;Jamais;31.1;Non;Non;6.4;Élevée;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+162;Cas;57.3;Homme;Fumeur actuel;21.3;Oui;Non;6.7;Faible;Élevée (>3 verres/j);Occitanie
+163;Cas;61.1;Femme;Jamais;33.2;Oui;Non;6.4;Faible;Élevée (>3 verres/j);Nouvelle Aquitaine
+164;Cas;55.8;Homme;Jamais;31.2;Oui;Oui;4.4;Faible;Aucune ou occasionnelle;Nouvelle Aquitaine
+165;Cas;56.3;Femme;Fumeur actuel;29.1;Non;Non;6.1;Faible;Élevée (>3 verres/j);Occitanie
+166;Cas;66.0;Homme;Ancien fumeur;30.2;Non;Non;6.7;Modérée;Aucune ou occasionnelle;Nouvelle Aquitaine
+167;Cas;69.7;Homme;Fumeur actuel;33.3;Oui;Oui;6.0;Élevée;Élevée (>3 verres/j);Nouvelle Aquitaine
+168;Cas;65.7;Homme;Fumeur actuel;27.8;Oui;Non;7.4;Faible;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+169;Cas;72.6;Homme;Fumeur actuel;32.3;Oui;Oui;5.7;Modérée;Aucune ou occasionnelle;Nouvelle Aquitaine
+170;Cas;72.9;Homme;Fumeur actuel;31.0;Oui;Oui;7.1;Élevée;Aucune ou occasionnelle;Nouvelle Aquitaine
+171;Cas;63.3;Homme;Fumeur actuel;28.0;Oui;Non;6.0;Faible;Élevée (>3 verres/j);Nouvelle Aquitaine
+172;Cas;59.0;Homme;Ancien fumeur;30.3;Non;Non;8.3;Modérée;Élevée (>3 verres/j);Provence-Alpes-Cote-d'azur
+173;Cas;55.6;Homme;Fumeur actuel;26.0;Oui;Oui;5.8;Faible;Élevée (>3 verres/j);Nouvelle Aquitaine
+174;Cas;52.8;Homme;Fumeur actuel;30.0;Oui;Non;6.2;Faible;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+175;Cas;65.3;Homme;Fumeur actuel;29.7;Oui;Non;5.7;Modérée;Élevée (>3 verres/j);Nouvelle Aquitaine
+176;Cas;62.0;Homme;Fumeur actuel;27.6;Oui;Oui;5.3;Faible;Élevée (>3 verres/j);Nouvelle Aquitaine
+177;Cas;83.1;Femme;Fumeur actuel;32.9;Oui;Non;5.6;Élevée;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+178;Cas;65.1;Homme;Fumeur actuel;32.5;Oui;Non;5.5;Faible;Modérée (2–3 verres/j);Nouvelle Aquitaine
+179;Cas;51.3;Homme;Fumeur actuel;33.0;Non;Non;4.6;Faible;Modérée (2–3 verres/j);Occitanie
+180;Cas;76.8;Homme;Jamais;21.0;Oui;Non;4.3;Faible;Élevée (>3 verres/j);Provence-Alpes-Cote-d'azur
+181;Cas;44.7;Femme;Fumeur actuel;29.2;Oui;Non;5.7;Faible;Aucune ou occasionnelle;Occitanie
+182;Cas;51.9;Homme;Jamais;25.4;Oui;Oui;4.8;Modérée;Modérée (2–3 verres/j);Occitanie
+183;Cas;67.3;Homme;Fumeur actuel;27.3;Oui;Non;5.7;Faible;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+184;Cas;63.9;Femme;Fumeur actuel;23.5;Oui;Non;4.9;Modérée;Modérée (2–3 verres/j);Nouvelle Aquitaine
+185;Cas;75.5;Femme;Ancien fumeur;26.5;Non;Non;3.7;Faible;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+186;Cas;51.0;Homme;Ancien fumeur;27.1;Non;Non;5.2;Faible;Élevée (>3 verres/j);Nouvelle Aquitaine
+187;Cas;53.2;Homme;Fumeur actuel;24.3;Oui;Non;5.7;Faible;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+188;Cas;58.7;Femme;Fumeur actuel;30.1;Non;Non;4.7;Faible;Élevée (>3 verres/j);Provence-Alpes-Cote-d'azur
+189;Cas;60.3;Homme;Fumeur actuel;27.1;Non;Oui;6.0;Faible;Modérée (2–3 verres/j);Nouvelle Aquitaine
+190;Cas;51.2;Femme;Fumeur actuel;33.8;Oui;Oui;7.7;Faible;Modérée (2–3 verres/j);Occitanie
+191;Cas;65.9;Homme;Ancien fumeur;34.9;Non;Non;5.3;Faible;Modérée (2–3 verres/j);Nouvelle Aquitaine
+192;Cas;58.7;Homme;Ancien fumeur;27.6;Oui;Oui;4.9;Élevée;Modérée (2–3 verres/j);Nouvelle Aquitaine
+193;Cas;50.7;Femme;Fumeur actuel;27.1;Oui;Oui;6.7;Modérée;Aucune ou occasionnelle;Occitanie
+194;Cas;55.9;Femme;Fumeur actuel;29.7;Oui;Non;7.0;Faible;Élevée (>3 verres/j);Provence-Alpes-Cote-d'azur
+195;Cas;73.9;Homme;Jamais;27.6;Oui;Non;5.0;Faible;Aucune ou occasionnelle;Occitanie
+196;Cas;60.1;Femme;Fumeur actuel;25.9;Oui;Oui;7.9;Faible;Modérée (2–3 verres/j);Occitanie
+197;Cas;62.5;Homme;Jamais;32.1;Oui;Non;5.0;Élevée;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+198;Cas;72.0;Femme;Fumeur actuel;33.3;Oui;Oui;7.0;Faible;Modérée (2–3 verres/j);Nouvelle Aquitaine
+199;Cas;66.6;Femme;Jamais;28.1;Oui;Non;5.3;Modérée;Aucune ou occasionnelle;Nouvelle Aquitaine
+200;Cas;54.5;Homme;Jamais;27.1;Oui;Oui;4.8;Modérée;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+201;Cas;61.1;Femme;Fumeur actuel;30.8;Oui;Non;6.1;Faible;Élevée (>3 verres/j);Provence-Alpes-Cote-d'azur
+202;Cas;58.4;Homme;Jamais;30.1;Oui;Non;8.0;Faible;Aucune ou occasionnelle;Occitanie
+203;Cas;65.4;Homme;Fumeur actuel;30.1;Oui;Non;7.0;Modérée;Élevée (>3 verres/j);Nouvelle Aquitaine
+204;Cas;58.9;Homme;Jamais;31.3;Oui;Oui;4.8;Modérée;Aucune ou occasionnelle;Nouvelle Aquitaine
+205;Cas;73.5;Femme;Jamais;24.1;Oui;Non;4.6;Modérée;Élevée (>3 verres/j);Nouvelle Aquitaine
+206;Cas;56.9;Homme;Fumeur actuel;34.8;Non;Oui;6.7;Faible;Aucune ou occasionnelle;Nouvelle Aquitaine
+207;Cas;59.3;Homme;Fumeur actuel;30.7;Non;Non;6.8;Faible;Aucune ou occasionnelle;Occitanie
+208;Cas;64.6;Femme;Ancien fumeur;25.6;Non;Non;4.7;Élevée;Modérée (2–3 verres/j);Nouvelle Aquitaine
+209;Cas;81.2;Homme;Ancien fumeur;26.1;Oui;Non;6.0;Modérée;Aucune ou occasionnelle;Occitanie
+210;Cas;71.1;Homme;Ancien fumeur;30.3;Oui;Non;6.4;Faible;Aucune ou occasionnelle;Occitanie
+211;Cas;68.6;Homme;Jamais;28.5;Oui;Oui;6.6;Faible;Élevée (>3 verres/j);Provence-Alpes-Cote-d'azur
+212;Cas;59.1;Homme;Fumeur actuel;28.0;Non;Non;6.4;Faible;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+213;Cas;73.4;Femme;Fumeur actuel;27.1;Non;Non;5.5;Modérée;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+214;Cas;83.0;Homme;Ancien fumeur;34.7;Oui;Non;5.8;Faible;Modérée (2–3 verres/j);Occitanie
+215;Cas;77.1;Homme;Ancien fumeur;28.8;Oui;Non;7.6;Faible;Aucune ou occasionnelle;Nouvelle Aquitaine
+216;Cas;73.1;Homme;Ancien fumeur;32.5;Oui;Non;6.8;Faible;Modérée (2–3 verres/j);Occitanie
+217;Cas;70.7;Homme;Fumeur actuel;28.0;Non;Non;6.8;Faible;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+218;Cas;57.9;Femme;Ancien fumeur;32.5;Non;Non;5.9;Faible;Aucune ou occasionnelle;Nouvelle Aquitaine
+219;Cas;68.0;Homme;Jamais;26.9;Non;Non;5.1;Modérée;Modérée (2–3 verres/j);Occitanie
+220;Cas;70.2;Femme;Fumeur actuel;29.2;Non;Non;5.1;Faible;Aucune ou occasionnelle;Occitanie
+221;Cas;61.5;Femme;Jamais;31.9;Oui;Non;4.6;Faible;Modérée (2–3 verres/j);Occitanie
+222;Cas;81.3;Homme;Jamais;33.2;Oui;Oui;6.6;Modérée;Modérée (2–3 verres/j);Occitanie
+223;Cas;67.7;Femme;Jamais;30.7;Oui;Non;5.7;Modérée;Modérée (2–3 verres/j);Nouvelle Aquitaine
+224;Cas;72.0;Femme;Fumeur actuel;30.4;Oui;Non;6.2;Faible;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+225;Cas;66.0;Homme;Fumeur actuel;28.6;Oui;Oui;5.5;Faible;Modérée (2–3 verres/j);Occitanie
+226;Cas;45.3;Homme;Jamais;28.9;Non;Non;5.3;Modérée;Aucune ou occasionnelle;Occitanie
+227;Cas;60.5;Femme;Fumeur actuel;26.5;Oui;Non;6.3;Faible;Modérée (2–3 verres/j);Occitanie
+228;Cas;63.2;Homme;Fumeur actuel;24.6;Non;Oui;6.1;Faible;Modérée (2–3 verres/j);Occitanie
+229;Cas;74.1;Homme;Jamais;29.7;Non;Non;5.4;Faible;Aucune ou occasionnelle;Occitanie
+230;Cas;66.2;Femme;Jamais;28.5;Oui;Non;5.8;Modérée;Aucune ou occasionnelle;Nouvelle Aquitaine
+231;Cas;65.1;Homme;Ancien fumeur;32.6;Oui;Oui;7.0;Faible;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+232;Cas;66.7;Homme;Fumeur actuel;36.9;Oui;Non;5.8;Faible;Modérée (2–3 verres/j);Occitanie
+233;Cas;62.6;Homme;Ancien fumeur;27.7;Oui;Oui;4.0;Modérée;Modérée (2–3 verres/j);Nouvelle Aquitaine
+234;Cas;57.3;Femme;Fumeur actuel;22.2;Oui;Non;5.2;Faible;Modérée (2–3 verres/j);Provence-Alpes-Cote-d'azur
+235;Cas;52.8;Homme;Ancien fumeur;38.5;Oui;Non;6.2;Faible;Élevée (>3 verres/j);Occitanie
+236;Cas;66.2;Homme;Fumeur actuel;23.5;Oui;Non;4.2;Faible;Modérée (2–3 verres/j);Nouvelle Aquitaine
+237;Cas;69.2;Homme;Fumeur actuel;23.6;Oui;Non;6.2;Faible;Aucune ou occasionnelle;Nouvelle Aquitaine
+238;Cas;88.9;Homme;Fumeur actuel;27.2;Oui;Non;7.0;Faible;Aucune ou occasionnelle;Nouvelle Aquitaine
+239;Cas;67.6;Homme;Fumeur actuel;30.3;Oui;Oui;6.5;Faible;Modérée (2–3 verres/j);Provence-Alpes-Cote-d'azur
+240;Cas;70.0;Homme;Fumeur actuel;25.9;Non;Non;3.7;Faible;Aucune ou occasionnelle;Nouvelle Aquitaine
+241;Cas;61.5;Homme;Fumeur actuel;35.6;Non;Oui;6.2;Faible;Aucune ou occasionnelle;Nouvelle Aquitaine
+242;Cas;68.5;Homme;Fumeur actuel;28.2;Oui;Non;7.5;Faible;Modérée (2–3 verres/j);Occitanie
+243;Cas;71.8;Femme;Fumeur actuel;35.0;Oui;Oui;7.9;Faible;Modérée (2–3 verres/j);Nouvelle Aquitaine
+244;Cas;54.5;Femme;Jamais;26.3;Oui;Non;5.9;Faible;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+245;Cas;51.5;Femme;Fumeur actuel;24.3;Oui;Oui;4.8;Modérée;Modérée (2–3 verres/j);Occitanie
+246;Cas;74.4;Homme;Jamais;29.5;Oui;Non;4.6;Faible;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+247;Cas;74.6;Homme;Fumeur actuel;21.5;Oui;Non;5.6;Faible;Aucune ou occasionnelle;Nouvelle Aquitaine
+248;Cas;67.5;Femme;Jamais;30.7;Oui;Oui;7.7;Faible;Élevée (>3 verres/j);Nouvelle Aquitaine
+249;Cas;56.1;Homme;Jamais;34.2;Non;Non;6.0;Faible;Aucune ou occasionnelle;Nouvelle Aquitaine
+250;Cas;66.7;Femme;Ancien fumeur;33.8;Oui;Oui;6.8;Faible;Aucune ou occasionnelle;Nouvelle Aquitaine
+251;Cas;80.8;Femme;Ancien fumeur;19.9;Oui;Oui;6.1;Modérée;Modérée (2–3 verres/j);Occitanie
+252;Cas;48.6;Femme;Ancien fumeur;32.6;Oui;Non;5.4;Faible;Aucune ou occasionnelle;Nouvelle Aquitaine
+253;Cas;51.3;Homme;Fumeur actuel;31.8;Non;Oui;4.8;Faible;Élevée (>3 verres/j);Nouvelle Aquitaine
+254;Cas;65.1;Homme;Ancien fumeur;26.0;Oui;Non;6.3;Faible;Modérée (2–3 verres/j);Provence-Alpes-Cote-d'azur
+255;Cas;64.0;Homme;Jamais;19.6;Oui;Oui;5.8;Modérée;Aucune ou occasionnelle;Occitanie
+256;Cas;52.6;Homme;Fumeur actuel;24.6;Oui;Oui;5.4;Faible;Modérée (2–3 verres/j);Nouvelle Aquitaine
+257;Cas;56.5;Homme;Jamais;30.9;Oui;Non;6.5;Faible;Modérée (2–3 verres/j);Nouvelle Aquitaine
+258;Cas;69.0;Femme;Ancien fumeur;36.2;Oui;Non;7.9;Faible;Aucune ou occasionnelle;Nouvelle Aquitaine
+259;Cas;59.5;Homme;Ancien fumeur;25.2;Non;Non;7.5;Faible;Aucune ou occasionnelle;Occitanie
+260;Cas;56.9;Homme;Jamais;29.7;Oui;Non;8.0;Élevée;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+261;Témoin;71.8;Femme;Fumeur actuel;23.5;Oui;Non;5.8;Faible;Modérée (2–3 verres/j);Provence-Alpes-Cote-d'azur
+262;Témoin;59.8;Homme;Jamais;29.3;Non;Non;5.7;Élevée;Modérée (2–3 verres/j);Provence-Alpes-Cote-d'azur
+263;Témoin;60.8;Homme;Jamais;24.8;Oui;Oui;6.8;Modérée;Aucune ou occasionnelle;Nouvelle Aquitaine
+264;Témoin;65.8;Homme;Fumeur actuel;21.2;Oui;Non;3.9;Faible;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+265;Témoin;60.7;Homme;Fumeur actuel;26.3;Non;Non;5.8;Élevée;Aucune ou occasionnelle;Occitanie
+266;Témoin;67.7;Homme;Ancien fumeur;23.6;Oui;Non;5.9;Faible;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+267;Témoin;61.3;Homme;Fumeur actuel;24.0;Oui;Non;3.8;Modérée;Aucune ou occasionnelle;Occitanie
+268;Témoin;75.0;Homme;Fumeur actuel;25.6;Oui;Non;3.7;Élevée;Élevée (>3 verres/j);Provence-Alpes-Cote-d'azur
+269;Témoin;53.6;Femme;Ancien fumeur;27.7;Non;Non;6.3;Faible;Élevée (>3 verres/j);Nouvelle Aquitaine
+270;Témoin;61.5;Homme;Ancien fumeur;28.1;Non;Non;4.4;Modérée;Modérée (2–3 verres/j);Provence-Alpes-Cote-d'azur
+271;Témoin;58.2;Femme;Jamais;30.2;Non;Non;7.2;Élevée;Aucune ou occasionnelle;Nouvelle Aquitaine
+272;Témoin;52.1;Femme;Jamais;31.1;Non;Non;3.6;Modérée;Élevée (>3 verres/j);Provence-Alpes-Cote-d'azur
+273;Témoin;55.1;Femme;Jamais;21.6;Non;Non;6.3;Élevée;Modérée (2–3 verres/j);Occitanie
+274;Témoin;51.5;Femme;Fumeur actuel;32.6;Non;Oui;4.2;Élevée;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+275;Témoin;59.6;Femme;Ancien fumeur;23.7;Oui;Non;7.0;Modérée;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+276;Témoin;66.9;Homme;Ancien fumeur;29.2;Non;Non;5.5;Élevée;Élevée (>3 verres/j);Nouvelle Aquitaine
+277;Témoin;58.2;Femme;Ancien fumeur;22.6;Oui;Non;6.5;Modérée;Aucune ou occasionnelle;Nouvelle Aquitaine
+278;Témoin;63.0;Homme;Ancien fumeur;30.6;Non;Non;4.8;Modérée;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+279;Témoin;61.2;Homme;Fumeur actuel;28.4;Oui;Non;6.7;Faible;Élevée (>3 verres/j);Provence-Alpes-Cote-d'azur
+280;Témoin;55.5;Homme;Jamais;31.5;Non;Non;3.6;Élevée;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+281;Témoin;53.6;Homme;Jamais;29.7;Oui;Non;7.1;Faible;Modérée (2–3 verres/j);Provence-Alpes-Cote-d'azur
+282;Témoin;54.6;Femme;Ancien fumeur;26.9;Oui;Non;4.7;Faible;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+283;Témoin;36.4;Femme;Jamais;30.6;Oui;Non;4.5;Modérée;Modérée (2–3 verres/j);Provence-Alpes-Cote-d'azur
+284;Témoin;71.9;Homme;Ancien fumeur;34.4;Oui;Non;5.3;Faible;Modérée (2–3 verres/j);Occitanie
+285;Témoin;58.6;Femme;Fumeur actuel;30.1;Non;Non;4.6;Faible;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+286;Témoin;55.4;Femme;Fumeur actuel;24.6;Non;Non;5.7;Élevée;Modérée (2–3 verres/j);Occitanie
+287;Témoin;46.6;Homme;Ancien fumeur;23.4;Non;Non;4.8;Élevée;Aucune ou occasionnelle;Occitanie
+288;Témoin;74.1;Femme;Fumeur actuel;22.8;Non;Non;5.5;Modérée;Élevée (>3 verres/j);Nouvelle Aquitaine
+289;Témoin;54.8;Homme;Jamais;20.4;Oui;Non;6.1;Élevée;Aucune ou occasionnelle;Occitanie
+290;Témoin;57.1;Femme;Jamais;32.2;Oui;Non;4.8;Faible;Modérée (2–3 verres/j);Nouvelle Aquitaine
+291;Témoin;61.5;Femme;Ancien fumeur;30.0;Non;Oui;4.7;Faible;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+292;Témoin;65.4;Homme;Jamais;18.0;Non;Non;5.2;Faible;Modérée (2–3 verres/j);Nouvelle Aquitaine
+293;Témoin;51.8;Homme;Ancien fumeur;27.8;Oui;Non;5.2;Modérée;Aucune ou occasionnelle;Nouvelle Aquitaine
+294;Témoin;67.5;Femme;Jamais;28.3;Non;Non;4.4;Faible;Aucune ou occasionnelle;Occitanie
+295;Témoin;58.3;Femme;Fumeur actuel;27.3;Non;Non;5.9;Faible;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+296;Témoin;70.1;Homme;Jamais;27.3;Oui;Non;4.8;Faible;Aucune ou occasionnelle;Occitanie
+297;Témoin;57.5;Homme;Fumeur actuel;34.0;Non;Oui;4.5;Faible;Modérée (2–3 verres/j);Occitanie
+298;Témoin;54.7;Homme;Fumeur actuel;34.4;Non;Non;5.2;Élevée;Aucune ou occasionnelle;Nouvelle Aquitaine
+299;Témoin;44.0;Homme;Jamais;22.1;Oui;Non;4.2;Modérée;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+300;Témoin;55.1;Femme;Fumeur actuel;23.2;Oui;Oui;4.4;Faible;Modérée (2–3 verres/j);Provence-Alpes-Cote-d'azur
+301;Témoin;62.7;Homme;Jamais;23.4;Non;Non;5.8;Faible;Aucune ou occasionnelle;Nouvelle Aquitaine
+302;Témoin;64.4;Homme;Jamais;24.0;Oui;Oui;5.8;Modérée;Élevée (>3 verres/j);Nouvelle Aquitaine
+303;Témoin;56.0;Homme;Jamais;25.1;Oui;Non;4.2;Modérée;Modérée (2–3 verres/j);Nouvelle Aquitaine
+304;Témoin;81.7;Femme;Jamais;26.6;Non;Non;5.4;Modérée;Aucune ou occasionnelle;Occitanie
+305;Témoin;42.3;Femme;Jamais;23.4;Non;Non;7.6;Modérée;Modérée (2–3 verres/j);Nouvelle Aquitaine
+306;Témoin;57.2;Femme;Ancien fumeur;25.9;Non;Non;6.2;Faible;Aucune ou occasionnelle;Occitanie
+307;Témoin;70.9;Femme;Jamais;29.2;Non;Non;5.1;Modérée;Modérée (2–3 verres/j);Nouvelle Aquitaine
+308;Témoin;63.3;Homme;Fumeur actuel;31.4;Oui;Non;5.1;Élevée;Aucune ou occasionnelle;Occitanie
+309;Témoin;59.5;Femme;Jamais;24.5;Oui;Non;4.4;Modérée;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+310;Témoin;42.2;Femme;Jamais;24.7;Oui;Non;6.0;Modérée;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+311;Témoin;60.6;Homme;Jamais;25.9;Oui;Non;5.7;Faible;Modérée (2–3 verres/j);Nouvelle Aquitaine
+312;Témoin;53.1;Femme;Ancien fumeur;22.2;Oui;Non;3.6;Faible;Aucune ou occasionnelle;Nouvelle Aquitaine
+313;Témoin;59.5;Homme;Ancien fumeur;22.9;Oui;Non;6.3;Élevée;Modérée (2–3 verres/j);Occitanie
+314;Témoin;66.8;Femme;Fumeur actuel;26.7;Non;Non;6.1;Modérée;Aucune ou occasionnelle;Nouvelle Aquitaine
+315;Témoin;57.8;Homme;Ancien fumeur;25.9;Non;Non;4.4;Modérée;Modérée (2–3 verres/j);Provence-Alpes-Cote-d'azur
+316;Témoin;55.4;Homme;Jamais;25.0;Oui;Oui;6.5;Faible;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+317;Témoin;66.3;Homme;Ancien fumeur;31.1;Non;Non;5.1;Élevée;Aucune ou occasionnelle;Nouvelle Aquitaine
+318;Témoin;57.4;Homme;Fumeur actuel;27.3;Oui;Non;6.0;Faible;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+319;Témoin;51.4;Homme;Fumeur actuel;26.1;Non;Non;3.8;Faible;Modérée (2–3 verres/j);Provence-Alpes-Cote-d'azur
+320;Témoin;48.8;Homme;Jamais;30.1;Non;Non;6.3;Faible;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+321;Témoin;67.0;Homme;Ancien fumeur;25.8;Oui;Non;6.1;Faible;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+322;Témoin;66.6;Femme;Jamais;33.0;Oui;Non;6.1;Modérée;Aucune ou occasionnelle;Occitanie
+323;Témoin;64.4;Femme;Ancien fumeur;26.6;Oui;Non;5.2;Élevée;Aucune ou occasionnelle;Occitanie
+324;Témoin;59.2;Homme;Ancien fumeur;28.2;Non;Non;4.9;Modérée;Élevée (>3 verres/j);Nouvelle Aquitaine
+325;Témoin;50.7;Homme;Jamais;27.5;Oui;Non;3.9;Faible;Modérée (2–3 verres/j);Occitanie
+326;Témoin;54.9;Homme;Jamais;27.7;Oui;Non;5.4;Modérée;Aucune ou occasionnelle;Occitanie
+327;Témoin;75.2;Homme;Ancien fumeur;25.0;Oui;Non;5.0;Modérée;Élevée (>3 verres/j);Occitanie
+328;Témoin;59.4;Femme;Fumeur actuel;28.1;Oui;Non;6.3;Faible;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+329;Témoin;64.8;Homme;Jamais;27.3;Non;Non;5.7;Faible;Élevée (>3 verres/j);Occitanie
+330;Témoin;54.2;Femme;Ancien fumeur;28.1;Non;Non;3.8;Modérée;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+331;Témoin;59.6;Femme;Ancien fumeur;31.7;Non;Non;5.4;Modérée;Élevée (>3 verres/j);Occitanie
+332;Témoin;60.5;Femme;Ancien fumeur;25.9;Oui;Non;4.8;Faible;Modérée (2–3 verres/j);Nouvelle Aquitaine
+333;Témoin;58.6;Homme;Jamais;26.3;Non;Non;4.3;Modérée;Aucune ou occasionnelle;Nouvelle Aquitaine
+334;Témoin;57.7;Homme;Ancien fumeur;33.5;Non;Oui;3.9;Faible;Aucune ou occasionnelle;Nouvelle Aquitaine
+335;Témoin;56.5;Homme;Fumeur actuel;18.6;Oui;Non;6.3;Élevée;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+336;Témoin;60.4;Homme;Fumeur actuel;26.4;Oui;Non;5.3;Modérée;Aucune ou occasionnelle;Occitanie
+337;Témoin;70.4;Homme;Jamais;24.0;Non;Non;5.3;Faible;Aucune ou occasionnelle;Nouvelle Aquitaine
+338;Témoin;57.8;Homme;Jamais;25.7;Non;Non;5.4;Faible;Aucune ou occasionnelle;Occitanie
+339;Témoin;59.2;Homme;Ancien fumeur;29.2;Non;Non;5.3;Élevée;Aucune ou occasionnelle;Occitanie
+340;Témoin;61.9;Femme;Ancien fumeur;18.0;Non;Non;3.5;Faible;Modérée (2–3 verres/j);Nouvelle Aquitaine
+341;Témoin;60.4;Homme;Jamais;26.4;Non;Non;4.6;Faible;Modérée (2–3 verres/j);Nouvelle Aquitaine
+342;Témoin;63.1;Homme;Ancien fumeur;25.8;Oui;Non;6.4;Faible;Aucune ou occasionnelle;Occitanie
+343;Témoin;63.3;Femme;Jamais;26.3;Oui;Non;5.9;Modérée;Aucune ou occasionnelle;Nouvelle Aquitaine
+344;Témoin;56.4;Homme;Jamais;21.9;Oui;Oui;6.2;Faible;Modérée (2–3 verres/j);Occitanie
+345;Témoin;48.4;Homme;Fumeur actuel;18.0;Non;Oui;4.9;Faible;Modérée (2–3 verres/j);Occitanie
+346;Témoin;57.6;Homme;Ancien fumeur;30.2;Oui;Non;3.8;Faible;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+347;Témoin;50.4;Homme;Jamais;28.1;Non;Non;6.0;Modérée;Aucune ou occasionnelle;Nouvelle Aquitaine
+348;Témoin;61.7;Femme;Jamais;33.2;Non;Non;4.8;Faible;Modérée (2–3 verres/j);Provence-Alpes-Cote-d'azur
+349;Témoin;61.8;Homme;Fumeur actuel;28.3;Oui;Non;3.9;Faible;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+350;Témoin;49.2;Homme;Jamais;25.9;Oui;Non;5.8;Faible;Modérée (2–3 verres/j);Occitanie
+351;Témoin;54.1;Femme;Jamais;29.3;Oui;Non;6.3;Faible;Aucune ou occasionnelle;Occitanie
+352;Témoin;71.5;Femme;Ancien fumeur;28.9;Oui;Non;5.5;Faible;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+353;Témoin;54.8;Homme;Jamais;29.6;Oui;Non;4.5;Faible;Modérée (2–3 verres/j);Provence-Alpes-Cote-d'azur
+354;Témoin;53.9;Femme;Jamais;34.6;Oui;Non;4.4;Modérée;Aucune ou occasionnelle;Nouvelle Aquitaine
+355;Témoin;46.0;Homme;Jamais;27.4;Oui;Oui;5.5;Faible;Aucune ou occasionnelle;Occitanie
+356;Témoin;57.6;Homme;Ancien fumeur;33.3;Oui;Non;4.9;Élevée;Aucune ou occasionnelle;Nouvelle Aquitaine
+357;Témoin;65.4;Homme;Ancien fumeur;20.4;Non;Non;5.9;Faible;Aucune ou occasionnelle;Nouvelle Aquitaine
+358;Témoin;76.9;Homme;Jamais;27.0;Oui;Non;5.1;Faible;Aucune ou occasionnelle;Occitanie
+359;Témoin;69.5;Homme;Jamais;29.4;Oui;Non;5.1;Élevée;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+360;Témoin;60.4;Femme;Jamais;33.5;Non;Non;7.0;Modérée;Aucune ou occasionnelle;Nouvelle Aquitaine
+361;Témoin;67.0;Homme;Ancien fumeur;24.4;Non;Non;5.1;Modérée;Aucune ou occasionnelle;Occitanie
+362;Témoin;67.7;Homme;Jamais;25.8;Oui;Oui;4.2;Modérée;Aucune ou occasionnelle;Nouvelle Aquitaine
+363;Témoin;61.1;Femme;Fumeur actuel;22.7;Non;Non;6.3;Faible;Modérée (2–3 verres/j);Nouvelle Aquitaine
+364;Témoin;56.2;Homme;Fumeur actuel;29.4;Non;Non;6.0;Élevée;Élevée (>3 verres/j);Occitanie
+365;Témoin;80.3;Homme;Fumeur actuel;24.2;Non;Non;3.6;Faible;Modérée (2–3 verres/j);Occitanie
+366;Témoin;70.5;Homme;Fumeur actuel;31.1;Non;Non;5.6;Élevée;Modérée (2–3 verres/j);Nouvelle Aquitaine
+367;Témoin;47.6;Homme;Jamais;20.5;Non;Non;5.0;Élevée;Aucune ou occasionnelle;Nouvelle Aquitaine
+368;Témoin;46.6;Femme;Ancien fumeur;21.8;Non;Non;6.4;Modérée;Modérée (2–3 verres/j);Provence-Alpes-Cote-d'azur
+369;Témoin;63.5;Femme;Ancien fumeur;31.3;Oui;Non;5.6;Modérée;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+370;Témoin;48.3;Femme;Ancien fumeur;26.7;Oui;Oui;5.3;Faible;Aucune ou occasionnelle;Nouvelle Aquitaine
+371;Témoin;52.5;Homme;Ancien fumeur;28.0;Oui;Non;4.3;Modérée;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+372;Témoin;58.9;Femme;Ancien fumeur;19.4;Non;Non;5.2;Élevée;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+373;Témoin;45.1;Femme;Jamais;23.5;Non;Non;5.4;Modérée;Aucune ou occasionnelle;Nouvelle Aquitaine
+374;Témoin;59.9;Femme;Jamais;25.1;Oui;Non;4.2;Faible;Modérée (2–3 verres/j);Occitanie
+375;Témoin;49.9;Femme;Ancien fumeur;30.8;Oui;Non;4.4;Faible;Aucune ou occasionnelle;Nouvelle Aquitaine
+376;Témoin;42.5;Homme;Fumeur actuel;26.1;Oui;Non;5.4;Faible;Modérée (2–3 verres/j);Provence-Alpes-Cote-d'azur
+377;Témoin;74.1;Homme;Fumeur actuel;29.4;Oui;Non;6.5;Modérée;Aucune ou occasionnelle;Nouvelle Aquitaine
+378;Témoin;46.2;Femme;Ancien fumeur;27.2;Oui;Non;4.7;Modérée;Modérée (2–3 verres/j);Provence-Alpes-Cote-d'azur
+379;Témoin;63.0;Homme;Jamais;23.0;Oui;Non;5.9;Modérée;Aucune ou occasionnelle;Occitanie
+380;Témoin;51.9;Femme;Ancien fumeur;28.0;Non;Non;4.6;Faible;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+381;Témoin;72.2;Homme;Ancien fumeur;25.8;Non;Non;5.4;Modérée;Aucune ou occasionnelle;Occitanie
+382;Témoin;57.1;Femme;Jamais;23.5;Non;Non;6.7;Élevée;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+383;Témoin;74.7;Homme;Fumeur actuel;31.2;Non;Non;5.5;Modérée;Aucune ou occasionnelle;Occitanie
+384;Témoin;55.0;Femme;Jamais;25.5;Oui;Non;6.4;Modérée;Aucune ou occasionnelle;Occitanie
+385;Témoin;59.7;Homme;Jamais;26.8;Non;Non;4.6;Élevée;Aucune ou occasionnelle;Nouvelle Aquitaine
+386;Témoin;53.5;Homme;Ancien fumeur;30.0;Non;Non;5.2;Modérée;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+387;Témoin;67.3;Femme;Jamais;27.3;Oui;Non;5.4;Élevée;Aucune ou occasionnelle;Nouvelle Aquitaine
+388;Témoin;42.3;Homme;Fumeur actuel;23.9;Non;Non;3.6;Modérée;Modérée (2–3 verres/j);Occitanie
+389;Témoin;51.2;Homme;Ancien fumeur;19.1;Non;Non;3.7;Modérée;Modérée (2–3 verres/j);Provence-Alpes-Cote-d'azur
+390;Témoin;50.1;Homme;Jamais;25.1;Non;Non;6.3;Faible;Aucune ou occasionnelle;Nouvelle Aquitaine
+391;Témoin;61.5;Homme;Fumeur actuel;22.8;Oui;Non;6.4;Faible;Modérée (2–3 verres/j);Provence-Alpes-Cote-d'azur
+392;Témoin;49.4;Femme;Jamais;29.8;Non;Oui;6.7;Modérée;Modérée (2–3 verres/j);Provence-Alpes-Cote-d'azur
+393;Témoin;61.0;Homme;Fumeur actuel;24.9;Non;Non;5.0;Faible;Aucune ou occasionnelle;Occitanie
+394;Témoin;62.8;Homme;Jamais;18.4;Oui;Non;4.8;Faible;Aucune ou occasionnelle;Occitanie
+395;Témoin;47.9;Femme;Fumeur actuel;31.8;Non;Oui;3.5;Élevée;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+396;Témoin;58.4;Femme;Ancien fumeur;20.9;Oui;Non;4.0;Faible;Modérée (2–3 verres/j);Nouvelle Aquitaine
+397;Témoin;58.6;Homme;Jamais;24.4;Oui;Oui;4.9;Élevée;Aucune ou occasionnelle;Occitanie
+398;Témoin;48.8;Homme;Jamais;25.0;Oui;Oui;4.1;Faible;Élevée (>3 verres/j);Occitanie
+399;Témoin;55.9;Femme;Ancien fumeur;25.5;Non;Non;5.6;Modérée;Modérée (2–3 verres/j);Nouvelle Aquitaine
+400;Témoin;75.4;Homme;Fumeur actuel;30.4;Oui;Oui;5.6;Faible;Aucune ou occasionnelle;Nouvelle Aquitaine
+401;Témoin;56.0;Femme;Jamais;23.8;Oui;Non;5.4;Modérée;Aucune ou occasionnelle;Occitanie
+402;Témoin;49.7;Homme;Fumeur actuel;27.9;Oui;Oui;5.5;Modérée;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+403;Témoin;61.2;Homme;Ancien fumeur;21.5;Non;Non;5.1;Faible;Modérée (2–3 verres/j);Nouvelle Aquitaine
+404;Témoin;46.6;Homme;Ancien fumeur;31.4;Oui;Non;4.7;Faible;Aucune ou occasionnelle;Nouvelle Aquitaine
+405;Témoin;56.2;Femme;Jamais;30.5;Non;Non;5.6;Modérée;Aucune ou occasionnelle;Occitanie
+406;Témoin;53.8;Femme;Jamais;27.0;Oui;Non;4.7;Élevée;Modérée (2–3 verres/j);Nouvelle Aquitaine
+407;Témoin;66.9;Femme;Jamais;26.3;Oui;Oui;5.8;Élevée;Aucune ou occasionnelle;Nouvelle Aquitaine
+408;Témoin;70.5;Femme;Fumeur actuel;27.8;Non;Non;5.0;Faible;Aucune ou occasionnelle;Occitanie
+409;Témoin;67.8;Homme;Ancien fumeur;25.7;Non;Non;5.0;Élevée;Modérée (2–3 verres/j);Occitanie
+410;Témoin;61.9;Femme;Jamais;23.7;Oui;Non;6.3;Élevée;Aucune ou occasionnelle;Nouvelle Aquitaine
+411;Témoin;49.3;Femme;Fumeur actuel;26.6;Non;Non;5.8;Faible;Modérée (2–3 verres/j);Occitanie
+412;Témoin;69.2;Homme;Ancien fumeur;29.1;Non;Oui;4.3;Modérée;Élevée (>3 verres/j);Provence-Alpes-Cote-d'azur
+413;Témoin;62.5;Homme;Fumeur actuel;28.2;Non;Non;5.6;Modérée;Aucune ou occasionnelle;Occitanie
+414;Témoin;52.3;Homme;Jamais;27.8;Oui;Non;5.6;Faible;Aucune ou occasionnelle;Occitanie
+415;Témoin;51.7;Femme;Jamais;33.3;Non;Non;5.5;Faible;Aucune ou occasionnelle;Nouvelle Aquitaine
+416;Témoin;55.8;Homme;Ancien fumeur;23.9;Non;Non;5.1;Modérée;Aucune ou occasionnelle;Occitanie
+417;Témoin;63.3;Homme;Fumeur actuel;23.4;Oui;Non;6.5;Modérée;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+418;Témoin;61.2;Homme;Jamais;24.1;Oui;Non;6.8;Modérée;Modérée (2–3 verres/j);Nouvelle Aquitaine
+419;Témoin;41.7;Femme;Fumeur actuel;26.8;Non;Non;3.5;Modérée;Aucune ou occasionnelle;Occitanie
+420;Témoin;49.8;Femme;Jamais;31.5;Non;Non;3.6;Modérée;Modérée (2–3 verres/j);Nouvelle Aquitaine
+421;Témoin;51.3;Homme;Jamais;24.7;Oui;Non;3.7;Élevée;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+422;Témoin;57.0;Femme;Jamais;26.1;Non;Non;5.8;Modérée;Aucune ou occasionnelle;Nouvelle Aquitaine
+423;Témoin;60.5;Homme;Jamais;27.9;Non;Non;4.7;Élevée;Aucune ou occasionnelle;Nouvelle Aquitaine
+424;Témoin;60.1;Homme;Fumeur actuel;23.8;Oui;Non;6.0;Modérée;Modérée (2–3 verres/j);Nouvelle Aquitaine
+425;Témoin;55.7;Femme;Ancien fumeur;21.9;Non;Non;4.3;Faible;Modérée (2–3 verres/j);Provence-Alpes-Cote-d'azur
+426;Témoin;55.2;Homme;Jamais;22.4;Oui;Non;3.6;Élevée;Modérée (2–3 verres/j);Provence-Alpes-Cote-d'azur
+427;Témoin;62.0;Homme;Ancien fumeur;23.0;Oui;Non;6.5;Modérée;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+428;Témoin;57.5;Homme;Ancien fumeur;30.1;Oui;Non;4.1;Élevée;Modérée (2–3 verres/j);Provence-Alpes-Cote-d'azur
+429;Témoin;53.8;Homme;Jamais;21.4;Oui;Non;5.0;Modérée;Aucune ou occasionnelle;Nouvelle Aquitaine
+430;Témoin;61.1;Homme;Jamais;23.2;Oui;Oui;6.7;Modérée;Aucune ou occasionnelle;Occitanie
+431;Témoin;48.8;Homme;Fumeur actuel;23.2;Oui;Non;5.3;Modérée;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+432;Témoin;55.2;Homme;Jamais;27.7;Oui;Non;6.4;Modérée;Aucune ou occasionnelle;Nouvelle Aquitaine
+433;Témoin;70.7;Homme;Jamais;23.4;Oui;Non;4.2;Faible;Aucune ou occasionnelle;Nouvelle Aquitaine
+434;Témoin;46.8;Homme;Ancien fumeur;18.4;Non;Non;5.7;Faible;Modérée (2–3 verres/j);Occitanie
+435;Témoin;44.0;Femme;Ancien fumeur;31.1;Non;Non;5.3;Faible;Modérée (2–3 verres/j);Nouvelle Aquitaine
+436;Témoin;72.0;Homme;Jamais;24.9;Oui;Non;5.5;Modérée;Modérée (2–3 verres/j);Nouvelle Aquitaine
+437;Témoin;52.7;Homme;Jamais;27.4;Oui;Oui;5.4;Faible;Modérée (2–3 verres/j);Occitanie
+438;Témoin;56.5;Homme;Fumeur actuel;28.0;Non;Non;4.8;Élevée;Aucune ou occasionnelle;Occitanie
+439;Témoin;73.1;Homme;Jamais;30.9;Non;Non;4.3;Faible;Aucune ou occasionnelle;Occitanie
+440;Témoin;53.1;Femme;Jamais;29.1;Non;Oui;5.5;Faible;Modérée (2–3 verres/j);Occitanie
+441;Témoin;51.8;Femme;Fumeur actuel;22.8;Oui;Non;6.9;Faible;Modérée (2–3 verres/j);Nouvelle Aquitaine
+442;Témoin;63.4;Homme;Fumeur actuel;29.2;Oui;Non;4.6;Faible;Aucune ou occasionnelle;Occitanie
+443;Témoin;56.0;Homme;Fumeur actuel;27.0;Oui;Non;3.5;Modérée;Aucune ou occasionnelle;Nouvelle Aquitaine
+444;Témoin;61.0;Homme;Ancien fumeur;25.5;Non;Non;5.4;Faible;Élevée (>3 verres/j);Provence-Alpes-Cote-d'azur
+445;Témoin;54.5;Femme;Fumeur actuel;27.5;Oui;Non;5.1;Modérée;Modérée (2–3 verres/j);Nouvelle Aquitaine
+446;Témoin;51.0;Femme;Jamais;25.6;Oui;Non;5.2;Élevée;Aucune ou occasionnelle;Occitanie
+447;Témoin;60.4;Homme;Jamais;20.9;Non;Oui;5.2;Modérée;Élevée (>3 verres/j);Nouvelle Aquitaine
+448;Témoin;60.5;Femme;Jamais;30.4;Non;Non;5.8;Élevée;Aucune ou occasionnelle;Occitanie
+449;Témoin;47.0;Femme;Jamais;29.3;Oui;Non;4.3;Élevée;Aucune ou occasionnelle;Occitanie
+450;Témoin;51.5;Homme;Ancien fumeur;22.4;Non;Oui;7.3;Modérée;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+451;Témoin;42.4;Homme;Jamais;31.1;Oui;Non;6.5;Élevée;Aucune ou occasionnelle;Nouvelle Aquitaine
+452;Témoin;60.4;Homme;Jamais;33.1;Oui;Oui;4.2;Modérée;Aucune ou occasionnelle;Nouvelle Aquitaine
+453;Témoin;58.9;Homme;Jamais;22.8;Non;Oui;4.3;Élevée;Modérée (2–3 verres/j);Occitanie
+454;Témoin;54.7;Femme;Ancien fumeur;28.2;Oui;Non;6.0;Modérée;Aucune ou occasionnelle;Occitanie
+455;Témoin;52.7;Homme;Ancien fumeur;25.8;Oui;Oui;5.0;Élevée;Élevée (>3 verres/j);Occitanie
+456;Témoin;58.2;Femme;Fumeur actuel;30.1;Non;Non;5.9;Modérée;Aucune ou occasionnelle;Occitanie
+457;Témoin;52.8;Homme;Fumeur actuel;26.2;Oui;Non;4.6;Élevée;Modérée (2–3 verres/j);Nouvelle Aquitaine
+458;Témoin;68.0;Homme;Jamais;29.5;Non;Oui;5.0;Faible;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+459;Témoin;47.1;Femme;Jamais;23.1;Oui;Non;5.5;Faible;Aucune ou occasionnelle;Occitanie
+460;Témoin;45.9;Homme;Jamais;27.7;Oui;Non;3.5;Modérée;Aucune ou occasionnelle;Nouvelle Aquitaine
+461;Témoin;76.7;Homme;Ancien fumeur;22.0;Oui;Non;4.9;Faible;Aucune ou occasionnelle;Nouvelle Aquitaine
+462;Témoin;44.6;Homme;Ancien fumeur;20.6;Non;Non;6.0;Modérée;Aucune ou occasionnelle;Occitanie
+463;Témoin;47.6;Homme;Fumeur actuel;25.9;Non;Oui;5.0;Faible;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+464;Témoin;61.8;Homme;Fumeur actuel;33.4;Oui;Non;3.6;Faible;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+465;Témoin;61.7;Femme;Jamais;26.6;Oui;Non;5.3;Modérée;Élevée (>3 verres/j);Occitanie
+466;Témoin;64.5;Homme;Jamais;30.6;Oui;Non;3.6;Modérée;Aucune ou occasionnelle;Nouvelle Aquitaine
+467;Témoin;60.4;Femme;Jamais;26.3;Non;Non;5.1;Modérée;Modérée (2–3 verres/j);Provence-Alpes-Cote-d'azur
+468;Témoin;55.8;Femme;Jamais;27.6;Non;Non;5.9;Faible;Aucune ou occasionnelle;Nouvelle Aquitaine
+469;Témoin;53.5;Homme;Jamais;29.0;Non;Non;6.3;Modérée;Modérée (2–3 verres/j);Nouvelle Aquitaine
+470;Témoin;51.7;Homme;Ancien fumeur;26.6;Non;Non;5.3;Modérée;Modérée (2–3 verres/j);Nouvelle Aquitaine
+471;Témoin;70.5;Homme;Jamais;18.0;Oui;Non;5.7;Faible;Aucune ou occasionnelle;Nouvelle Aquitaine
+472;Témoin;55.4;Homme;Jamais;27.6;Oui;Non;5.5;Élevée;Aucune ou occasionnelle;Nouvelle Aquitaine
+473;Témoin;62.5;Homme;Fumeur actuel;20.0;Non;Non;5.5;Élevée;Modérée (2–3 verres/j);Occitanie
+474;Témoin;75.6;Homme;Fumeur actuel;34.8;Non;Non;5.7;Faible;Aucune ou occasionnelle;Nouvelle Aquitaine
+475;Témoin;55.5;Homme;Fumeur actuel;29.1;Oui;Non;6.4;Modérée;Aucune ou occasionnelle;Occitanie
+476;Témoin;58.3;Homme;Jamais;27.0;Non;Non;6.5;Faible;Aucune ou occasionnelle;Occitanie
+477;Témoin;62.0;Homme;Ancien fumeur;27.8;Non;Oui;4.2;Faible;Aucune ou occasionnelle;Occitanie
+478;Témoin;45.3;Homme;Ancien fumeur;30.3;Non;Non;5.8;Modérée;Modérée (2–3 verres/j);Nouvelle Aquitaine
+479;Témoin;62.1;Femme;Fumeur actuel;29.2;Oui;Non;6.6;Modérée;Modérée (2–3 verres/j);Occitanie
+480;Témoin;62.6;Femme;Jamais;28.9;Non;Oui;5.4;Faible;Aucune ou occasionnelle;Occitanie
+481;Témoin;47.6;Homme;Jamais;26.3;Non;Non;4.6;Modérée;Aucune ou occasionnelle;Occitanie
+482;Témoin;45.6;Femme;Fumeur actuel;25.9;Non;Non;5.0;Modérée;Modérée (2–3 verres/j);Nouvelle Aquitaine
+483;Témoin;53.5;Homme;Fumeur actuel;25.8;Oui;Non;5.5;Modérée;Modérée (2–3 verres/j);Provence-Alpes-Cote-d'azur
+484;Témoin;54.3;Homme;Fumeur actuel;26.2;Non;Non;4.4;Modérée;Aucune ou occasionnelle;Nouvelle Aquitaine
+485;Témoin;42.5;Homme;Fumeur actuel;21.8;Oui;Non;6.6;Élevée;Aucune ou occasionnelle;Nouvelle Aquitaine
+486;Témoin;57.7;Femme;Jamais;28.4;Oui;Non;5.7;Modérée;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+487;Témoin;51.1;Homme;Ancien fumeur;29.2;Non;Non;5.9;Faible;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+488;Témoin;58.9;Homme;Ancien fumeur;29.9;Non;Oui;5.8;Modérée;Aucune ou occasionnelle;Occitanie
+489;Témoin;51.6;Homme;Jamais;30.3;Oui;Oui;5.8;Modérée;Modérée (2–3 verres/j);Nouvelle Aquitaine
+490;Témoin;38.0;Femme;Jamais;22.7;Non;Non;5.3;Modérée;Modérée (2–3 verres/j);Provence-Alpes-Cote-d'azur
+491;Témoin;64.5;Homme;Jamais;23.1;Non;Oui;6.3;Élevée;Modérée (2–3 verres/j);Nouvelle Aquitaine
+492;Témoin;66.3;Femme;Fumeur actuel;27.9;Oui;Oui;3.5;Modérée;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+493;Témoin;52.9;Femme;Ancien fumeur;25.8;Non;Non;3.5;Faible;Aucune ou occasionnelle;Nouvelle Aquitaine
+494;Témoin;44.3;Homme;Ancien fumeur;25.0;Oui;Non;4.7;Élevée;Modérée (2–3 verres/j);Nouvelle Aquitaine
+495;Témoin;57.9;Homme;Jamais;29.4;Non;Non;6.1;Faible;Aucune ou occasionnelle;Occitanie
+496;Témoin;55.8;Homme;Ancien fumeur;32.9;Non;Non;5.1;Modérée;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+497;Témoin;56.5;Homme;Ancien fumeur;29.0;Oui;Oui;5.1;Faible;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+498;Témoin;59.1;Femme;Ancien fumeur;28.0;Non;Non;6.0;Modérée;Aucune ou occasionnelle;Nouvelle Aquitaine
+499;Témoin;39.3;Femme;Ancien fumeur;22.3;Non;Non;6.1;Modérée;Aucune ou occasionnelle;Nouvelle Aquitaine
+500;Témoin;49.0;Homme;Ancien fumeur;22.3;Non;Non;4.9;Modérée;Modérée (2–3 verres/j);Occitanie
+501;Témoin;62.7;Homme;Jamais;21.2;Non;Non;4.8;Modérée;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+502;Témoin;65.4;Homme;Fumeur actuel;31.0;Oui;Non;6.0;Élevée;Modérée (2–3 verres/j);Occitanie
+503;Témoin;56.7;Homme;Ancien fumeur;24.5;Oui;Non;4.4;Élevée;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+504;Témoin;57.6;Homme;Jamais;29.1;Oui;Non;5.1;Modérée;Aucune ou occasionnelle;Occitanie
+505;Témoin;51.7;Femme;Jamais;31.3;Non;Non;5.9;Élevée;Modérée (2–3 verres/j);Provence-Alpes-Cote-d'azur
+506;Témoin;73.6;Femme;Fumeur actuel;29.0;Oui;Non;4.9;Modérée;Modérée (2–3 verres/j);Provence-Alpes-Cote-d'azur
+507;Témoin;60.1;Homme;Fumeur actuel;20.6;Non;Non;4.7;Élevée;Aucune ou occasionnelle;Occitanie
+508;Témoin;67.8;Femme;Jamais;31.0;Oui;Non;6.2;Faible;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+509;Témoin;54.8;Femme;Jamais;25.3;Oui;Oui;4.7;Faible;Modérée (2–3 verres/j);Occitanie
+510;Témoin;57.7;Homme;Jamais;21.7;Oui;Non;4.8;Modérée;Modérée (2–3 verres/j);Provence-Alpes-Cote-d'azur
+511;Témoin;56.2;Homme;Ancien fumeur;28.0;Non;Non;5.6;Modérée;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+512;Témoin;53.7;Homme;Jamais;28.1;Oui;Non;7.0;Élevée;Aucune ou occasionnelle;Nouvelle Aquitaine
+513;Témoin;73.4;Femme;Ancien fumeur;31.2;Oui;Oui;5.0;Modérée;Aucune ou occasionnelle;Occitanie
+514;Témoin;70.9;Homme;Ancien fumeur;23.6;Non;Non;5.2;Modérée;Aucune ou occasionnelle;Nouvelle Aquitaine
+515;Témoin;47.5;Femme;Jamais;28.0;Non;Non;4.0;Faible;Élevée (>3 verres/j);Nouvelle Aquitaine
+516;Témoin;58.4;Femme;Ancien fumeur;23.0;Oui;Oui;5.8;Modérée;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+517;Témoin;61.3;Homme;Fumeur actuel;32.2;Oui;Non;5.3;Faible;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur
+518;Témoin;63.2;Femme;Jamais;25.1;Oui;Non;5.6;Faible;Aucune ou occasionnelle;Nouvelle Aquitaine
+519;Témoin;67.9;Femme;Jamais;24.1;Non;Non;5.2;Faible;Aucune ou occasionnelle;Nouvelle Aquitaine
+520;Témoin;54.2;Homme;Ancien fumeur;22.3;Oui;Non;5.0;Faible;Aucune ou occasionnelle;Provence-Alpes-Cote-d'azur

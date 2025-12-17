@@ -1,0 +1,56 @@
+---
+title: "Projet_Biostat"
+author: "LANCON Cindy"
+date: "2025-12-17"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(dplyr)
+library(ggplot2)
+library(MASS)
+library(car)
+library(pROC)
+
+data <- read.csv2("data/Table.csv", header=TRUE)
+
+```
+
+# ***Étude cas-témoin sur l’infarctus du myocarde***
+
+Cette étude cas-témoin multicentrique porte sur l'infarctus du myocarde aigu. Les cas sont des patients hospitalisés pour un premier infarctus du myocarde confirmé. Les témoins sont des patients hospitalisés dans les mêmes hopitaux, pour des pathologies non cardiovasculaires, sans antécédent de maladie coronarienne.
+
+L'objectif de ce projet est d'analyser le lien entre plusieurs facteurs de risque (tabagisme, hypertension...) et la survenue d'un infarctus du myocarde.
+
+L'échantillon comprend 520 patients, dont 260 cas et 260 témoins.
+
+Les différentes variables explicatives possibles sont :
+
+-   **Âge** (en années)
+-   **Sexe**
+-   **Tabagisme** : jamais fumeur, ancien fumeur, fumeur actuel
+-   **IMC** (kg/m²)
+-   **Hypertension artérielle** (oui / non)
+-   **Diabète** (oui / non)
+-   **Cholestérol total** (mmol/L)
+-   **Niveau d’activité physique** : faible, modéré, élevé
+-   **Consommation d’alcool** : nulle ou occasionnelle, modérée, élevée
+-   **Région** de l’hôpital de prise en charge
+
+## Analyse exploratoire / Stats descriptives
+
+## Regression logistique simple / univarié
+
+### Quantitative : Age IMC Chol....
+
+### Qualitative : Sexe, tabac, HTA....
+
+## Regression multivariée logistique multiple
+
+Avec quantitatif et qualitative binaire
+
+## Modèle polytomique + interactions ??
+
+Avec qualitative ordonnées, non ordonnées
