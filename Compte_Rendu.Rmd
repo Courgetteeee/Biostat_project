@@ -18,6 +18,26 @@ data <- read.csv2("data/Table.csv", header=TRUE)
 
 ```
 
+```{r, include=FALSE}
+#Vérifier type de données
+str(data)
+
+#Variable quantitative
+data$age <- as.numeric(data$age)
+data$imc <- as.numeric(data$imc)
+data$cholesterol_total <- as.numeric(data$cholesterol_total)
+
+#Variable factor
+data$statut_cas_temoin <- factor(data$statut_cas_temoin)
+data$sexe <- factor(data$sexe)
+data$tabagisme <- factor(data$tabagisme)
+data$hypertension <- factor(data$hypertension)
+data$diabete <- factor(data$diabete)
+data$niveau_activite_physique <- factor(data$niveau_activite_physique)
+data$consommation_alcool <- factor(data$consommation_alcool)
+data$region <- factor(data$region)
+```
+
 # ***Étude cas-témoin sur l’infarctus du myocarde***
 
 Cette étude cas-témoin multicentrique porte sur l'infarctus du myocarde aigu. Les cas sont des patients hospitalisés pour un premier infarctus du myocarde confirmé. Les témoins sont des patients hospitalisés dans les mêmes hopitaux, pour des pathologies non cardiovasculaires, sans antécédent de maladie coronarienne.
