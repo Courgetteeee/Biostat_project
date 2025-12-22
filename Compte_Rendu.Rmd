@@ -61,11 +61,153 @@ Les différentes variables explicatives possibles sont :
 
 ## Analyse exploratoire / Stats descriptives
 
+## Niveau de référence des variables
+
+```{r}
+lapply( data[, sapply(data, is.factor)], levels)
+
+#Changement référence
+## Référence = Témoin (car on veut la proba d'être CAS par rapport aux TEMOINS)
+data$statut_cas_temoin <- relevel(data$statut_cas_temoin, ref="Témoin")
+
+#Référence = Jamais
+data$tabagisme <- relevel(data$tabagisme, ref = "Jamais")
+```
+
 ## Regression logistique simple / univarié
 
 ### Quantitative : Age IMC Chol....
 
-### Qualitative : Sexe, tabac, HTA....
+### Variable Sexe
+
+```{r}
+#Modèle
+mod_sexe <- glm(statut_cas_temoin~sexe, family=binomial, data=data)
+
+#Statistiques et intervalle de confiance
+summary(mod_sexe)
+IC_sexe <- confint(mod_sexe)
+IC_exp_sexe <- exp(confint(mod_sexe))
+
+IC_sexe
+IC_exp_sexe
+
+anova(mod_sexe, test = "Chisq")
+```
+
+La modalité de référence est "Femme".
+
+$\hat{\beta}_{H} = 0.307$ estime le coefficitent $\beta_{H}=ln(\frac{odds(Y=1 \space | \space sexe=Homme)}{odds(Y=1 \space | \space sexe= Femme)})$. L'intervalle de confiance à 95% de l'odds ratio est : $exp(\beta_{H}) \in [e^{-0.05} ; e^{0.67}] = [0.95;1.95]$.
+
+Comme 1 appartient à l'intervalle de confiance, on ne peut pas mettre en évidence d'association statistique. De plus, Nous obtenons une p-value supérieure au seuil de 0.05, ce qui signifie que le sexe n'a pas d'effet statistiquement significatif au seuil de 5% sur l'infarctus.
+
+### Variable Tabagisme
+
+```{r}
+#Modèle
+mod_tabac <- glm(statut_cas_temoin~tabagisme, family=binomial, data=data)
+
+#Statistiques et intervalle de confiance
+summary(mod_tabac)
+IC_tabac <- confint(mod_tabac)
+IC_exp_tabac <- exp(confint(mod_tabac))
+
+IC_tabac
+IC_exp_tabac
+
+anova(mod_tabac, test = "Chisq")
+```
+
+Modalité de référence : "Jamais".
+
+-   On obtient : $\hat{\beta}_{ancien \space fumeur}$=0.51 qui estime $\beta_{ancien \space fumeur} = ln(\frac{odds(Y=1 \space | \space tabagisme =\text{ancien fumeur)}}{odds(Y=1 \space | \space tabagisme = Jamais)})$. L'intervalle de confiance à 95% de l'odds ratio est : $exp(\beta_{ancien \space fumeur})\in [e^{0.07} ; e^{0.96}] = [1.07;2.61]$.
+
+    Donc être un ancien fumeur va multiplier l'odds d'être cas par au moins exp(0.07)=1.07 et au plus exp(0.96)=2.61, par rapport à n'avoir jamais fumé. Cette association est statistiquement significative (p=0.0236).
+
+-   On obtient : $\hat{\beta}_{fumeur \space actuel} =1.28 \text{ qui estime } \beta_{fumeur \space actuel} = ln(\frac{odds(Y=1 \space | \space tabagisme =\text{Fumeur actuel)}}{odds(Y=1 \space | \space tabagisme = Jamais)})$. L'intervalle de confiance à 95% de l'odds ratio est : $exp(\beta_{fumeur \space actuel})\in [e^{0.85} ; e^{1.71}] = [2.34;5.56]$.
+
+    Ainsi, être fumeur actuel va multiplier l'odds d'être cas par au moins exp(0.85)=2.34 et par au plus exp(1.71)=5.56, par rapport à n'avoir jamais fumé. Cette association est très significative (p\<0.001).
+
+Le test du Chi² nous fournit une p-value inférieur au seuil 0.05 (1.3e-08), ce qui signifie que l'on rejette l'hypothèse nulle $H_0$ donc le tabagisme est statistiquement associé à la contraction de la maladie.
+
+### Variable Hypertension
+
+```{r}
+#Modèle
+mod_hypertension <- glm(statut_cas_temoin~hypertension, family=binomial, data=data)
+
+#Statistiques et intervalle de confiance
+summary(mod_hypertension)
+IC_hypertension <- confint(mod_hypertension)
+IC_exp_hypertension <- exp(confint(mod_hypertension))
+
+IC_hypertension
+IC_exp_hypertension
+
+anova(mod_hypertension, test = "Chisq")
+```
+
+Modalité de référence : "Non".
+
+On obtient : $\hat{\beta}_{hypertension \space oui}$=0.75 qui estime $\beta_{hypertension \space oui} = ln(\frac{odds(Y=1 \space | \space hypertension=Oui)}{odds(Y=1 \space | \space hypertension= Non)})$. L'intervalle de confiance à 95% de l'odds ratio est : $exp(\beta_{hypertension \space oui})\in [e^{0.40} ; e^{1.11}] = [1.47;3.03]$.
+
+Ainsi, être hypertendu va multiplier l'odds d'être cas par au moins exp(0.40)=1.47 et au plus exp(1.11)=3.03, par rapport à un sujet non hypertendu.
+
+Le test du Chi² nous fournit une p-value inférieur au seuil 0.05 (3.6e-05), ce qui signifie que l'on rejette l'hypothèse nulle $H_0$ donc l'hypertension est statistiquement associé à la contraction de la maladie.
+
+### Variable Diabete
+
+```{r}
+#Modèle
+mod_diabete <- glm(statut_cas_temoin~diabete, family=binomial, data=data)
+
+#Statistiques et intervalle de confiance
+summary(mod_diabete)
+IC_diabete <- confint(mod_diabete)
+IC_exp_diabete <- exp(confint(mod_diabete))
+
+IC_diabete
+IC_exp_diabete
+
+anova(mod_diabete, test = "Chisq")
+```
+
+Modalité de référence : "Non".
+
+On obtient : $\hat{\beta}_{diabete\space oui}$=0.77 qui estime $\beta_{diabete\space oui} = ln(\frac{odds(Y=1 \space | \space diabete=Oui)}{odds(Y=1 \space | \space diabete= Non)})$. L'intervalle de confiance à 95% de l'odds ratio est : $exp(\beta_{diabete\space oui})\in [e^{0.35} ; e^{1.21}] = [1.42;3.34]$.
+
+Ainsi, être diabetique va multiplier l'odds d'être cas par au moins exp(0.35)=1.42 et au plus exp(1.21)=3.34, par rapport à un sujet non diabetique.
+
+Le test du Chi² nous fournit une p-value inférieur au seuil 0.05 (3.2e-4), ce qui signifie que l'on rejette l'hypothèse nulle $H_0$ donc le diabete est statistiquement associé à la contraction de la maladie.
+
+### Variable Niveau d'activité physique
+
+```{r}
+#Modèle
+mod_act_phys <- glm(statut_cas_temoin~ niveau_activite_physique, family=binomial, data=data)
+
+#Statistiques et intervalle de confiance
+summary(mod_act_phys)
+IC_act_phys <- confint(mod_act_phys)
+IC_exp_act_phys <- exp(confint(mod_act_phys))
+
+IC_act_phys
+IC_exp_act_phys
+
+anova(mod_act_phys, test = "Chisq")
+```
+
+Modalité de référence : "Elevée".
+
+-   On obtient : $\hat{\beta}_{act. \space faible}$=1.45 qui estime $\beta_{act. \space faible} = ln(\frac{odds(Y=1 \space | \space niveau \space act. \space physique=\text{Faible)}}{odds(Y=1 \space | \space niveau \space act. \space physique= Elevée)})$. L'intervalle de confiance à 95% de l'odds ratio est : $exp(\beta_{act. \space faible})\in [e^{0.91} ; e^{2.02}] = [2.48;7.51]$.
+
+    Ainsi avoir un niveau d'activité faible va multiplier l'odds d'être cas par au moins exp(0.91)=2.48 et au plus exp(2.02)=7.51, par rapport aux individus avec une activité 'elevée'. Cette association est statistiquement significative (p=2.8e-4).
+
+-   On obtient : $\hat{\beta}_{act. \space modérée} =0.48 \text{ qui estime } \beta_{act. \space modérée} = ln(\frac{odds(Y=1 \space | \space niveau \space act. \space physique=\text{Modérée)}}{odds(Y=1 \space | \space niveau \space act. \space physique= Elevée)})$. L'intervalle de confiance à 95% de l'odds ratio est : $exp(\beta_{act. \space modérée})\in [e^{-0.09} ; e^{1.08}] = [0.91;2.93]$.
+
+    Cependant, l'intervalle de confiance inclut 1 et la p-value = 0.104, ce qui signifie que l'association n'est pas statistiquement significative au seuil de 5%.
+
+Le test global du Chi² nous fournit une p-value inférieur au seuil 0.05 (1.29e-09), ce qui signifie que l'on rejette l'hypothèse nulle $H_0$ et donc que le niveau d'activité physique est globalement statistiquement associé à la contraction de la maladie.
 
 ## Regression multivariée logistique multiple
 
