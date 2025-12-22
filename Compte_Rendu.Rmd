@@ -209,6 +209,8 @@ Modalité de référence : "Elevée".
 
 Le test global du Chi² nous fournit une p-value inférieur au seuil 0.05 (1.29e-09), ce qui signifie que l'on rejette l'hypothèse nulle $H_0$ et donc que le niveau d'activité physique est globalement statistiquement associé à la contraction de la maladie.
 
+(Plus le niveau d'activité diminue, plus le risque augmente.)
+
 ## Regression multivariée logistique multiple
 
 Avec quantitatif et qualitative binaire
