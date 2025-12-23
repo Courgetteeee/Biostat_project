@@ -209,7 +209,38 @@ Modalité de référence : "Elevée".
 
 Le test global du Chi² nous fournit une p-value inférieur au seuil 0.05 (1.29e-09), ce qui signifie que l'on rejette l'hypothèse nulle $H_0$ et donc que le niveau d'activité physique est globalement statistiquement associé à la contraction de la maladie.
 
-(Plus le niveau d'activité diminue, plus le risque augmente.)
+Ces résultats suggèrent qu'une diminution du niveau d'activité physique augmente le risque d'être cas.
+
+### Consommation d'alcool
+
+```{r}
+#Modèle
+mod_conso_alcool <- glm(statut_cas_temoin~consommation_alcool, family=binomial, data=data)
+
+#Statistiques et intervalle de confiance
+summary(mod_conso_alcool)
+IC_conso_alcool <- confint(mod_conso_alcool)
+IC_exp_conso_alcool <- exp(confint(mod_conso_alcool))
+
+IC_conso_alcool
+IC_exp_conso_alcool
+
+anova(mod_conso_alcool, test = "Chisq")
+```
+
+Modalité de référence : "Aucune ou occasionnelle".
+
+-   On obtient : $\hat{\beta}_{conso. \space elevée}$=1.15 qui estime $\beta_{conso. \space elevée} = ln(\frac{odds(Y=1 \space | \space conso. \space alcool=\text{Elevée)}}{odds(Y=1 \space | \space conso. \space alcool= \text{Aucune / occasionnelle})})$. L'intervalle de confiance à 95% de l'odds ratio est : $exp(\beta_{conso. \space elevée})\in [e^{0.59} ; e^{1.76}] = [1.80;5.79]$.
+
+    Ainsi avoir un niveau de consommation d'alcool élevée va multiplier l'odds d'être cas par au moins exp(0.59)=1.80 et au plus exp(1.76)=5.79, par rapport aux individus sans consommation ou avec une consommation occasionnelle. Cette association est statistiquement significative (p=9.77e-05).
+
+-   On obtient : $\hat{\beta}_{conso. \space modérée} =0.35 \text{ qui estime } \beta_{conso.. \space modérée} = ln(\frac{odds(Y=1 \space | \space conso. \space alcool=\text{Modérée)}}{odds(Y=1 \space | \space conso. \space alcool= \text{Aucune / occasionnelle})})$. L'intervalle de confiance à 95% de l'odds ratio est : $exp(\beta_{conso. \space modérée})\in [e^{-0.04} ; e^{0.73}] = [0.96;2.08]$.
+
+    Cependant, l'intervalle de confiance inclut 1 et la p-value = 0.08, ce qui signifie que l'association n'est pas statistiquement significative au seuil de 5%.
+
+Le test global du Chi² nous fournit une p-value inférieur au seuil 0.05 (1.9e-4), ce qui signifie que l'on rejette l'hypothèse nulle $H_0$ et donc que le niveau de consommation d'alcool est globalement statistiquement associé à la contraction de la maladie.
+
+Ces résultats suggèrent qu'une augmentation du niveau de consommation d'alcool augmente aussi le risque d'être cas.
 
 ## Regression multivariée logistique multiple
 
