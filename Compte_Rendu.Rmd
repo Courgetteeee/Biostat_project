@@ -128,7 +128,7 @@ Modalité de référence : "Jamais".
 
     Ainsi, être fumeur actuel va multiplier l'odds d'être cas par au moins exp(0.85)=2.34 et par au plus exp(1.71)=5.56, par rapport à n'avoir jamais fumé. Cette association est très significative (p\<0.001).
 
-Le test du Chi² nous fournit une p-value inférieur au seuil 0.05 (1.3e-08), ce qui signifie que l'on rejette l'hypothèse nulle $H_0$ donc le tabagisme est statistiquement associé à la contraction de la maladie.
+Le test du Chi² nous fournit une p-value inférieure au seuil 0.05 (1.3e-08), ce qui signifie que l'on rejette l'hypothèse nulle $H_0$ donc le tabagisme est statistiquement associée à la contraction de la maladie.
 
 ### Variable Hypertension
 
@@ -153,9 +153,9 @@ On obtient : $\hat{\beta}_{hypertension \space oui}$=0.75 qui estime $\beta_{hyp
 
 Ainsi, être hypertendu va multiplier l'odds d'être cas par au moins exp(0.40)=1.47 et au plus exp(1.11)=3.03, par rapport à un sujet non hypertendu.
 
-Le test du Chi² nous fournit une p-value inférieur au seuil 0.05 (3.6e-05), ce qui signifie que l'on rejette l'hypothèse nulle $H_0$ donc l'hypertension est statistiquement associé à la contraction de la maladie.
+Le test du Chi² nous fournit une p-value inférieure au seuil 0.05 (3.6e-05), ce qui signifie que l'on rejette l'hypothèse nulle $H_0$ donc l'hypertension est statistiquement associée à la contraction de la maladie.
 
-### Variable Diabete
+### Variable Diabète
 
 ```{r}
 #Modèle
@@ -176,9 +176,9 @@ Modalité de référence : "Non".
 
 On obtient : $\hat{\beta}_{diabete\space oui}$=0.77 qui estime $\beta_{diabete\space oui} = ln(\frac{odds(Y=1 \space | \space diabete=Oui)}{odds(Y=1 \space | \space diabete= Non)})$. L'intervalle de confiance à 95% de l'odds ratio est : $exp(\beta_{diabete\space oui})\in [e^{0.35} ; e^{1.21}] = [1.42;3.34]$.
 
-Ainsi, être diabetique va multiplier l'odds d'être cas par au moins exp(0.35)=1.42 et au plus exp(1.21)=3.34, par rapport à un sujet non diabetique.
+Ainsi, être diabétique va multiplier l'odds d'être cas par au moins exp(0.35)=1.42 et au plus exp(1.21)=3.34, par rapport à un sujet non diabétique.
 
-Le test du Chi² nous fournit une p-value inférieur au seuil 0.05 (3.2e-4), ce qui signifie que l'on rejette l'hypothèse nulle $H_0$ donc le diabete est statistiquement associé à la contraction de la maladie.
+Le test du Chi² nous fournit une p-value inférieure au seuil 0.05 (3.2e-4), ce qui signifie que l'on rejette l'hypothèse nulle $H_0$ donc le diabète est statistiquement associée à la contraction de la maladie.
 
 ### Variable Niveau d'activité physique
 
@@ -207,7 +207,7 @@ Modalité de référence : "Elevée".
 
     Cependant, l'intervalle de confiance inclut 1 et la p-value = 0.104, ce qui signifie que l'association n'est pas statistiquement significative au seuil de 5%.
 
-Le test global du Chi² nous fournit une p-value inférieur au seuil 0.05 (1.29e-09), ce qui signifie que l'on rejette l'hypothèse nulle $H_0$ et donc que le niveau d'activité physique est globalement statistiquement associé à la contraction de la maladie.
+Le test global du Chi² nous fournit une p-value inférieure au seuil 0.05 (1.29e-09), ce qui signifie que l'on rejette l'hypothèse nulle $H_0$ et donc que le niveau d'activité physique est globalement statistiquement associée à la contraction de la maladie.
 
 Ces résultats suggèrent qu'une diminution du niveau d'activité physique augmente le risque d'être cas.
 
@@ -238,13 +238,74 @@ Modalité de référence : "Aucune ou occasionnelle".
 
     Cependant, l'intervalle de confiance inclut 1 et la p-value = 0.08, ce qui signifie que l'association n'est pas statistiquement significative au seuil de 5%.
 
-Le test global du Chi² nous fournit une p-value inférieur au seuil 0.05 (1.9e-4), ce qui signifie que l'on rejette l'hypothèse nulle $H_0$ et donc que le niveau de consommation d'alcool est globalement statistiquement associé à la contraction de la maladie.
+Le test global du Chi² nous fournit une p-value inférieure au seuil 0.05 (1.9e-4), ce qui signifie que l'on rejette l'hypothèse nulle $H_0$ et donc que le niveau de consommation d'alcool est globalement statistiquement associée à la contraction de la maladie.
 
 Ces résultats suggèrent qu'une augmentation du niveau de consommation d'alcool augmente aussi le risque d'être cas.
 
 ## Regression multivariée logistique multiple
 
-Avec quantitatif et qualitative binaire
+Les analyses univariées précédentes ont permis d'étudier séparément l'association entre chaque facteur de risque et la survenue de l'infarctus du myocarde. Cependant, ces associations peuvent être influencées par des facteurs de confusion. Ainsi, afin d'estimer l'association de chaque facteur en tenant compte des autres, une analyse multivariée est nécessaire.
+
+Pour la sélection du modèle, nous avons utilisé une procédure de sélection descendante (backward) basée sur le critère de l'AIC : on part d'abord du modèle complet en incluant toutes les variables et on retire successivement les variables les moins significatives jusqu'à obtenir notre modèle optimal.
+
+```{r}
+#Création du modèle avec toutes les variables
+mod_complet <- glm(statut_cas_temoin ~ age + sexe + tabagisme + imc + 
+                     hypertension + diabete + cholesterol_total +
+                     niveau_activite_physique + consommation_alcool + region,
+                   family = binomial, data=data)
+summary(mod_complet)
+
+#Méthode Descendante
+mod_final <- stepAIC(mod_complet, direction="backward")
+summary(mod_final)
+
+#Comparaison AIC
+AIC(mod_complet, mod_final)
+
+
+```
+
+Résultats de la procédure :
+
+-   Modèle complet : AIC = **526.83**
+
+-   Modèle final : AIC = **525.09**
+
+Le modèle final a exclu deux variables : **sexe** et **region**, ces variables n'apportent pas d'information significative. Les variables retenues dans le modèle final sont donc :
+
+-   Age, Tabagisme, IMC, Hypertension, Diabète, Cholesterol total, Niveau d'activité physique, Consommation d'alcool.
+
+### Performance du modèle
+
+La courbe ROC (Receiver Operating Characteristic) est un outil graphique permettant d'évaluer la performance d'un modèle de classification binaire (malade / non malade).
+
+L'AUC (aire sous la courbe) mesure la probabilité que le modèle attribue une probabilité prédite plus élevée à un cas qu'à un témoin tiré au hasard :
+
+-   AUC = 0.5 : aucun pouvoir discriminant (hasard)
+
+-   0.7 $\leq$ AUC $<$ 0.8 : Discrimination acceptable
+
+-   0.8 $\leq$ AUC $<$ 0.9 : Bonne discrimination
+
+-   0.9 $\leq$ AUC : Excellente discrimination
+
+```{r, message=FALSE, warning=FALSE}
+#Courbe ROC
+pred <- predict(mod_final, type="response")
+
+roc <- roc(data$statut_cas_temoin, pred)
+
+#Graphique
+plot(roc, main = "Courbe ROC du modèle final")
+
+legend("bottomright", legend = paste("AUC = ", round(auc(roc),3)), bty="n")
+
+```
+
+Dans notre étude, nous obtenons une aire sous la courbe ROC (AUC) de 0.85, ce qui indique une bonne capacité discriminante du modèle. Concrètement, cela signifie que 85% du temps, la probabilité prédite est plus élevée chez les individus cas que chez les individus témoins.
+
+De plus, la courbe ROC s'éloigne nettement de la diagonale correspondant à un modèle aléatoire (AUC=0.5), ce qui confirme visuellement la bonne performance du modèle.
 
 ## Modèle polytomique + interactions ??
 

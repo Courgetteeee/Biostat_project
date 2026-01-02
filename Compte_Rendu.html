@@ -571,9 +571,9 @@ moins exp(0.85)=2.34 et par au plus exp(1.71)=5.56, par rapport à
 n’avoir jamais fumé. Cette association est très significative
 (p&lt;0.001).</p></li>
 </ul>
-<p>Le test du Chi² nous fournit une p-value inférieur au seuil 0.05
+<p>Le test du Chi² nous fournit une p-value inférieure au seuil 0.05
 (1.3e-08), ce qui signifie que l’on rejette l’hypothèse nulle <span class="math inline">\(H_0\)</span> donc le tabagisme est statistiquement
-associé à la contraction de la maladie.</p>
+associée à la contraction de la maladie.</p>
 </div>
 <div id="variable-hypertension" class="section level3">
 <h3>Variable Hypertension</h3>
@@ -638,12 +638,12 @@ l’odds ratio est : <span class="math inline">\(exp(\beta_{hypertension
 <p>Ainsi, être hypertendu va multiplier l’odds d’être cas par au moins
 exp(0.40)=1.47 et au plus exp(1.11)=3.03, par rapport à un sujet non
 hypertendu.</p>
-<p>Le test du Chi² nous fournit une p-value inférieur au seuil 0.05
+<p>Le test du Chi² nous fournit une p-value inférieure au seuil 0.05
 (3.6e-05), ce qui signifie que l’on rejette l’hypothèse nulle <span class="math inline">\(H_0\)</span> donc l’hypertension est
-statistiquement associé à la contraction de la maladie.</p>
+statistiquement associée à la contraction de la maladie.</p>
 </div>
-<div id="variable-diabete" class="section level3">
-<h3>Variable Diabete</h3>
+<div id="variable-diabète" class="section level3">
+<h3>Variable Diabète</h3>
 <pre class="r"><code>#Modèle
 mod_diabete &lt;- glm(statut_cas_temoin~diabete, family=binomial, data=data)
 
@@ -702,12 +702,12 @@ oui}\)</span>=0.77 qui estime <span class="math inline">\(\beta_{diabete\space o
 Non)})\)</span>. L’intervalle de confiance à 95% de l’odds ratio est :
 <span class="math inline">\(exp(\beta_{diabete\space oui})\in [e^{0.35}
 ; e^{1.21}] = [1.42;3.34]\)</span>.</p>
-<p>Ainsi, être diabetique va multiplier l’odds d’être cas par au moins
+<p>Ainsi, être diabétique va multiplier l’odds d’être cas par au moins
 exp(0.35)=1.42 et au plus exp(1.21)=3.34, par rapport à un sujet non
-diabetique.</p>
-<p>Le test du Chi² nous fournit une p-value inférieur au seuil 0.05
-(3.2e-4), ce qui signifie que l’on rejette l’hypothèse nulle <span class="math inline">\(H_0\)</span> donc le diabete est statistiquement
-associé à la contraction de la maladie.</p>
+diabétique.</p>
+<p>Le test du Chi² nous fournit une p-value inférieure au seuil 0.05
+(3.2e-4), ce qui signifie que l’on rejette l’hypothèse nulle <span class="math inline">\(H_0\)</span> donc le diabète est statistiquement
+associée à la contraction de la maladie.</p>
 </div>
 <div id="variable-niveau-dactivité-physique" class="section level3">
 <h3>Variable Niveau d’activité physique</h3>
@@ -770,10 +770,10 @@ summary(mod_act_phys)</code></pre>
 <li><p>On obtient : <span class="math inline">\(\hat{\beta}_{act. \space
 faible}\)</span>=1.45 qui estime <span class="math inline">\(\beta_{act.
 \space faible} = ln(\frac{odds(Y=1 \space | \space niveau \space act.
-\space physique=\text{act. faible)}}{odds(Y=1 \space | \space niveau
-\space act. \space physique= Elevée)})\)</span>. L’intervalle de
-confiance à 95% de l’odds ratio est : <span class="math inline">\(exp(\beta_{act. \space faible})\in [e^{0.91} ;
-e^{2.02}] = [2.48;7.51]\)</span>.</p>
+\space physique=\text{Faible)}}{odds(Y=1 \space | \space niveau \space
+act. \space physique= Elevée)})\)</span>. L’intervalle de confiance à
+95% de l’odds ratio est : <span class="math inline">\(exp(\beta_{act.
+\space faible})\in [e^{0.91} ; e^{2.02}] = [2.48;7.51]\)</span>.</p>
 <p>Ainsi avoir un niveau d’activité faible va multiplier l’odds d’être
 cas par au moins exp(0.91)=2.48 et au plus exp(2.02)=7.51, par rapport
 aux individus avec une activité ‘elevée’. Cette association est
@@ -789,16 +789,321 @@ modérée})\in [e^{-0.09} ; e^{1.08}] = [0.91;2.93]\)</span>.</p>
 ce qui signifie que l’association n’est pas statistiquement
 significative au seuil de 5%.</p></li>
 </ul>
-<p>Le test global du Chi² nous fournit une p-value inférieur au seuil
+<p>Le test global du Chi² nous fournit une p-value inférieure au seuil
 0.05 (1.29e-09), ce qui signifie que l’on rejette l’hypothèse nulle
 <span class="math inline">\(H_0\)</span> et donc que le niveau
-d’activité physique est globalement statistiquement associé à la
+d’activité physique est globalement statistiquement associée à la
 contraction de la maladie.</p>
+<p>Ces résultats suggèrent qu’une diminution du niveau d’activité
+physique augmente le risque d’être cas.</p>
+</div>
+<div id="consommation-dalcool" class="section level3">
+<h3>Consommation d’alcool</h3>
+<pre class="r"><code>#Modèle
+mod_conso_alcool &lt;- glm(statut_cas_temoin~consommation_alcool, family=binomial, data=data)
+
+#Statistiques et intervalle de confiance
+summary(mod_conso_alcool)</code></pre>
+<pre><code>## 
+## Call:
+## glm(formula = statut_cas_temoin ~ consommation_alcool, family = binomial, 
+##     data = data)
+## 
+## Coefficients:
+##                                           Estimate Std. Error z value Pr(&gt;|z|)
+## (Intercept)                                -0.2496     0.1184  -2.109   0.0350
+## consommation_alcoolÉlevée (&gt;3 verres/j)     1.1553     0.2965   3.896 9.77e-05
+## consommation_alcoolModérée (2–3 verres/j)   0.3472     0.1961   1.770   0.0766
+##                                              
+## (Intercept)                               *  
+## consommation_alcoolÉlevée (&gt;3 verres/j)   ***
+## consommation_alcoolModérée (2–3 verres/j) .  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 720.87  on 519  degrees of freedom
+## Residual deviance: 703.74  on 517  degrees of freedom
+## AIC: 709.74
+## 
+## Number of Fisher Scoring iterations: 4</code></pre>
+<pre class="r"><code>IC_conso_alcool &lt;- confint(mod_conso_alcool)</code></pre>
+<pre><code>## Waiting for profiling to be done...</code></pre>
+<pre class="r"><code>IC_exp_conso_alcool &lt;- exp(confint(mod_conso_alcool))</code></pre>
+<pre><code>## Waiting for profiling to be done...</code></pre>
+<pre class="r"><code>IC_conso_alcool</code></pre>
+<pre><code>##                                                 2.5 %      97.5 %
+## (Intercept)                               -0.48292297 -0.01843659
+## consommation_alcoolÉlevée (&gt;3 verres/j)    0.58859156  1.75643085
+## consommation_alcoolModérée (2–3 verres/j) -0.03662931  0.73281829</code></pre>
+<pre class="r"><code>IC_exp_conso_alcool</code></pre>
+<pre><code>##                                               2.5 %    97.5 %
+## (Intercept)                               0.6169773 0.9817323
+## consommation_alcoolÉlevée (&gt;3 verres/j)   1.8014494 5.7917289
+## consommation_alcoolModérée (2–3 verres/j) 0.9640334 2.0809370</code></pre>
+<pre class="r"><code>anova(mod_conso_alcool, test = &quot;Chisq&quot;)</code></pre>
+<pre><code>## Analysis of Deviance Table
+## 
+## Model: binomial, link: logit
+## 
+## Response: statut_cas_temoin
+## 
+## Terms added sequentially (first to last)
+## 
+## 
+##                     Df Deviance Resid. Df Resid. Dev  Pr(&gt;Chi)    
+## NULL                                  519     720.87              
+## consommation_alcool  2   17.134       517     703.74 0.0001902 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>Modalité de référence : “Aucune ou occasionnelle”.</p>
+<ul>
+<li><p>On obtient : <span class="math inline">\(\hat{\beta}_{conso.
+\space elevée}\)</span>=1.15 qui estime <span class="math inline">\(\beta_{conso. \space elevée} = ln(\frac{odds(Y=1
+\space | \space conso. \space alcool=\text{Elevée)}}{odds(Y=1 \space |
+\space conso. \space alcool= \text{Aucune / occasionnelle})})\)</span>.
+L’intervalle de confiance à 95% de l’odds ratio est : <span class="math inline">\(exp(\beta_{conso. \space elevée})\in [e^{0.59} ;
+e^{1.76}] = [1.80;5.79]\)</span>.</p>
+<p>Ainsi avoir un niveau de consommation d’alcool élevée va multiplier
+l’odds d’être cas par au moins exp(0.59)=1.80 et au plus exp(1.76)=5.79,
+par rapport aux individus sans consommation ou avec une consommation
+occasionnelle. Cette association est statistiquement significative
+(p=9.77e-05).</p></li>
+<li><p>On obtient : <span class="math inline">\(\hat{\beta}_{conso.
+\space modérée} =0.35 \text{ qui estime } \beta_{conso.. \space modérée}
+= ln(\frac{odds(Y=1 \space | \space conso. \space
+alcool=\text{Modérée)}}{odds(Y=1 \space | \space conso. \space alcool=
+\text{Aucune / occasionnelle})})\)</span>. L’intervalle de confiance à
+95% de l’odds ratio est : <span class="math inline">\(exp(\beta_{conso.
+\space modérée})\in [e^{-0.04} ; e^{0.73}] = [0.96;2.08]\)</span>.</p>
+<p>Cependant, l’intervalle de confiance inclut 1 et la p-value = 0.08,
+ce qui signifie que l’association n’est pas statistiquement
+significative au seuil de 5%.</p></li>
+</ul>
+<p>Le test global du Chi² nous fournit une p-value inférieure au seuil
+0.05 (1.9e-4), ce qui signifie que l’on rejette l’hypothèse nulle <span class="math inline">\(H_0\)</span> et donc que le niveau de consommation
+d’alcool est globalement statistiquement associée à la contraction de la
+maladie.</p>
+<p>Ces résultats suggèrent qu’une augmentation du niveau de consommation
+d’alcool augmente aussi le risque d’être cas.</p>
 </div>
 </div>
 <div id="regression-multivariée-logistique-multiple" class="section level2">
 <h2>Regression multivariée logistique multiple</h2>
-<p>Avec quantitatif et qualitative binaire</p>
+<p>Les analyses univariées précédentes ont permis d’étudier séparément
+l’association entre chaque facteur de risque et la survenue de
+l’infarctus du myocarde. Cependant, ces associations peuvent être
+influencées par des facteurs de confusion. Ainsi, afin d’estimer
+l’association de chaque facteur en tenant compte des autres, une analyse
+multivariée est nécessaire.</p>
+<p>Pour la sélection du modèle, nous avons utilisé une procédure de
+sélection descendante (backward) basée sur le critère de l’AIC : on part
+d’abord du modèle complet en incluant toutes les variables et on retire
+successivement les variables les moins significatives jusqu’à obtenir
+notre modèle optimal.</p>
+<pre class="r"><code>#Création du modèle avec toutes les variables
+mod_complet &lt;- glm(statut_cas_temoin ~ age + sexe + tabagisme + imc + 
+                     hypertension + diabete + cholesterol_total +
+                     niveau_activite_physique + consommation_alcool + region,
+                   family = binomial, data=data)
+summary(mod_complet)</code></pre>
+<pre><code>## 
+## Call:
+## glm(formula = statut_cas_temoin ~ age + sexe + tabagisme + imc + 
+##     hypertension + diabete + cholesterol_total + niveau_activite_physique + 
+##     consommation_alcool + region, family = binomial, data = data)
+## 
+## Coefficients:
+##                                            Estimate Std. Error z value Pr(&gt;|z|)
+## (Intercept)                               -15.49227    1.63651  -9.467  &lt; 2e-16
+## age                                         0.07908    0.01342   5.893 3.79e-09
+## sexeHomme                                   0.32423    0.23686   1.369  0.17105
+## tabagismeAncien fumeur                      0.37250    0.27891   1.336  0.18169
+## tabagismeFumeur actuel                      1.01020    0.26971   3.746  0.00018
+## imc                                         0.15567    0.03210   4.850 1.24e-06
+## hypertensionOui                             0.66746    0.22892   2.916  0.00355
+## diabeteOui                                  0.74005    0.27478   2.693  0.00708
+## cholesterol_total                           0.78046    0.12738   6.127 8.96e-10
+## niveau_activite_physiqueFaible              1.07173    0.33486   3.201  0.00137
+## niveau_activite_physiqueModérée             0.35191    0.35344   0.996  0.31941
+## consommation_alcoolÉlevée (&gt;3 verres/j)     1.09218    0.35576   3.070  0.00214
+## consommation_alcoolModérée (2–3 verres/j)   0.49418    0.25334   1.951  0.05110
+## regionOccitanie                            -0.43027    0.27027  -1.592  0.11139
+## regionProvence-Alpes-Cote-d&#39;azur           -0.21921    0.27269  -0.804  0.42147
+##                                              
+## (Intercept)                               ***
+## age                                       ***
+## sexeHomme                                    
+## tabagismeAncien fumeur                       
+## tabagismeFumeur actuel                    ***
+## imc                                       ***
+## hypertensionOui                           ** 
+## diabeteOui                                ** 
+## cholesterol_total                         ***
+## niveau_activite_physiqueFaible            ** 
+## niveau_activite_physiqueModérée              
+## consommation_alcoolÉlevée (&gt;3 verres/j)   ** 
+## consommation_alcoolModérée (2–3 verres/j) .  
+## regionOccitanie                              
+## regionProvence-Alpes-Cote-d&#39;azur             
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 720.87  on 519  degrees of freedom
+## Residual deviance: 496.83  on 505  degrees of freedom
+## AIC: 526.83
+## 
+## Number of Fisher Scoring iterations: 5</code></pre>
+<pre class="r"><code>#Méthode Descendante
+mod_final &lt;- stepAIC(mod_complet, direction=&quot;backward&quot;)</code></pre>
+<pre><code>## Start:  AIC=526.83
+## statut_cas_temoin ~ age + sexe + tabagisme + imc + hypertension + 
+##     diabete + cholesterol_total + niveau_activite_physique + 
+##     consommation_alcool + region
+## 
+##                            Df Deviance    AIC
+## - region                    2   499.39 525.39
+## - sexe                      1   498.71 526.71
+## &lt;none&gt;                          496.83 526.83
+## - diabete                   1   504.23 532.23
+## - hypertension              1   505.46 533.46
+## - consommation_alcool       2   508.16 534.16
+## - tabagisme                 2   511.45 537.45
+## - niveau_activite_physique  2   511.81 537.81
+## - imc                       1   523.17 551.17
+## - age                       1   535.66 563.66
+## - cholesterol_total         1   540.08 568.08
+## 
+## Step:  AIC=525.39
+## statut_cas_temoin ~ age + sexe + tabagisme + imc + hypertension + 
+##     diabete + cholesterol_total + niveau_activite_physique + 
+##     consommation_alcool
+## 
+##                            Df Deviance    AIC
+## - sexe                      1   501.09 525.09
+## &lt;none&gt;                          499.39 525.39
+## - diabete                   1   506.87 530.87
+## - hypertension              1   508.23 532.23
+## - consommation_alcool       2   510.80 532.80
+## - tabagisme                 2   513.81 535.81
+## - niveau_activite_physique  2   514.03 536.03
+## - imc                       1   526.08 550.08
+## - age                       1   537.56 561.56
+## - cholesterol_total         1   542.78 566.78
+## 
+## Step:  AIC=525.09
+## statut_cas_temoin ~ age + tabagisme + imc + hypertension + diabete + 
+##     cholesterol_total + niveau_activite_physique + consommation_alcool
+## 
+##                            Df Deviance    AIC
+## &lt;none&gt;                          501.09 525.09
+## - diabete                   1   509.66 531.66
+## - consommation_alcool       2   511.87 531.87
+## - hypertension              1   510.26 532.26
+## - tabagisme                 2   515.63 535.63
+## - niveau_activite_physique  2   515.94 535.94
+## - imc                       1   527.49 549.49
+## - age                       1   540.16 562.16
+## - cholesterol_total         1   544.66 566.66</code></pre>
+<pre class="r"><code>summary(mod_final)</code></pre>
+<pre><code>## 
+## Call:
+## glm(formula = statut_cas_temoin ~ age + tabagisme + imc + hypertension + 
+##     diabete + cholesterol_total + niveau_activite_physique + 
+##     consommation_alcool, family = binomial, data = data)
+## 
+## Coefficients:
+##                                            Estimate Std. Error z value Pr(&gt;|z|)
+## (Intercept)                               -15.44044    1.61312  -9.572  &lt; 2e-16
+## age                                         0.07871    0.01335   5.898 3.69e-09
+## tabagismeAncien fumeur                      0.40746    0.27599   1.476 0.139836
+## tabagismeFumeur actuel                      0.99496    0.26473   3.758 0.000171
+## imc                                         0.15562    0.03205   4.856 1.20e-06
+## hypertensionOui                             0.68176    0.22706   3.003 0.002677
+## diabeteOui                                  0.78333    0.27070   2.894 0.003807
+## cholesterol_total                           0.77941    0.12680   6.147 7.90e-10
+## niveau_activite_physiqueFaible              1.04782    0.33238   3.152 0.001619
+## niveau_activite_physiqueModérée             0.32442    0.35115   0.924 0.355559
+## consommation_alcoolÉlevée (&gt;3 verres/j)     1.05850    0.35280   3.000 0.002698
+## consommation_alcoolModérée (2–3 verres/j)   0.47069    0.25081   1.877 0.060563
+##                                              
+## (Intercept)                               ***
+## age                                       ***
+## tabagismeAncien fumeur                       
+## tabagismeFumeur actuel                    ***
+## imc                                       ***
+## hypertensionOui                           ** 
+## diabeteOui                                ** 
+## cholesterol_total                         ***
+## niveau_activite_physiqueFaible            ** 
+## niveau_activite_physiqueModérée              
+## consommation_alcoolÉlevée (&gt;3 verres/j)   ** 
+## consommation_alcoolModérée (2–3 verres/j) .  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 720.87  on 519  degrees of freedom
+## Residual deviance: 501.09  on 508  degrees of freedom
+## AIC: 525.09
+## 
+## Number of Fisher Scoring iterations: 5</code></pre>
+<pre class="r"><code>#Comparaison AIC
+AIC(mod_complet, mod_final)</code></pre>
+<pre><code>##             df      AIC
+## mod_complet 15 526.8267
+## mod_final   12 525.0880</code></pre>
+<p>Résultats de la procédure :</p>
+<ul>
+<li><p>Modèle complet : AIC = <strong>526.83</strong></p></li>
+<li><p>Modèle final : AIC = <strong>525.09</strong></p></li>
+</ul>
+<p>Le modèle final a exclu deux variables : <strong>sexe</strong> et
+<strong>region</strong>, ces variables n’apportent pas d’information
+significative. Les variables retenues dans le modèle final sont donc
+:</p>
+<ul>
+<li>Age, Tabagisme, IMC, Hypertension, Diabète, Cholesterol total,
+Niveau d’activité physique, Consommation d’alcool.</li>
+</ul>
+<div id="performance-du-modèle" class="section level3">
+<h3>Performance du modèle</h3>
+<p>La courbe ROC (Receiver Operating Characteristic) est un outil
+graphique permettant d’évaluer la performance d’un modèle de
+classification binaire (malade / non malade).</p>
+<p>L’AUC (aire sous la courbe) mesure la probabilité que le modèle
+attribue une probabilité prédite plus élevée à un cas qu’à un témoin
+tiré au hasard :</p>
+<ul>
+<li><p>AUC = 0.5 : aucun pouvoir discriminant (hasard)</p></li>
+<li><p>0.7 <span class="math inline">\(\leq\)</span> AUC <span class="math inline">\(&lt;\)</span> 0.8 : Discrimination
+acceptable</p></li>
+<li><p>0.8 <span class="math inline">\(\leq\)</span> AUC <span class="math inline">\(&lt;\)</span> 0.9 : Bonne discrimination</p></li>
+<li><p>0.9 <span class="math inline">\(\leq\)</span> AUC : Excellente
+discrimination</p></li>
+</ul>
+<pre class="r"><code>#Courbe ROC
+pred &lt;- predict(mod_final, type=&quot;response&quot;)
+
+roc &lt;- roc(data$statut_cas_temoin, pred)
+
+#Graphique
+plot(roc, main = &quot;Courbe ROC du modèle final&quot;)
+
+legend(&quot;bottomright&quot;, legend = paste(&quot;AUC = &quot;, round(auc(roc),3)), bty=&quot;n&quot;)</code></pre>
+<p><img role="img" src="data:image/png;base64,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" width="672" /></p>
+<p>Dans notre étude, nous obtenons une aire sous la courbe ROC (AUC) de
+0.85, ce qui indique une bonne capacité discriminante du modèle.
+Concrètement, cela signifie que 85% du temps, la probabilité prédite est
+plus élevée chez les individus cas que chez les individus témoins.</p>
+<p>De plus, la courbe ROC s’éloigne nettement de la diagonale
+correspondant à un modèle aléatoire (AUC=0.5), ce qui confirme
+visuellement la bonne performance du modèle.</p>
+</div>
 </div>
 <div id="modèle-polytomique-interactions" class="section level2">
 <h2>Modèle polytomique + interactions ??</h2>
