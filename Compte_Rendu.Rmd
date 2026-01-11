@@ -83,6 +83,22 @@ table1 <- data %>%
 table1
 ```
 
+**Interprétation des résultats**
+
+L'analyse porte sur un échantillon total de 520 sujets, répartis équitablement entre cas (N=260) et témoins (N=260).
+
+**Caractéristiques sociodémographiques**
+Les cas sont **significativement plus âgés** que les témoins, avec une moyenne d'âge de 64,3 ans contre 58,1 ans ($p < 0,001$). En revanche, aucune différence significative n'a été observée concernant la répartition par **sexe** ($p = 0,10$) ou la **région** d'origine ($p = 0,3$).
+
+**Mode de vie et comportements**
+Le groupe des cas présente des habitudes de vie plus à risque ($p < 0,001$) :
+* **Tabac :** La prévalence du tabagisme actuel est presque deux fois plus élevée chez les cas (48%) que chez les témoins (25%).
+* **Activité physique :** La sédentarité est prédominante chez les cas, avec 65% déclarant une activité "Faible", contre 38% chez les témoins.
+* **Alcool :** Une consommation élevée (>3 verres/j) est plus fréquente chez les cas (18% vs 7,3%).
+
+**Caractéristiques cliniques**
+Sur le plan clinique, les cas présentent un profil de santé plus dégradé. Ils affichent un **IMC** moyen supérieur (28,7 vs 26,6 kg/m$^2$) ainsi qu'un taux de **cholestérol total** plus élevé. Les comorbidités sont également plus fréquentes chez les cas, notamment l'**hypertension** (69% vs 51%) et le **diabète** (29% vs 16%). Toutes ces différences cliniques sont statistiquement significatives ($p < 0,001$).
+
 ```{r}
 
 ```
