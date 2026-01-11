@@ -9,7 +9,6 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 
 library(car)
-library(corrplot)
 library(dplyr)
 library(ggplot2)
 library(gtsummary)
@@ -99,9 +98,6 @@ Le groupe des cas présente des habitudes de vie plus à risque ($p < 0,001$) :
 **Caractéristiques cliniques**
 Sur le plan clinique, les cas présentent un profil de santé plus dégradé. Ils affichent un **IMC** moyen supérieur (28,7 vs 26,6 kg/m$^2$) ainsi qu'un taux de **cholestérol total** plus élevé. Les comorbidités sont également plus fréquentes chez les cas, notamment l'**hypertension** (69% vs 51%) et le **diabète** (29% vs 16%). Toutes ces différences cliniques sont statistiquement significatives ($p < 0,001$).
 
-```{r}
-
-```
 
 
 ## Niveau de référence des variables
@@ -119,7 +115,80 @@ data$tabagisme <- relevel(data$tabagisme, ref = "Jamais")
 
 ## Regression logistique simple / univarié
 
-### Quantitative : Age IMC Chol....
+### Variable Age
+
+```{r}
+# Modèle
+mod_age <- glm(statut_cas_temoin ~ age, family = binomial, data = data)
+
+# Statistiques et intervalle de confiance
+summary(mod_age)
+IC_age <- confint(mod_age)
+IC_exp_age <- exp(confint(mod_age))
+
+IC_age
+IC_exp_age
+
+anova(mod_age, test = "Chisq")
+```
+
+On obtient $\hat{\beta}_{age} = 0.083$ qui estime $\beta_{age} = \ln\left(\frac{odds(Y=1 \mid age=x+1)}{odds(Y=1 \mid age=x)}\right)$.
+
+L'intervalle de confiance à 95% de l'odds ratio est : $\exp(\beta_{age}) \in [1.06; 1.11]$.
+
+Cela signifie que pour chaque année d'âge supplémentaire, l'odds de faire un infarctus est multiplié par au moins **1.06** et au plus **1.11**. Autrement dit, le risque augmente d'environ 6% à 11% par an.
+
+Comme l'intervalle ne contient pas la valeur 1 (borne inférieure > 1) et que la p-value est extrêmement faible ($p < 0.001$), l'âge est un **facteur de risque statistiquement significatif**.
+
+### Variable IMC
+
+```{r}
+# Modèle
+mod_chol <- glm(statut_cas_temoin ~ cholesterol_total, family = binomial, data = data)
+
+# Statistiques et intervalle de confiance
+summary(mod_chol)
+IC_chol <- confint(mod_chol)
+IC_exp_chol <- exp(confint(mod_chol))
+
+IC_chol
+IC_exp_chol
+
+anova(mod_chol, test = "Chisq")
+```
+
+On obtient $\hat{\beta}_{imc} = 0.148$ qui estime $\beta_{imc}$.
+
+L'intervalle de confiance à 95% de l'odds ratio est : $\exp(\beta_{imc}) \in [1.10; 1.22]$.
+
+Ainsi, une augmentation de 1 point d'IMC (par exemple passer de 24 à 25 kg/m²) multiplie l'odds de maladie par un facteur compris entre **1.10** et **1.22**.
+
+La p-value étant très faible ($6.7 \times 10^{-10}$), l'IMC est **significativement associé** à la maladie : plus l'IMC est élevé, plus le risque augmente.
+
+### Variable Cholesterole
+
+```{r}
+# Modèle
+mod_imc <- glm(statut_cas_temoin ~ imc, family = binomial, data = data)
+
+# Statistiques et intervalle de confiance
+summary(mod_imc)
+IC_imc <- confint(mod_imc)
+IC_exp_imc <- exp(confint(mod_imc))
+
+IC_imc
+IC_exp_imc
+
+anova(mod_imc, test = "Chisq")
+```
+
+On obtient $\hat{\beta}_{chol} = 0.785$ qui estime $\beta_{chol}$.
+
+L'intervalle de confiance à 95% de l'odds ratio est : $\exp(\beta_{chol}) \in [1.79; 2.71]$.
+
+L'association est très forte : pour une augmentation d'une unité de cholestérol total, l'odds d'être un cas est multiplié par environ **2.19** (l'estimateur ponctuel $e^{0.785}$), avec un intervalle allant de 1.79 à 2.71.
+
+La p-value est très inférieure au seuil de 0.05, confirmant que l'hypercholestérolémie est un **facteur de risque majeur et significatif** dans cet échantillon.
 
 ### Variable Sexe
 

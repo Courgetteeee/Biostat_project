@@ -9,11 +9,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="LANCON Cindy" />
+<meta name="author" content="LANCON Cindy, FRISON Victor" />
 
 <meta name="date" content="2025-12-17" />
 
-<title>Projet_Biostat</title>
+<title>Projet de biostatistiques</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -350,12 +350,47 @@ display: none;
 
 
 
-<h1 class="title toc-ignore">Projet_Biostat</h1>
-<h4 class="author">LANCON Cindy</h4>
+<h1 class="title toc-ignore">Projet de biostatistiques</h1>
+<h4 class="author">LANCON Cindy, FRISON Victor</h4>
 <h4 class="date">2025-12-17</h4>
 
 </div>
 
+<div id="TOC">
+<ul>
+<li><a href="#étude-cas-témoin-sur-linfarctus-du-myocarde" id="toc-étude-cas-témoin-sur-linfarctus-du-myocarde"><strong><em>Étude
+cas-témoin sur l’infarctus du myocarde</em></strong></a>
+<ul>
+<li><a href="#analyse-exploratoire-stats-descriptives" id="toc-analyse-exploratoire-stats-descriptives">Analyse exploratoire /
+Stats descriptives</a></li>
+<li><a href="#niveau-de-référence-des-variables" id="toc-niveau-de-référence-des-variables">Niveau de référence des
+variables</a></li>
+<li><a href="#regression-logistique-simple-univarié" id="toc-regression-logistique-simple-univarié">Regression logistique
+simple / univarié</a>
+<ul>
+<li><a href="#variable-age" id="toc-variable-age">Variable Age</a></li>
+<li><a href="#variable-imc" id="toc-variable-imc">Variable IMC</a></li>
+<li><a href="#variable-cholesterole" id="toc-variable-cholesterole">Variable Cholesterole</a></li>
+<li><a href="#variable-sexe" id="toc-variable-sexe">Variable
+Sexe</a></li>
+<li><a href="#variable-tabagisme" id="toc-variable-tabagisme">Variable
+Tabagisme</a></li>
+<li><a href="#variable-hypertension" id="toc-variable-hypertension">Variable Hypertension</a></li>
+<li><a href="#variable-diabète" id="toc-variable-diabète">Variable
+Diabète</a></li>
+<li><a href="#variable-niveau-dactivité-physique" id="toc-variable-niveau-dactivité-physique">Variable Niveau d’activité
+physique</a></li>
+<li><a href="#consommation-dalcool" id="toc-consommation-dalcool">Consommation d’alcool</a></li>
+</ul></li>
+<li><a href="#regression-multivariée-logistique-multiple" id="toc-regression-multivariée-logistique-multiple">Regression
+multivariée logistique multiple</a>
+<ul>
+<li><a href="#performance-du-modèle" id="toc-performance-du-modèle">Performance du modèle</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#todo" id="toc-todo">TODO</a></li>
+</ul>
+</div>
 
 <div id="étude-cas-témoin-sur-linfarctus-du-myocarde" class="section level1">
 <h1><strong><em>Étude cas-témoin sur l’infarctus du
@@ -392,20 +427,20 @@ une analyse exploratoire de nos données et regarder quelques
 statistiques descrptives. Cela nous permettera de voir si l’on a des
 différence entre nos cas et témoins, mais également regarder si l’on a
 des interactions entre nos varialbes.</p>
-<div id="ddtumcyjkn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#ddtumcyjkn table {
+<div id="qvyeidkhaq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#qvyeidkhaq table {
 font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 -webkit-font-smoothing: antialiased;
 -moz-osx-font-smoothing: grayscale;
 }
-#ddtumcyjkn thead, #ddtumcyjkn tbody, #ddtumcyjkn tfoot, #ddtumcyjkn tr, #ddtumcyjkn td, #ddtumcyjkn th {
+#qvyeidkhaq thead, #qvyeidkhaq tbody, #qvyeidkhaq tfoot, #qvyeidkhaq tr, #qvyeidkhaq td, #qvyeidkhaq th {
 border-style: none;
 }
-#ddtumcyjkn p {
+#qvyeidkhaq p {
 margin: 0;
 padding: 0;
 }
-#ddtumcyjkn .gt_table {
+#qvyeidkhaq .gt_table {
 display: table;
 border-collapse: collapse;
 line-height: normal;
@@ -430,11 +465,11 @@ border-left-style: none;
 border-left-width: 2px;
 border-left-color: #D3D3D3;
 }
-#ddtumcyjkn .gt_caption {
+#qvyeidkhaq .gt_caption {
 padding-top: 4px;
 padding-bottom: 4px;
 }
-#ddtumcyjkn .gt_title {
+#qvyeidkhaq .gt_title {
 color: #333333;
 font-size: 125%;
 font-weight: initial;
@@ -445,7 +480,7 @@ padding-right: 5px;
 border-bottom-color: #FFFFFF;
 border-bottom-width: 0;
 }
-#ddtumcyjkn .gt_subtitle {
+#qvyeidkhaq .gt_subtitle {
 color: #333333;
 font-size: 85%;
 font-weight: initial;
@@ -456,7 +491,7 @@ padding-right: 5px;
 border-top-color: #FFFFFF;
 border-top-width: 0;
 }
-#ddtumcyjkn .gt_heading {
+#qvyeidkhaq .gt_heading {
 background-color: #FFFFFF;
 text-align: center;
 border-bottom-color: #FFFFFF;
@@ -467,12 +502,12 @@ border-right-style: none;
 border-right-width: 1px;
 border-right-color: #D3D3D3;
 }
-#ddtumcyjkn .gt_bottom_border {
+#qvyeidkhaq .gt_bottom_border {
 border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 }
-#ddtumcyjkn .gt_col_headings {
+#qvyeidkhaq .gt_col_headings {
 border-top-style: solid;
 border-top-width: 2px;
 border-top-color: #D3D3D3;
@@ -486,7 +521,7 @@ border-right-style: none;
 border-right-width: 1px;
 border-right-color: #D3D3D3;
 }
-#ddtumcyjkn .gt_col_heading {
+#qvyeidkhaq .gt_col_heading {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -505,7 +540,7 @@ padding-left: 5px;
 padding-right: 5px;
 overflow-x: hidden;
 }
-#ddtumcyjkn .gt_column_spanner_outer {
+#qvyeidkhaq .gt_column_spanner_outer {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -516,13 +551,13 @@ padding-bottom: 0;
 padding-left: 4px;
 padding-right: 4px;
 }
-#ddtumcyjkn .gt_column_spanner_outer:first-child {
+#qvyeidkhaq .gt_column_spanner_outer:first-child {
 padding-left: 0;
 }
-#ddtumcyjkn .gt_column_spanner_outer:last-child {
+#qvyeidkhaq .gt_column_spanner_outer:last-child {
 padding-right: 0;
 }
-#ddtumcyjkn .gt_column_spanner {
+#qvyeidkhaq .gt_column_spanner {
 border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
@@ -533,10 +568,10 @@ overflow-x: hidden;
 display: inline-block;
 width: 100%;
 }
-#ddtumcyjkn .gt_spanner_row {
+#qvyeidkhaq .gt_spanner_row {
 border-bottom-style: hidden;
 }
-#ddtumcyjkn .gt_group_heading {
+#qvyeidkhaq .gt_group_heading {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -561,7 +596,7 @@ border-right-color: #D3D3D3;
 vertical-align: middle;
 text-align: left;
 }
-#ddtumcyjkn .gt_empty_group_heading {
+#qvyeidkhaq .gt_empty_group_heading {
 padding: 0.5px;
 color: #333333;
 background-color: #FFFFFF;
@@ -575,13 +610,13 @@ border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 vertical-align: middle;
 }
-#ddtumcyjkn .gt_from_md > :first-child {
+#qvyeidkhaq .gt_from_md > :first-child {
 margin-top: 0;
 }
-#ddtumcyjkn .gt_from_md > :last-child {
+#qvyeidkhaq .gt_from_md > :last-child {
 margin-bottom: 0;
 }
-#ddtumcyjkn .gt_row {
+#qvyeidkhaq .gt_row {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -599,7 +634,7 @@ border-right-color: #D3D3D3;
 vertical-align: middle;
 overflow-x: hidden;
 }
-#ddtumcyjkn .gt_stub {
+#qvyeidkhaq .gt_stub {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -611,7 +646,7 @@ border-right-color: #D3D3D3;
 padding-left: 5px;
 padding-right: 5px;
 }
-#ddtumcyjkn .gt_stub_row_group {
+#qvyeidkhaq .gt_stub_row_group {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -624,13 +659,13 @@ padding-left: 5px;
 padding-right: 5px;
 vertical-align: top;
 }
-#ddtumcyjkn .gt_row_group_first td {
+#qvyeidkhaq .gt_row_group_first td {
 border-top-width: 2px;
 }
-#ddtumcyjkn .gt_row_group_first th {
+#qvyeidkhaq .gt_row_group_first th {
 border-top-width: 2px;
 }
-#ddtumcyjkn .gt_summary_row {
+#qvyeidkhaq .gt_summary_row {
 color: #333333;
 background-color: #FFFFFF;
 text-transform: inherit;
@@ -639,14 +674,14 @@ padding-bottom: 8px;
 padding-left: 5px;
 padding-right: 5px;
 }
-#ddtumcyjkn .gt_first_summary_row {
+#qvyeidkhaq .gt_first_summary_row {
 border-top-style: solid;
 border-top-color: #D3D3D3;
 }
-#ddtumcyjkn .gt_first_summary_row.thick {
+#qvyeidkhaq .gt_first_summary_row.thick {
 border-top-width: 2px;
 }
-#ddtumcyjkn .gt_last_summary_row {
+#qvyeidkhaq .gt_last_summary_row {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -655,7 +690,7 @@ border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 }
-#ddtumcyjkn .gt_grand_summary_row {
+#qvyeidkhaq .gt_grand_summary_row {
 color: #333333;
 background-color: #FFFFFF;
 text-transform: inherit;
@@ -664,7 +699,7 @@ padding-bottom: 8px;
 padding-left: 5px;
 padding-right: 5px;
 }
-#ddtumcyjkn .gt_first_grand_summary_row {
+#qvyeidkhaq .gt_first_grand_summary_row {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -673,7 +708,7 @@ border-top-style: double;
 border-top-width: 6px;
 border-top-color: #D3D3D3;
 }
-#ddtumcyjkn .gt_last_grand_summary_row_top {
+#qvyeidkhaq .gt_last_grand_summary_row_top {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -682,10 +717,10 @@ border-bottom-style: double;
 border-bottom-width: 6px;
 border-bottom-color: #D3D3D3;
 }
-#ddtumcyjkn .gt_striped {
+#qvyeidkhaq .gt_striped {
 background-color: rgba(128, 128, 128, 0.05);
 }
-#ddtumcyjkn .gt_table_body {
+#qvyeidkhaq .gt_table_body {
 border-top-style: solid;
 border-top-width: 2px;
 border-top-color: #D3D3D3;
@@ -693,7 +728,7 @@ border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 }
-#ddtumcyjkn .gt_footnotes {
+#qvyeidkhaq .gt_footnotes {
 color: #333333;
 background-color: #FFFFFF;
 border-bottom-style: none;
@@ -706,7 +741,7 @@ border-right-style: none;
 border-right-width: 2px;
 border-right-color: #D3D3D3;
 }
-#ddtumcyjkn .gt_footnote {
+#qvyeidkhaq .gt_footnote {
 margin: 0px;
 font-size: 90%;
 padding-top: 4px;
@@ -714,7 +749,7 @@ padding-bottom: 4px;
 padding-left: 5px;
 padding-right: 5px;
 }
-#ddtumcyjkn .gt_sourcenotes {
+#qvyeidkhaq .gt_sourcenotes {
 color: #333333;
 background-color: #FFFFFF;
 border-bottom-style: none;
@@ -727,64 +762,64 @@ border-right-style: none;
 border-right-width: 2px;
 border-right-color: #D3D3D3;
 }
-#ddtumcyjkn .gt_sourcenote {
+#qvyeidkhaq .gt_sourcenote {
 font-size: 90%;
 padding-top: 4px;
 padding-bottom: 4px;
 padding-left: 5px;
 padding-right: 5px;
 }
-#ddtumcyjkn .gt_left {
+#qvyeidkhaq .gt_left {
 text-align: left;
 }
-#ddtumcyjkn .gt_center {
+#qvyeidkhaq .gt_center {
 text-align: center;
 }
-#ddtumcyjkn .gt_right {
+#qvyeidkhaq .gt_right {
 text-align: right;
 font-variant-numeric: tabular-nums;
 }
-#ddtumcyjkn .gt_font_normal {
+#qvyeidkhaq .gt_font_normal {
 font-weight: normal;
 }
-#ddtumcyjkn .gt_font_bold {
+#qvyeidkhaq .gt_font_bold {
 font-weight: bold;
 }
-#ddtumcyjkn .gt_font_italic {
+#qvyeidkhaq .gt_font_italic {
 font-style: italic;
 }
-#ddtumcyjkn .gt_super {
+#qvyeidkhaq .gt_super {
 font-size: 65%;
 }
-#ddtumcyjkn .gt_footnote_marks {
+#qvyeidkhaq .gt_footnote_marks {
 font-size: 75%;
 vertical-align: 0.4em;
 position: initial;
 }
-#ddtumcyjkn .gt_asterisk {
+#qvyeidkhaq .gt_asterisk {
 font-size: 100%;
 vertical-align: 0;
 }
-#ddtumcyjkn .gt_indent_1 {
+#qvyeidkhaq .gt_indent_1 {
 text-indent: 5px;
 }
-#ddtumcyjkn .gt_indent_2 {
+#qvyeidkhaq .gt_indent_2 {
 text-indent: 10px;
 }
-#ddtumcyjkn .gt_indent_3 {
+#qvyeidkhaq .gt_indent_3 {
 text-indent: 15px;
 }
-#ddtumcyjkn .gt_indent_4 {
+#qvyeidkhaq .gt_indent_4 {
 text-indent: 20px;
 }
-#ddtumcyjkn .gt_indent_5 {
+#qvyeidkhaq .gt_indent_5 {
 text-indent: 25px;
 }
-#ddtumcyjkn .katex-display {
+#qvyeidkhaq .katex-display {
 display: inline-flex !important;
 margin-bottom: 0.75em !important;
 }
-#ddtumcyjkn div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#qvyeidkhaq div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
 height: 0px !important;
 }
 </style>
@@ -955,6 +990,32 @@ N = 260</span><span class="gt_footnote_marks" style="white-space:nowrap;font-sty
   </tfoot>
 </table>
 </div>
+<p><strong>Interprétation des résultats</strong></p>
+<p>L’analyse porte sur un échantillon total de 520 sujets, répartis
+équitablement entre cas (N=260) et témoins (N=260).</p>
+<p><strong>Caractéristiques sociodémographiques</strong> Les cas sont
+<strong>significativement plus âgés</strong> que les témoins, avec une
+moyenne d’âge de 64,3 ans contre 58,1 ans (<span class="math inline">\(p
+&lt; 0,001\)</span>). En revanche, aucune différence significative n’a
+été observée concernant la répartition par <strong>sexe</strong> (<span class="math inline">\(p = 0,10\)</span>) ou la <strong>région</strong>
+d’origine (<span class="math inline">\(p = 0,3\)</span>).</p>
+<p><strong>Mode de vie et comportements</strong> Le groupe des cas
+présente des habitudes de vie plus à risque (<span class="math inline">\(p &lt; 0,001\)</span>) : * <strong>Tabac
+:</strong> La prévalence du tabagisme actuel est presque deux fois plus
+élevée chez les cas (48%) que chez les témoins (25%). * <strong>Activité
+physique :</strong> La sédentarité est prédominante chez les cas, avec
+65% déclarant une activité “Faible”, contre 38% chez les témoins. *
+<strong>Alcool :</strong> Une consommation élevée (&gt;3 verres/j) est
+plus fréquente chez les cas (18% vs 7,3%).</p>
+<p><strong>Caractéristiques cliniques</strong> Sur le plan clinique, les
+cas présentent un profil de santé plus dégradé. Ils affichent un
+<strong>IMC</strong> moyen supérieur (28,7 vs 26,6 kg/m<span class="math inline">\(^2\)</span>) ainsi qu’un taux de
+<strong>cholestérol total</strong> plus élevé. Les comorbidités sont
+également plus fréquentes chez les cas, notamment
+l’<strong>hypertension</strong> (69% vs 51%) et le
+<strong>diabète</strong> (29% vs 16%). Toutes ces différences cliniques
+sont statistiquement significatives (<span class="math inline">\(p &lt;
+0,001\)</span>).</p>
 </div>
 <div id="niveau-de-référence-des-variables" class="section level2">
 <h2>Niveau de référence des variables</h2>
@@ -993,8 +1054,196 @@ data$tabagisme &lt;- relevel(data$tabagisme, ref = &quot;Jamais&quot;)</code></p
 </div>
 <div id="regression-logistique-simple-univarié" class="section level2">
 <h2>Regression logistique simple / univarié</h2>
-<div id="quantitative-age-imc-chol." class="section level3">
-<h3>Quantitative : Age IMC Chol….</h3>
+<div id="variable-age" class="section level3">
+<h3>Variable Age</h3>
+<pre class="r"><code># Modèle
+mod_age &lt;- glm(statut_cas_temoin ~ age, family = binomial, data = data)
+
+# Statistiques et intervalle de confiance
+summary(mod_age)</code></pre>
+<pre><code>## 
+## Call:
+## glm(formula = statut_cas_temoin ~ age, family = binomial, data = data)
+## 
+## Coefficients:
+##             Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept) -5.10359    0.70399  -7.250 4.18e-13 ***
+## age          0.08342    0.01141   7.312 2.63e-13 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 720.87  on 519  degrees of freedom
+## Residual deviance: 657.66  on 518  degrees of freedom
+## AIC: 661.66
+## 
+## Number of Fisher Scoring iterations: 4</code></pre>
+<pre class="r"><code>IC_age &lt;- confint(mod_age)</code></pre>
+<pre><code>## Waiting for profiling to be done...</code></pre>
+<pre class="r"><code>IC_exp_age &lt;- exp(confint(mod_age))</code></pre>
+<pre><code>## Waiting for profiling to be done...</code></pre>
+<pre class="r"><code>IC_age</code></pre>
+<pre><code>##                   2.5 %    97.5 %
+## (Intercept) -6.52099681 -3.757393
+## age          0.06160951  0.106393</code></pre>
+<pre class="r"><code>IC_exp_age</code></pre>
+<pre><code>##                   2.5 %     97.5 %
+## (Intercept) 0.001472201 0.02334453
+## age         1.063546956 1.11225893</code></pre>
+<pre class="r"><code>anova(mod_age, test = &quot;Chisq&quot;)</code></pre>
+<pre><code>## Analysis of Deviance Table
+## 
+## Model: binomial, link: logit
+## 
+## Response: statut_cas_temoin
+## 
+## Terms added sequentially (first to last)
+## 
+## 
+##      Df Deviance Resid. Df Resid. Dev  Pr(&gt;Chi)    
+## NULL                   519     720.87              
+## age   1    63.21       518     657.66 1.858e-15 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>On obtient <span class="math inline">\(\hat{\beta}_{age} =
+0.083\)</span> qui estime <span class="math inline">\(\beta_{age} =
+\ln\left(\frac{odds(Y=1 \mid age=x+1)}{odds(Y=1 \mid
+age=x)}\right)\)</span>.</p>
+<p>L’intervalle de confiance à 95% de l’odds ratio est : <span class="math inline">\(\exp(\beta_{age}) \in [1.06; 1.11]\)</span>.</p>
+<p>Cela signifie que pour chaque année d’âge supplémentaire, l’odds de
+faire un infarctus est multiplié par au moins <strong>1.06</strong> et
+au plus <strong>1.11</strong>. Autrement dit, le risque augmente
+d’environ 6% à 11% par an.</p>
+<p>Comme l’intervalle ne contient pas la valeur 1 (borne inférieure &gt;
+1) et que la p-value est extrêmement faible (<span class="math inline">\(p &lt; 0.001\)</span>), l’âge est un
+<strong>facteur de risque statistiquement significatif</strong>.</p>
+</div>
+<div id="variable-imc" class="section level3">
+<h3>Variable IMC</h3>
+<pre class="r"><code># Modèle
+mod_chol &lt;- glm(statut_cas_temoin ~ cholesterol_total, family = binomial, data = data)
+
+# Statistiques et intervalle de confiance
+summary(mod_chol)</code></pre>
+<pre><code>## 
+## Call:
+## glm(formula = statut_cas_temoin ~ cholesterol_total, family = binomial, 
+##     data = data)
+## 
+## Coefficients:
+##                   Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept)        -4.3867     0.5996  -7.316 2.56e-13 ***
+## cholesterol_total   0.7850     0.1060   7.404 1.32e-13 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 720.87  on 519  degrees of freedom
+## Residual deviance: 655.86  on 518  degrees of freedom
+## AIC: 659.86
+## 
+## Number of Fisher Scoring iterations: 4</code></pre>
+<pre class="r"><code>IC_chol &lt;- confint(mod_chol)</code></pre>
+<pre><code>## Waiting for profiling to be done...</code></pre>
+<pre class="r"><code>IC_exp_chol &lt;- exp(confint(mod_chol))</code></pre>
+<pre><code>## Waiting for profiling to be done...</code></pre>
+<pre class="r"><code>IC_chol</code></pre>
+<pre><code>##                        2.5 %     97.5 %
+## (Intercept)       -5.5947962 -3.2404729
+## cholesterol_total  0.5823819  0.9986468</code></pre>
+<pre class="r"><code>IC_exp_chol</code></pre>
+<pre><code>##                         2.5 %     97.5 %
+## (Intercept)       0.003717157 0.03914538
+## cholesterol_total 1.790297604 2.71460599</code></pre>
+<pre class="r"><code>anova(mod_chol, test = &quot;Chisq&quot;)</code></pre>
+<pre><code>## Analysis of Deviance Table
+## 
+## Model: binomial, link: logit
+## 
+## Response: statut_cas_temoin
+## 
+## Terms added sequentially (first to last)
+## 
+## 
+##                   Df Deviance Resid. Df Resid. Dev  Pr(&gt;Chi)    
+## NULL                                519     720.87              
+## cholesterol_total  1   65.013       518     655.86 7.442e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>On obtient <span class="math inline">\(\hat{\beta}_{imc} =
+0.148\)</span> qui estime <span class="math inline">\(\beta_{imc}\)</span>.</p>
+<p>L’intervalle de confiance à 95% de l’odds ratio est : <span class="math inline">\(\exp(\beta_{imc}) \in [1.10; 1.22]\)</span>.</p>
+<p>Ainsi, une augmentation de 1 point d’IMC (par exemple passer de 24 à
+25 kg/m²) multiplie l’odds de maladie par un facteur compris entre
+<strong>1.10</strong> et <strong>1.22</strong>.</p>
+<p>La p-value étant très faible (<span class="math inline">\(6.7 \times
+10^{-10}\)</span>), l’IMC est <strong>significativement associé</strong>
+à la maladie : plus l’IMC est élevé, plus le risque augmente.</p>
+</div>
+<div id="variable-cholesterole" class="section level3">
+<h3>Variable Cholesterole</h3>
+<pre class="r"><code># Modèle
+mod_imc &lt;- glm(statut_cas_temoin ~ imc, family = binomial, data = data)
+
+# Statistiques et intervalle de confiance
+summary(mod_imc)</code></pre>
+<pre><code>## 
+## Call:
+## glm(formula = statut_cas_temoin ~ imc, family = binomial, data = data)
+## 
+## Coefficients:
+##             Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept) -4.08197    0.70234  -5.812 6.17e-09 ***
+## imc          0.14769    0.02521   5.860 4.64e-09 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 720.87  on 519  degrees of freedom
+## Residual deviance: 682.77  on 518  degrees of freedom
+## AIC: 686.77
+## 
+## Number of Fisher Scoring iterations: 4</code></pre>
+<pre class="r"><code>IC_imc &lt;- confint(mod_imc)</code></pre>
+<pre><code>## Waiting for profiling to be done...</code></pre>
+<pre class="r"><code>IC_exp_imc &lt;- exp(confint(mod_imc))</code></pre>
+<pre><code>## Waiting for profiling to be done...</code></pre>
+<pre class="r"><code>IC_imc</code></pre>
+<pre><code>##                   2.5 %     97.5 %
+## (Intercept) -5.48952735 -2.7321344
+## imc          0.09926246  0.1982199</code></pre>
+<pre class="r"><code>IC_exp_imc</code></pre>
+<pre><code>##                   2.5 %     97.5 %
+## (Intercept) 0.004129796 0.06508023
+## imc         1.104356108 1.21923049</code></pre>
+<pre class="r"><code>anova(mod_imc, test = &quot;Chisq&quot;)</code></pre>
+<pre><code>## Analysis of Deviance Table
+## 
+## Model: binomial, link: logit
+## 
+## Response: statut_cas_temoin
+## 
+## Terms added sequentially (first to last)
+## 
+## 
+##      Df Deviance Resid. Df Resid. Dev  Pr(&gt;Chi)    
+## NULL                   519     720.87              
+## imc   1   38.099       518     682.77 6.726e-10 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>On obtient <span class="math inline">\(\hat{\beta}_{chol} =
+0.785\)</span> qui estime <span class="math inline">\(\beta_{chol}\)</span>.</p>
+<p>L’intervalle de confiance à 95% de l’odds ratio est : <span class="math inline">\(\exp(\beta_{chol}) \in [1.79; 2.71]\)</span>.</p>
+<p>L’association est très forte : pour une augmentation d’une unité de
+cholestérol total, l’odds d’être un cas est multiplié par environ
+<strong>2.19</strong> (l’estimateur ponctuel <span class="math inline">\(e^{0.785}\)</span>), avec un intervalle allant de
+1.79 à 2.71.</p>
+<p>La p-value est très inférieure au seuil de 0.05, confirmant que
+l’hypercholestérolémie est un <strong>facteur de risque majeur et
+significatif</strong> dans cet échantillon.</p>
 </div>
 <div id="variable-sexe" class="section level3">
 <h3>Variable Sexe</h3>
@@ -1673,10 +1922,18 @@ correspondant à un modèle aléatoire (AUC=0.5), ce qui confirme
 visuellement la bonne performance du modèle.</p>
 </div>
 </div>
-<div id="modèle-polytomique-interactions" class="section level2">
-<h2>Modèle polytomique + interactions ??</h2>
-<p>Avec qualitative ordonnées, non ordonnées</p>
 </div>
+<div id="todo" class="section level1">
+<h1>TODO</h1>
+<ul>
+<li>Modèle polytomique
+<ul>
+<li>Avec qualitative ordonnées, non ordonnées</li>
+</ul></li>
+<li>interaction ??</li>
+<li>Commenter les odds du modele total ?</li>
+<li>Quelles sorties + quels morceaux de code on affiche ?</li>
+</ul>
 </div>
 
 
