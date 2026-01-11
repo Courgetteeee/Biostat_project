@@ -8,10 +8,12 @@ output: html_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 
+library(car)
+library(corrplot)
 library(dplyr)
 library(ggplot2)
+library(gtsummary)
 library(MASS)
-library(car)
 library(pROC)
 
 data <- read.csv2("data/Table.csv", header=TRUE)
@@ -60,6 +62,31 @@ Les différentes variables explicatives possibles sont :
 -   **Région** de l’hôpital de prise en charge
 
 ## Analyse exploratoire / Stats descriptives
+
+Avant de faire nos régressions logistiques, nous allons commencer par une analyse exploratoire de nos données et regarder quelques statistiques descrptives. Cela nous permettera de voir si l'on a des différence entre nos cas et témoins, mais également regarder si l'on a des interactions entre nos varialbes.
+
+```{r, echo=FALSE}
+table1 <- data %>%
+  dplyr::select(-id_sujet) %>% 
+  tbl_summary(
+    by = statut_cas_temoin, # On compare selon le statut
+    statistic = list(all_continuous() ~ "{mean} ({sd})", 
+                     all_categorical() ~ "{n} ({p}%)"),
+    digits = all_continuous() ~ 1,
+    label = list(age ~ "Âge (années)", imc ~ "IMC (kg/m²)", cholesterol_total ~ "Cholestérol")
+  ) %>%
+  add_p() %>%      # Ajoute les p-values (test Chi2 ou Wilcoxon/T-test auto)
+  add_overall() %>% # Ajoute une colonne "Total"
+  bold_labels() %>% 
+  modify_caption("**Tableau 1.** Comparaison cas/témoins.  \n*Réalisé avec la librairie **gtsummary** avec l'aide de **Gemini***")
+
+table1
+```
+
+```{r}
+
+```
+
 
 ## Niveau de référence des variables
 
