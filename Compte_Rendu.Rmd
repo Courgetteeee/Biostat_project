@@ -88,19 +88,11 @@ table1
 
 L'analyse porte sur un échantillon total de 520 sujets, répartis équitablement entre cas (N=260) et témoins (N=260).
 
-**Caractéristiques sociodémographiques**
-Les cas sont **significativement plus âgés** que les témoins, avec une moyenne d'âge de 64,3 ans contre 58,1 ans ($p < 0,001$). En revanche, aucune différence significative n'a été observée concernant la répartition par **sexe** ($p = 0,10$) ou la **région** d'origine ($p = 0,3$).
+**Caractéristiques sociodémographiques** Les cas sont **significativement plus âgés** que les témoins, avec une moyenne d'âge de 64,3 ans contre 58,1 ans ($p < 0,001$). En revanche, aucune différence significative n'a été observée concernant la répartition par **sexe** ($p = 0,10$) ou la **région** d'origine ($p = 0,3$).
 
-**Mode de vie et comportements**
-Le groupe des cas présente des habitudes de vie plus à risque ($p < 0,001$) :
-* **Tabac :** La prévalence du tabagisme actuel est presque deux fois plus élevée chez les cas (48%) que chez les témoins (25%).
-* **Activité physique :** La sédentarité est prédominante chez les cas, avec 65% déclarant une activité "Faible", contre 38% chez les témoins.
-* **Alcool :** Une consommation élevée (>3 verres/j) est plus fréquente chez les cas (18% vs 7,3%).
+**Mode de vie et comportements** Le groupe des cas présente des habitudes de vie plus à risque ($p < 0,001$) : \* **Tabac :** La prévalence du tabagisme actuel est presque deux fois plus élevée chez les cas (48%) que chez les témoins (25%). \* **Activité physique :** La sédentarité est prédominante chez les cas, avec 65% déclarant une activité "Faible", contre 38% chez les témoins. \* **Alcool :** Une consommation élevée (\>3 verres/j) est plus fréquente chez les cas (18% vs 7,3%).
 
-**Caractéristiques cliniques**
-Sur le plan clinique, les cas présentent un profil de santé plus dégradé. Ils affichent un **IMC** moyen supérieur (28,7 vs 26,6 kg/m$^2$) ainsi qu'un taux de **cholestérol total** plus élevé. Les comorbidités sont également plus fréquentes chez les cas, notamment l'**hypertension** (69% vs 51%) et le **diabète** (29% vs 16%). Toutes ces différences cliniques sont statistiquement significatives ($p < 0,001$).
-
-
+**Caractéristiques cliniques** Sur le plan clinique, les cas présentent un profil de santé plus dégradé. Ils affichent un **IMC** moyen supérieur (28,7 vs 26,6 kg/m$^2$) ainsi qu'un taux de **cholestérol total** plus élevé. Les comorbidités sont également plus fréquentes chez les cas, notamment l'**hypertension** (69% vs 51%) et le **diabète** (29% vs 16%). Toutes ces différences cliniques sont statistiquement significatives ($p < 0,001$).
 
 ## Niveau de référence des variables
 
@@ -140,7 +132,7 @@ L'intervalle de confiance à 95% de l'odds ratio est : $\exp(\beta_{age}) \in [1
 
 Cela signifie que pour chaque année d'âge supplémentaire, l'odds de faire un infarctus est multiplié par au moins **1.06** et au plus **1.11**. Autrement dit, le risque augmente d'environ 6% à 11% par an.
 
-Comme l'intervalle ne contient pas la valeur 1 (borne inférieure > 1) et que la p-value est extrêmement faible ($p < 0.001$), l'âge est un **facteur de risque statistiquement significatif**.
+Comme l'intervalle ne contient pas la valeur 1 (borne inférieure \> 1) et que la p-value est extrêmement faible ($p < 0.001$), l'âge est un **facteur de risque statistiquement significatif**.
 
 ### Variable IMC
 
@@ -421,9 +413,99 @@ Dans notre étude, nous obtenons une aire sous la courbe ROC (AUC) de 0.85, ce q
 
 De plus, la courbe ROC s'éloigne nettement de la diagonale correspondant à un modèle aléatoire (AUC=0.5), ce qui confirme visuellement la bonne performance du modèle.
 
+## Interactions dans le modèle
+
+Nous avons pu mettre en avant plusieurs facteurs de risque associés à l'infarctus du myocarde. Cependant, il peut arriver que l'effet de certains facteurs dépende du niveau d'autres variables : c'est ce que l'on appelle une interaction. Par exemple, on pourrait imaginer que l'effet du tabagisme soit différent entre les hommes et les femmes, ou encore l'effet de l'IMC pourrait varier selon le niveau d'activité physique.
+
+Dans la suite, nous allons donc tester plusieurs interactions plausibles.
+
+#### Interactions testées
+
+-   Tabagisme x Sexe
+
+    L'effet du tabagisme peut être différent entre les hommes et les femmes.
+
+-   Tabagisme x Age
+
+    L'effet du tabagisme pourrait être plus important chez les personnes plus âgées.
+
+-   IMC x Activité physique
+
+    L'effet d'un IMC élevé pourrait être plus marqué chez les individu peu actifs.
+
+-   Diabète x Hypertension
+
+    Ces deux facteurs de risque cardiovasculaire pourraient avoir un effet synergique.
+
+-   Cholestérol x Age
+
+    L'effet du cholestérol pourrait être plus élevé chez les personne
+
+```{r, echo=FALSE}
+
+#Tabac x Sexe
+mod_inter_tabac_sexe <- glm(statut_cas_temoin ~ age + tabagisme*sexe + imc + 
+                     hypertension + diabete + cholesterol_total +
+                     niveau_activite_physique + consommation_alcool,
+                   family = binomial, data=data)
+#Tabac x Age
+mod_inter_tabac_age <- glm(statut_cas_temoin ~ sexe + tabagisme*age + imc + 
+                     hypertension + diabete + cholesterol_total +
+                     niveau_activite_physique + consommation_alcool,
+                   family = binomial, data=data)
+#IMC x activité physique
+mod_inter_imc_act <- glm(statut_cas_temoin ~ tabagisme + age + 
+                     hypertension + diabete + cholesterol_total +
+                     imc*niveau_activite_physique + consommation_alcool,
+                   family = binomial, data=data)
+
+#Diabète x Hypertension
+mod_inter_diab_hyp <- glm(statut_cas_temoin ~ tabagisme + age + 
+                     hypertension*diabete + cholesterol_total +
+                     imc + niveau_activite_physique + consommation_alcool,
+                   family = binomial, data=data)
+
+#Cholestérol x Age
+mod_inter_chol_age <- glm(statut_cas_temoin ~ tabagisme + 
+                     hypertension + diabete + cholesterol_total*age +
+                     imc + niveau_activite_physique + consommation_alcool,
+                   family = binomial, data=data)
+
+```
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+p_tabac_sexe <- anova(mod_final, mod_inter_tabac_sexe, test = "Chisq")$`Pr(>Chi)`[2]
+p_tabac_age <- anova(mod_final, mod_inter_tabac_age, test = "Chisq")$`Pr(>Chi)`[2]
+p_imc_act <- anova(mod_final, mod_inter_imc_act, test = "Chisq")$`Pr(>Chi)`[2]
+p_diabete_hta <- anova(mod_final, mod_inter_diabete_hta, test = "Chisq")$`Pr(>Chi)`[2]
+p_chol_age <- anova(mod_final, mod_inter_chol_age, test = "Chisq")$`Pr(>Chi)`[2]
+
+# Tableau récapitulatif
+interactions_summary <- data.frame(
+  Interaction = c("Tabagisme × Sexe", 
+                  "Tabagisme × Âge", 
+                  "IMC × Activité physique", 
+                  "Diabète × Hypertension",
+                  "Cholestérol × Âge"),
+  P_value = round(c(p_tabac_sexe, p_tabac_age, p_imc_act, p_diabete_hta, p_chol_age), 3),
+  Significative = ifelse(c(p_tabac_sexe, p_tabac_age, p_imc_act, p_diabete_hta, p_chol_age) < 0.05, 
+                         "Oui", "Non")
+)
+
+knitr::kable(interactions_summary, 
+             caption = "**Tableau X.** Résultats des tests d'interactions (test Anova)")
+```
+
+Aucune des cinq interactions testées n'est statistiquement significative au seuil de 5% (p-value\>0.3). Cela suggère que les effets des facteurs de risque sont additifs plutot que multiplicatifs. Cela signifie par exemple, que l'effet du cholestérol semble constant quel que soit l'age.
+
+L'abscence d'interactions significatives justifie donc le choix du modèle additif retenu précèdemment.
+
+Cependant, l'abscence d'interactions dans notre échantillon (n=520) ne signifie pas qu'elles n'existent pas dans la population générale.
+
 # TODO
-- Modèle polytomique
-  - Avec qualitative ordonnées, non ordonnées
-- interaction ??
-- Commenter les odds du modele total ?
-- Quelles sorties + quels morceaux de code on affiche ?
+
+-   Modèle polytomique
+    -   Avec qualitative ordonnées, non ordonnées
+-   interaction ??
+-   Commenter les odds du modele total ?
+-   Quelles sorties + quels morceaux de code on affiche ?
