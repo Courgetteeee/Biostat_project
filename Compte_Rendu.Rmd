@@ -1,8 +1,10 @@
 ---
-title: "Projet_Biostat"
-author: "LANCON Cindy"
+title: "Projet de biostatistiques"
+author: "LANCON Cindy, FRISON Victor"
 date: "2025-12-17"
-output: html_document
+output:
+  html_document:
+    toc: true
 ---
 
 ```{r setup, include=FALSE}
@@ -419,6 +421,9 @@ Dans notre étude, nous obtenons une aire sous la courbe ROC (AUC) de 0.85, ce q
 
 De plus, la courbe ROC s'éloigne nettement de la diagonale correspondant à un modèle aléatoire (AUC=0.5), ce qui confirme visuellement la bonne performance du modèle.
 
-## Modèle polytomique + interactions ??
-
-Avec qualitative ordonnées, non ordonnées
+# TODO
+- Modèle polytomique
+  - Avec qualitative ordonnées, non ordonnées
+- interaction ??
+- Commenter les odds du modele total ?
+- Quelles sorties + quels morceaux de code on affiche ?
