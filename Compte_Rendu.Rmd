@@ -369,7 +369,6 @@ summary(mod_final)
 #Comparaison AIC
 AIC(mod_complet, mod_final)
 
-
 ```
 
 Résultats de la procédure :
@@ -381,6 +380,17 @@ Résultats de la procédure :
 Le modèle final a exclu deux variables : **sexe** et **region**, ces variables n'apportent pas d'information significative. Les variables retenues dans le modèle final sont donc :
 
 -   Age, Tabagisme, IMC, Hypertension, Diabète, Cholesterol total, Niveau d'activité physique, Consommation d'alcool.
+
+```{r}
+#Modèle final IC et coefficients
+summary(mod_final)
+
+IC_final <- confint(mod_final)
+IC_final
+
+IC_exp_final <- exp(IC_final)
+IC_exp_final
+```
 
 ### Performance du modèle
 
@@ -439,7 +449,7 @@ Dans la suite, nous allons donc tester plusieurs interactions plausibles.
 
 -   Cholestérol x Age
 
-    L'effet du cholestérol pourrait être plus élevé chez les personne
+    L'effet du cholestérol pourrait être plus élevé chez les personne agées.
 
 ```{r, echo=FALSE}
 
@@ -477,7 +487,7 @@ mod_inter_chol_age <- glm(statut_cas_temoin ~ tabagisme +
 p_tabac_sexe <- anova(mod_final, mod_inter_tabac_sexe, test = "Chisq")$`Pr(>Chi)`[2]
 p_tabac_age <- anova(mod_final, mod_inter_tabac_age, test = "Chisq")$`Pr(>Chi)`[2]
 p_imc_act <- anova(mod_final, mod_inter_imc_act, test = "Chisq")$`Pr(>Chi)`[2]
-p_diabete_hta <- anova(mod_final, mod_inter_diabete_hta, test = "Chisq")$`Pr(>Chi)`[2]
+p_diabete_hta <- anova(mod_final, mod_inter_diab_hyp, test = "Chisq")$`Pr(>Chi)`[2]
 p_chol_age <- anova(mod_final, mod_inter_chol_age, test = "Chisq")$`Pr(>Chi)`[2]
 
 # Tableau récapitulatif
