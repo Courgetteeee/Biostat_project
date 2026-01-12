@@ -392,6 +392,142 @@ IC_exp_final <- exp(IC_final)
 IC_exp_final
 ```
 
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+## Tableau comparatif manuel
+
+
+# Fonction pour extraire OR et IC d'un modèle
+extraire_OR <- function(modele, nom_var) {
+  coef <- summary(modele)$coefficients
+  OR <- exp(coef(modele))
+  IC <- exp(confint(modele))
+  
+  # Pour les variables catégorielles, on prend les lignes correspondantes
+  if (nom_var %in% rownames(coef)) {
+    data.frame(
+      Variable = nom_var,
+      OR = round(OR[nom_var], 2),
+      IC_inf = round(IC[nom_var, 1], 2),
+      IC_sup = round(IC[nom_var, 2], 2),
+      p_value = round(coef[nom_var, 4], 4)
+    )
+  }
+}
+
+# Créer un data frame avec tous les résultats
+resultats <- data.frame(
+  Variable = c(
+    "Âge (par année)",
+    "Tabagisme - Ancien fumeur",
+    "Tabagisme - Fumeur actuel",
+    "IMC (par kg/m²)",
+    "Hypertension - Oui",
+    "Diabète - Oui",
+    "Cholestérol total (par mmol/L)",
+    "Activité physique - Faible",
+    "Activité physique - Modérée",
+    "Consommation alcool - Élevée",
+    "Consommation alcool - Modérée"
+  ),
+  
+  # OR bruts (de vos analyses univariées)
+  OR_brut = c(
+    1.09,  # age (exp(0.083))
+    1.67,  # ancien fumeur (exp(0.51))
+    3.59,  # fumeur actuel (exp(1.28))
+    1.16,  # imc (exp(0.148))
+    2.11,  # hypertension (exp(0.75))
+    2.16,  # diabete (exp(0.77))
+    2.19,  # cholesterol (exp(0.785))
+    4.26,  # act faible (exp(1.45))
+    1.62,  # act modérée (exp(0.48))
+    3.16,  # alcool élevée (exp(1.15))
+    1.42   # alcool modérée (exp(0.35))
+  ),
+  
+  IC_brut = c(
+    "[1.06 ; 1.11]",
+    "[1.07 ; 2.61]",
+    "[2.34 ; 5.56]",
+    "[1.10 ; 1.22]",
+    "[1.47 ; 3.03]",
+    "[1.42 ; 3.34]",
+    "[1.79 ; 2.71]",
+    "[2.48 ; 7.51]",
+    "[0.91 ; 2.93]",
+    "[1.80 ; 5.79]",
+    "[0.96 ; 2.08]"
+  ),
+  
+  p_brut = c(
+    "<0.001",
+    "0.024",
+    "<0.001",
+    "<0.001",
+    "<0.001",
+    "<0.001",
+    "<0.001",
+    "<0.001",
+    "0.104",
+    "<0.001",
+    "0.080"
+  ),
+  
+  # OR ajustés (de votre modèle final)
+  OR_ajuste = c(
+    1.08,  # exp(0.07871)
+    1.50,  # exp(0.40746)
+    2.70,  # exp(0.99496)
+    1.17,  # exp(0.15562)
+    1.98,  # exp(0.68176)
+    2.19,  # exp(0.78333)
+    2.18,  # exp(0.77941)
+    2.85,  # exp(1.04782)
+    1.38,  # exp(0.32442)
+    2.88,  # exp(1.05850)
+    1.60   # exp(0.47069)
+  ),
+  
+  IC_ajuste = c(
+    "[1.05 ; 1.11]",
+    "[0.88 ; 2.59]",
+    "[1.62 ; 4.57]",
+    "[1.10 ; 1.25]",
+    "[1.27 ; 3.10]",
+    "[1.29 ; 3.75]",
+    "[1.71 ; 2.82]",
+    "[1.50 ; 5.56]",
+    "[0.70 ; 2.79]",
+    "[1.46 ; 5.86]",
+    "[0.98 ; 2.63]"
+  ),
+  
+  p_ajuste = c(
+    "<0.001",
+    "0.140",
+    "<0.001",
+    "<0.001",
+    "0.003",
+    "0.004",
+    "<0.001",
+    "0.002",
+    "0.356",
+    "0.003",
+    "0.061"
+  )
+)
+
+# Afficher le tableau
+knitr::kable(
+  resultats,
+  col.names = c("Variable", "OR", "IC 95%", "p", "OR", "IC 95%", "p"),
+  caption = "**Tableau.** Comparaison des odds ratios bruts (univariés) et ajustés (multivariés)",
+  align = c("l", "c", "c", "c", "c", "c", "c")
+) %>%
+  kableExtra::kable_styling(bootstrap_options = c("striped", "hover")) %>%
+  kableExtra::add_header_above(c(" " = 1, "Analyse univariée" = 3, "Analyse multivariée" = 3))
+```
+
 ### Performance du modèle
 
 La courbe ROC (Receiver Operating Characteristic) est un outil graphique permettant d'évaluer la performance d'un modèle de classification binaire (malade / non malade).
