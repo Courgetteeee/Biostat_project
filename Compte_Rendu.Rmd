@@ -62,7 +62,29 @@ Les différentes variables explicatives possibles sont :
 -   **Consommation d’alcool** : nulle ou occasionnelle, modérée, élevée
 -   **Région** de l’hôpital de prise en charge
 
-## Analyse exploratoire / Stats descriptives
+## Définitions et théorie
+
+### Définition de l'odds
+
+Pour un évenement A tel que $\mathbb{P}(A) \neq1$, on appelle odds de A la quantité : $odds(A) = \frac{\mathbb P(A)}{1-\mathbb P(A)}$. C'est le rapport entre la probabilité que## l'évènement se produise et qu'il ne se produise pas.
+
+### Modèle logistique
+
+Pour une variable explicative X quantitative, le modèle logistique suppose qu'il existe $\beta \in \mathbb R^p$ tel que :
+
+$$
+\mathbb P(Y=1 | \space X=x) = F(<\beta,x>) = \frac{exp(<\beta,x>)}{1+exp(<\beta,x>)}
+$$
+
+où F est la fonction de répartition de la loi logistique. De plus, dans le modèle logistique, ona :
+
+$$
+odds(Y=1 | \space X=x) = \frac{\mathbb P(Y=1 | \space X=x)}{\mathbb P(Y=0 | \space X=x)} = exp(<\beta,x>)
+$$
+
+#### Interpretation coef ??
+
+## Analyse exploratoire et Statistiques Descriptives
 
 Avant de faire nos régressions logistiques, nous allons commencer par une analyse exploratoire de nos données et regarder quelques statistiques descrptives. Cela nous permettera de voir si l'on a des différence entre nos cas et témoins, mais également regarder si l'on a des interactions entre nos varialbes.
 
@@ -528,6 +550,20 @@ knitr::kable(
   kableExtra::add_header_above(c(" " = 1, "Analyse univariée" = 3, "Analyse multivariée" = 3))
 ```
 
+#### Tabagisme
+
+Modalité de référence : "Jamais".
+
+-   On obtient : $\hat{\beta}_{ancien \space fumeur}$=0.407 qui estime $\beta_{ancien \space fumeur} = ln(\frac{odds(Y=1 \space | \space tabagisme =\text{ancien fumeur, } X_{-tabac} \text{ fixé})}{odds(Y=1 \space | \space tabagisme = Jamais, \space X_{-tabac} \text{ fixé})})$. L'intervalle de confiance à 95% de l'odds ratio est : $exp(\beta_{ancien \space fumeur})\in [e^{-0.13} ; e^{0.95}] = [0.88;2.59]$.
+
+    En analyse univariée, l'effet était significatif (p = 0.024). Après ajustement sur les autres facteurs de risque (âge, IMC, hypertension, diabète, cholestérol, activité physique, consommation d'alcool), cet effet n'est plus significatif. Cela suggère que l'association observée en univarié était en partie due à des facteurs confondants.)
+
+-   On obtient : $\hat{\beta}_{fumeur \space actuel} =0.995 \text{ qui estime } \beta_{fumeur \space actuel} = ln(\frac{odds(Y=1 \space | \space tabagisme =\text{Fumeur actuel, }X_{-tabac} \text{ fixé})}{odds(Y=1 \space | \space tabagisme = Jamais, \space X_{-tabac} \text{ fixé})})$. L'intervalle de confiance à 95% de l'odds ratio est : $exp(\beta_{fumeur \space actuel})\in [e^{0.48} ; e^{1.52}] = [1.62;4.57]$.
+
+    Ainsi, toutes choses égales par ailleurs, être fumeur actuel va multiplier l'odds d'être cas par au moins exp(0.48)=1.62 et par au plus exp(1.52)=4.57, par rapport à n'avoir jamais fumé. Cette association est très significative (p\<0.001).
+
+    En passant au modèle multivarié, le tabagisme actif reste significatif, mais la diminution de l'odds ration (IC et estimation) peut supposer qu'une partie de l'effet brut était dû à d'autres facteurs....
+
 ### Performance du modèle
 
 La courbe ROC (Receiver Operating Characteristic) est un outil graphique permettant d'évaluer la performance d'un modèle de classification binaire (malade / non malade).
@@ -648,10 +684,49 @@ L'abscence d'interactions significatives justifie donc le choix du modèle addit
 
 Cependant, l'abscence d'interactions dans notre échantillon (n=520) ne signifie pas qu'elles n'existent pas dans la population générale.
 
+## Modèle polytomique
+
+A titre exploratoire, nous avons voulu inverser la relation $Y\sim E,F$ en $E \sim Y,F$ pour considérant des variables ordinales (tabagisme, consommation alcool, niveau d'activité physique) comme variables dépendantes. En effet, l'effet de l'exposition E sur la maladie Y à F fixé est le même que l'effet de Y sur E à F fixé.
+
+Cette approche permet d'étudier les determinants de ces variables dans la population étudiée.
+
+#### Exemple : Tabagisme
+
+```{r}
+#Création de la variable ordonnée
+data$tabac_ord <- factor(data$tabagisme, ordered = TRUE,
+                         levels =c("Jamais","Ancien fumeur","Fumeur actuel"))
+
+#Modèle
+mod_plr_complet <- polr(tabac_ord ~ age + sexe + imc + niveau_activite_physique +
+                           statut_cas_temoin + hypertension + diabete + 
+                           cholesterol_total,
+                         data = data, Hess = TRUE)
+
+#Selection variable
+mod_plr_final <- stepAIC(mod_plr_complet, direction="backward", trace=FALSE)
+
+#Résultat
+coef(mod_plr_final)
+confint(mod_plr_final)
+print("EXP")
+exp(coef(mod_plr_final))
+exp(confint(mod_plr_final))
+```
+
+Les intervalles de confiance pour "niveau_activite_physique" contiennent 1, l'association n'est donc pas statistiquement significative. Cependant, le statut de cas est fortement associé à un niveau de tabagisme élevé :
+
+$$ e^{-1.230} \leq \frac{odds(tabagisme\leq k | Cas)}{odds(tabagisme\leq k | Témoin)} \leq e^{-0.555} $$
+
+(k représente un seuil, $k\in${Jamais, Ancien fumeur})
+
+Ainsi, à activité physique fixée, être cas multiplie l'odds d'être dans une catégorie de tabagisme élevée d'au moins exp(0.555) = 1.74 et d'au plus exp(1.230) =3.42 par rapport aux témoins.
+
+Ce résultat était attendu et ne modifie pas l'interprétation causale, le tabagisme reste un facteur de risque de l'infarctus du myocarde.
+
+Des analyses analogues ont été réalisées sur la consommation d'alcool et le niveau d'activité phyisique, mais aussi la réalisation de modèle polytomique non ordonnée (variable Sexe et Region). Cependant cette approche s'est rélévée peu informative dans notre contexte.
+
 # TODO
 
--   Modèle polytomique
-    -   Avec qualitative ordonnées, non ordonnées
--   interaction ??
 -   Commenter les odds du modele total ?
 -   Quelles sorties + quels morceaux de code on affiche ?
