@@ -45,7 +45,7 @@ data$region <- factor(data$region)
 
 # ***Étude cas-témoin sur l’infarctus du myocarde***
 
-Cette étude cas-témoin multicentrique porte sur l'infarctus du myocarde aigu. Les cas sont des patients hospitalisés pour un premier infarctus du myocarde confirmé. Les témoins sont des patients hospitalisés dans les mêmes hopitaux, pour des pathologies non cardiovasculaires, sans antécédent de maladie coronarienne.
+Cette étude cas-témoin porte sur l'infarctus du myocarde aigu. Les cas sont des patients hospitalisés pour un premier infarctus du myocarde confirmé. Les témoins sont des patients hospitalisés dans les mêmes hopitaux, pour des pathologies non cardiovasculaires, sans antécédent de maladie coronarienne.
 
 L'objectif de ce projet est d'analyser le lien entre plusieurs facteurs de risque (tabagisme, hypertension...) et la survenue d'un infarctus du myocarde.
 
@@ -68,7 +68,7 @@ Les différentes variables explicatives possibles sont :
 
 ### Définition de l'odds
 
-Pour un évenement A tel que $\mathbb{P}(A) \neq1$, on appelle odds de A la quantité : $odds(A) = \frac{\mathbb P(A)}{1-\mathbb P(A)}$. C'est le rapport entre la probabilité que## l'évènement se produise et qu'il ne se produise pas.
+Pour un évenement A tel que $\mathbb{P}(A) \neq1$, on appelle odds de A la quantité : $odds(A) = \frac{\mathbb P(A)}{1-\mathbb P(A)}$. C'est le rapport entre la probabilité que l'évènement se produise et qu'il ne se produise pas.
 
 ### Modèle logistique
 
@@ -84,11 +84,9 @@ $$
 odds(Y=1 | \space X=x) = \frac{\mathbb P(Y=1 | \space X=x)}{\mathbb P(Y=0 | \space X=x)} = exp(<\beta,x>)
 $$
 
-#### Interpretation coef ??
-
 ## Analyse exploratoire et Statistiques Descriptives
 
-Avant de faire nos régressions logistiques, nous allons commencer par une analyse exploratoire de nos données et regarder quelques statistiques descrptives. Cela nous permettera de voir si l'on a des différence entre nos cas et témoins, mais également regarder si l'on a des interactions entre nos varialbes.
+Avant de faire nos régressions logistiques, nous allons commencer par une analyse exploratoire de nos données et regarder quelques statistiques descriptives. Cela nous permettera de voir si l'on a des différence entre nos cas et témoins, mais également regarder si l'on a des interactions entre nos variables.
 
 ```{r, echo=FALSE}
 table1 <- data %>%
@@ -131,13 +129,19 @@ data$statut_cas_temoin <- relevel(data$statut_cas_temoin, ref="Témoin")
 data$tabagisme <- relevel(data$tabagisme, ref = "Jamais")
 ```
 
-Avant de commencer nos analyses et nos modèles de régressions logistiques, on va changer les variables de références pour nos variables qualitatives.
+Avant de commencer nos analyses et nos modèles de régressions logistiques, nous allons changer les variables de références pour nos variables qualitatives.
+
+\- **Statut cas-témoin** : "Témoin" (pour estimer le risque de devenir cas)
+- **Tabagisme** : "Jamais" (pour comparer fumeurs vs non-fumeurs)
+- **Hypertension, Diabète** : "Non" (pour comparer présence vs absence)
+- **Activité physique** : "Élevée" (pour évaluer l'effet de la sédentarité)
+- **Consommation d'alcool** : "Aucune ou occasionnelle" (pour comparer les niveaux de consommation)
 
 Donc pour cas-temoins, on met **témoins** en référence car on s'intéresse au risque de passé de témoins à cas.
 
 ## Regression logistique simple / univarié
 
-Dans cette partie, nous allons tester de faire des `glm` simple pour chacune de nos variables avec le code suivant :
+Dans cette partie, nous allons tester de faire des `glm` simple pour chacune de nos variables avec le type code suivant :
 
 ```{r, eval=FALSE}
 # Définition du Modèle
@@ -151,12 +155,11 @@ IC_exp_age <- exp(confint(mod_age))
 anova(mod_age, test = "Chisq")
 ```
 
-Dans la suite nous afficherons plus le code.
-
+Dans la suite nous n'afficherons plus le code pour éviter les répétitions.
 
 ### Variable Age
 
-On obtient les sorties suivantes, dans la suite nous analyserons juste les résultats sans inclure les sorties :
+On obtient les sorties suivantes (dans la suite nous analyserons juste les résultats sans inclure les sorties) :
 
 ```{r, echo=FALSE}
 # Modèle
@@ -173,13 +176,15 @@ IC_exp_age
 anova(mod_age, test = "Chisq")
 ```
 
-On obtient $\hat{\beta}_{age} = 0.083$ qui estime $\beta_{age} = \ln\left(\frac{odds(Y=1 \mid age=x+1)}{odds(Y=1 \mid age=x)}\right)$.
+On obtient le coefficient $\hat{\beta}_{age} = 0.083$ qui estime $\beta_{age} = \ln\left(\frac{odds(Y=1 \mid \space age=x+1)}{odds(Y=1 \mid\space age=x)}\right)$. L'odds ratio est estimé à : $\exp(\hat{\beta}_{age})=1.09$.
 
 L'intervalle de confiance à 95% de l'odds ratio est : $\exp(\beta_{age}) \in [1.06; 1.11]$.
 
-Cela signifie que pour chaque année d'âge supplémentaire, l'odds de faire un infarctus est multiplié par au moins **1.06** et au plus **1.11**. Autrement dit, le risque augmente d'environ 6% à 11% par an.
+Ainsi, cela signifie que pour chaque année d'âge supplémentaire, l'odds de faire un infarctus est multiplié par au moins **1.06** et au plus **1.11**. Autrement dit, le risque augmente d'environ 6% à 11% par an.
 
-Comme l'intervalle ne contient pas la valeur 1 (borne inférieure \> 1) et que la p-value est extrêmement faible ($p < 0.001$), l'âge est un **facteur de risque statistiquement significatif**.
+Comme l'intervalle ne contient pas la valeur 1 (borne inférieure \> 1) et que la p-value est extrêmement faible ($p < 0.001$), l'âge est alors un facteur de risque et est donc significativement associé à la survenue de l'infarctus du myocarde.
+
+Ces résultats suggèrent qu'une augmentation de l'âge, augmente le risque d'être cas.
 
 ### Variable IMC
 
@@ -198,15 +203,15 @@ IC_exp_imc
 anova(mod_imc, test = "Chisq")
 ```
 
-On obtient $\hat{\beta}_{chol} = 0.785$ qui estime $\beta_{chol}$.
+On obtient $\hat{\beta}_{imc} = 0.148$ qui estime $\beta_{imc} = \ln\left(\frac{odds(Y=1 \mid \space IMC=x+1)}{odds(Y=1 \mid \space IMC=x)}\right)$. L'odds ratio est estimé à : $\exp(\hat{\beta}_{IMC})=1.16$.
 
-L'intervalle de confiance à 95% de l'odds ratio est : $\exp(\beta_{chol}) \in [1.79; 2.71]$.
+L'intervalle de confiance à 95% de l'odds ratio est : $\exp(\beta_{imc}) \in [1.10; 1.22]$.
 
-L'association est très forte : pour une augmentation d'une unité de cholestérol total, l'odds d'être un cas est multiplié par environ **2.19** (l'estimateur ponctuel $e^{0.785}$), avec un intervalle allant de 1.79 à 2.71.
+Ce qui signifie qu'une augmentation d'une unité d'IMC supplémentaire, multiplie l'odds d'être cas par au moins 1.10 et au plus 1.22.
 
-La p-value est très inférieure au seuil de 0.05, confirmant que l'hypercholestérolémie est un **facteur de risque majeur et significatif** dans cet échantillon.
+La p-value étant très faible ($6.7 \times 10^{-10}$), l'IMC est significativement associée à la survenue de l'infarctus du myocarde. Cela suggère que plus l'IMC est élevé, plus le risque d'être cas augmente..
 
-### Variable Cholesterole
+### Variable Cholesterol
 
 ```{r, include=FALSE}
 # Modèle
@@ -223,13 +228,13 @@ IC_exp_chol
 anova(mod_chol, test = "Chisq")
 ```
 
-On obtient $\hat{\beta}_{imc} = 0.148$ qui estime $\beta_{imc}$.
+On obtient $\hat{\beta}_{chol} = 0.785$ qui estime $\beta_{chol} = \ln\left(\frac{odds(Y=1 \mid \space chol=x+1)}{odds(Y=1 \mid \space chol=x)}\right)$. L'odds ratio est estimé à : $\exp(\hat{\beta}_{chol})=2.19$.
 
-L'intervalle de confiance à 95% de l'odds ratio est : $\exp(\beta_{imc}) \in [1.10; 1.22]$.
+L'intervalle de confiance à 95% de l'odds ratio est : $\exp(\beta_{chol}) \in [1.79; 2.71]$.
 
-Ainsi, une augmentation de 1 point d'IMC (par exemple passer de 24 à 25 kg/m²) multiplie l'odds de maladie par un facteur compris entre **1.10** et **1.22**.
+Cela signifie qu'une augmentation d'une unité de cholestérol total, multiplie l'odds d'être cas par au moins 1.79 et au plus 2.71.
 
-La p-value étant très faible ($6.7 \times 10^{-10}$), l'IMC est **significativement associé** à la maladie : plus l'IMC est élevé, plus le risque augmente.
+La p-value est très inférieure au seuil de 0.05, confirmant que le cholesterol est un facteur de risque majeur et significatif au seuil de 5%. Plus le niveau de cholésterol est élevée, plus le risque d'être cas augmente.
 
 ### Variable Sexe
 
@@ -250,9 +255,30 @@ anova(mod_sexe, test = "Chisq")
 
 La modalité de référence est "Femme".
 
-$\hat{\beta}_{H} = 0.307$ estime le coefficitent $\beta_{H}=ln(\frac{odds(Y=1 \space | \space sexe=Homme)}{odds(Y=1 \space | \space sexe= Femme)})$. L'intervalle de confiance à 95% de l'odds ratio est : $exp(\beta_{H}) \in [e^{-0.05} ; e^{0.67}] = [0.95;1.95]$.
+$\hat{\beta}_{H} = 0.307$ estime le coefficitent $\beta_{H}=ln(\frac{odds(Y=1 \space | \space sexe=Homme)}{odds(Y=1 \space | \space sexe= Femme)})$.
 
-Comme 1 appartient à l'intervalle de confiance, on ne peut pas mettre en évidence d'association statistique. De plus, Nous obtenons une p-value supérieure au seuil de 0.05, ce qui signifie que le sexe n'a pas d'effet statistiquement significatif au seuil de 5% sur l'infarctus. On retrouve donc bien la même conclusion que dans notre analyse exploratoire.
+L'intervalle de confiance à 95% de l'odds ratio est : $exp(\beta_{H}) \in [e^{-0.05} ; e^{0.67}] = [0.95;1.95]$.
+
+Comme 1 appartient à l'intervalle de confiance, on ne peut pas mettre en évidence d'association statistique. De plus, Nous obtenons une p-value supérieure au seuil de 0.05, ce qui signifie que le sexe n'a pas d'effet statistiquement significatif au seuil de 5% sur le fait d'être cas. On retrouve donc bien la même conclusion que dans notre analyse exploratoire.
+
+### Variable Région
+
+```{r, include=FALSE}
+#Modèle
+mod_reg <- glm(statut_cas_temoin~region, family=binomial, data=data)
+
+#Statistiques et intervalle de confiance
+summary(mod_reg)
+IC_sexe <- confint(mod_reg)
+IC_exp_sexe <- exp(confint(mod_reg))
+
+IC_sexe
+IC_exp_sexe
+
+anova(mod_reg, test = "Chisq")
+```
+
+Comme pour la variable 'sexe', le test global du $Chi^2$ n'est pas significatif (p\>0.05), indiquant l'abscence d'assiociation statistiquement significative entre la région et la survenue de l'infarctus du myocarde.
 
 ### Variable Tabagisme
 
@@ -281,7 +307,7 @@ Modalité de référence : "Jamais".
 
     Ainsi, être fumeur actuel va multiplier l'odds d'être cas par au moins exp(0.85)=2.34 et par au plus exp(1.71)=5.56, par rapport à n'avoir jamais fumé. Cette association est très significative (p\<0.001).
 
-Le test du Chi² nous fournit une p-value inférieure au seuil 0.05 (1.3e-08), ce qui signifie que l'on rejette l'hypothèse nulle $H_0$ donc le tabagisme est statistiquement associée à la contraction de la maladie.
+Le test du Chi² nous fournit une p-value inférieure au seuil 0.05 (1.3e-08), ce qui signifie que l'on rejette l'hypothèse nulle $H_0$ donc le tabagisme est statistiquement associée à la survenue de l'infarctus du myocarde.
 
 ### Variable Hypertension
 
@@ -306,7 +332,7 @@ On obtient : $\hat{\beta}_{hypertension \space oui}$=0.75 qui estime $\beta_{hyp
 
 Ainsi, être hypertendu va multiplier l'odds d'être cas par au moins exp(0.40)=1.47 et au plus exp(1.11)=3.03, par rapport à un sujet non hypertendu.
 
-Le test du Chi² nous fournit une p-value inférieure au seuil 0.05 (3.6e-05), ce qui signifie que l'on rejette l'hypothèse nulle $H_0$ donc l'hypertension est statistiquement associée à la contraction de la maladie.
+Le test du Chi² nous fournit une p-value inférieure au seuil 0.05 (3.6e-05), ce qui signifie que l'on rejette l'hypothèse nulle $H_0$ donc l'hypertension est statistiquement associée à la survenue de l'infarctus du myocarde.
 
 ### Variable Diabète
 
@@ -331,7 +357,7 @@ On obtient : $\hat{\beta}_{diabete\space oui}$=0.77 qui estime $\beta_{diabete\s
 
 Ainsi, être diabétique va multiplier l'odds d'être cas par au moins exp(0.35)=1.42 et au plus exp(1.21)=3.34, par rapport à un sujet non diabétique.
 
-Le test du Chi² nous fournit une p-value inférieure au seuil 0.05 (3.2e-4), ce qui signifie que l'on rejette l'hypothèse nulle $H_0$ donc le diabète est statistiquement associée à la contraction de la maladie.
+Le test du Chi² nous fournit une p-value inférieure au seuil 0.05 (3.2e-4), ce qui signifie que l'on rejette l'hypothèse nulle $H_0$ donc le diabète est statistiquement associée à la survenue de l'infarctus du myocarde.
 
 ### Variable Niveau d'activité physique
 
@@ -360,7 +386,7 @@ Modalité de référence : "Elevée".
 
     Cependant, l'intervalle de confiance inclut 1 et la p-value = 0.104, ce qui signifie que l'association n'est pas statistiquement significative au seuil de 5%.
 
-Le test global du Chi² nous fournit une p-value inférieure au seuil 0.05 (1.29e-09), ce qui signifie que l'on rejette l'hypothèse nulle $H_0$ et donc que le niveau d'activité physique est globalement statistiquement associée à la contraction de la maladie.
+Le test global du Chi² nous fournit une p-value inférieure au seuil 0.05 (1.29e-09), ce qui signifie que l'on rejette l'hypothèse nulle $H_0$ et donc que le niveau d'activité physique est globalement statistiquement associée à la survenue de l'infarctus du myocarde.
 
 Ces résultats suggèrent qu'une diminution du niveau d'activité physique augmente le risque d'être cas.
 
@@ -391,7 +417,7 @@ Modalité de référence : "Aucune ou occasionnelle".
 
     Cependant, l'intervalle de confiance inclut 1 et la p-value = 0.08, ce qui signifie que l'association n'est pas statistiquement significative au seuil de 5%.
 
-Le test global du Chi² nous fournit une p-value inférieure au seuil 0.05 (1.9e-4), ce qui signifie que l'on rejette l'hypothèse nulle $H_0$ et donc que le niveau de consommation d'alcool est globalement statistiquement associée à la contraction de la maladie.
+Le test global du Chi² nous fournit une p-value inférieure au seuil 0.05 (1.9e-4), ce qui signifie que l'on rejette l'hypothèse nulle $H_0$ et donc que le niveau de consommation d'alcool est globalement statistiquement associée à la survenue de l'infarctus du myocarde.
 
 Ces résultats suggèrent qu'une augmentation du niveau de consommation d'alcool augmente aussi le risque d'être cas.
 
@@ -583,17 +609,19 @@ Modalité de référence : "Jamais".
 
     En analyse univariée, l'effet était significatif (p = 0.024 et IC = [1.07;2.61]). Après ajustement sur les autres facteurs de risque (âge, IMC, hypertension, diabète, cholestérol, activité physique, consommation d'alcool), cet effet n'est plus significatif. Cela suggère que l'association observée en univarié était en partie due à des facteurs confondants.
 
+    ( $X_{-tabac}$ désigne toutes les autres covariables (maintenues fixes))
+
 -   On obtient : $\hat{\beta}_{fumeur \space actuel} =0.995 \text{ qui estime } \beta_{fumeur \space actuel} = ln(\frac{odds(Y=1 \space | \space tabagisme =\text{Fumeur actuel, }X_{-tabac} \text{ fixé})}{odds(Y=1 \space | \space tabagisme = Jamais, \space X_{-tabac} \text{ fixé})})$. L'intervalle de confiance à 95% de l'odds ratio est : $exp(\beta_{fumeur \space actuel})\in [e^{0.48} ; e^{1.52}] = [1.62;4.57]$.
 
     Ainsi, toutes choses égales par ailleurs, être fumeur actuel va multiplier l'odds d'être cas par au moins exp(0.48)=1.62 et par au plus exp(1.52)=4.57, par rapport à n'avoir jamais fumé. Cette association est très significative (p\<0.001).
 
-    En univarié, l'intervalle de confiance était : [2.34;5.56]. En passant au modèle multivarié, le tabagisme actif reste significatif et est donc un facteur de risque de l'infarctus du myocarde. La diminution de l'odds ratio (IC et estimation) peut supposer qu'une partie de l'effet brut était dû à d'autres facteurs.
+    En univarié, l'intervalle de confiance était : [2.34;5.56]. En passant au modèle multivarié, le tabagisme actif reste significatif et est donc un facteur de risque de l'infarctus du myocarde. La diminution de l'odds ratio (IC et estimation) suggère qu'une partie de l'effet brut était dû à d'autres facteurs.
 
 #### Activité Physique
 
 Modalité de référence : "Elevée".
 
--   On obtient : $\hat{\beta}_{act. \space modérée} =0.324 \text{ qui estime } \beta_{act. \space modérée} = ln(\frac{odds(Y=1 \space | \space niveau \space act. \space physique=\text{Modérée)}}{odds(Y=1 \space | \space niveau \space act. \space physique= Elevée)})$. En analyse univariée comme en multivariée, les intervalles de confiance contiennent 1 et la p-value \> 0.05, ce qui signifie que l'association n'est pas statistiquement significative au seuil de 5%. Il n'y a donc pas de différence singificative entre une activité modérée et une activitée élevée en termes de risque d'infarctus.
+-   On obtient : $\hat{\beta}_{act. \space modérée} =0.324 \text{ qui estime } \beta_{act. \space modérée} = ln(\frac{odds(Y=1 \space | \space niveau \space act. \space physique=\text{Modérée, } \space X_{-act.phys.} \text{ fixé})}{odds(Y=1 \space | \space niveau \space act. \space physique= Elevée, \space \space X_{-act.phys.} \text{ fixé})})$. En analyse univariée comme en multivariée, les intervalles de confiance contiennent 1 et la p-value \> 0.05, ce qui signifie que l'association n'est pas statistiquement significative au seuil de 5%. Il n'y a donc pas de différence significative entre une activité modérée et une activité élevée en termes de risque d'infarctus.
 
 <!-- -->
 
@@ -601,15 +629,15 @@ Modalité de référence : "Elevée".
 
     Ainsi, toutes choses égales par ailleurs, avoir un niveau d'activité faible multiplie l'odds d'être cas par au moins exp(0.41)=1.5 et au plus exp(1.72)=5.56, par rapport aux individus avec une activité 'elevée'. Cette association est statistiquement significative (p\<0.05).
 
-    En univarié, l'intervalle de confiance était [2.48; 7.51]. En passant au modèle multivarié, une activité physique faible reste significatif et est donc un facteur de risque de l'infarctus du myocarde. La diminution de l'odds ratio (IC et estimation) peut supposer qu'une partie de l'effet brut était dû à d'autres facteurs.
+    En univarié, l'intervalle de confiance était [2.48; 7.51]. En passant au modèle multivarié, une activité physique faible reste significatif et est donc un facteur de risque de l'infarctus du myocarde. La diminution de l'odds ratio (IC et estimation) suggère qu'une partie de l'effet brut était dû à d'autres facteurs, mais l'effet propre du tabagisme reste important.
 
 #### Autres variables
 
-Pour les variables **Age, IMC, Hypertension, Diabète, Cholesterol et consommation alcool,** les estimations et les intervalles de confiance en multivariée ne varient très peu par rapport à l'univarié, ce qui signifie que l'effet de ces variables est indépendant des autres fateurs de risque.
-
-Le léger élargissement des intervalles de confiance est attendu, car nous estimons un plus grand nombre de paramètres, ce qui réduit donc la précision des estimations individuelles.
+Pour les variables **Age, IMC, Hypertension, Diabète, Cholesterol et consommation alcool,** les estimations et les intervalles de confiance en multivariée varient très peu par rapport à l'univarié, ce qui signifie que l'effet de ces variables est indépendant des autres facteurs de risque. Le léger élargissement des intervalles de confiance est attendu, car nous estimons un plus grand nombre de paramètres, ce qui réduit donc la précision des estimations individuelles.
 
 Ces variables peuvent être considérées comme des facteurs de risque indépendants de l'infarctus du myocarde, leur effet n'étant pas beaucoup influencé par les autres covariables du modèle.
+
+Après ajustement, les facteurs associés statistiquement à l'infarctus sont donc : age, tabagisme actif, IMC, hypertension, diabète, cholesterol, faible activité physique et consommation élevée d'alcool.
 
 ### Performance du modèle
 
@@ -644,7 +672,7 @@ De plus, la courbe ROC s'éloigne nettement de la diagonale correspondant à un 
 
 ## Interactions dans le modèle
 
-Nous avons pu mettre en avant plusieurs facteurs de risque associés à l'infarctus du myocarde. Cependant, il peut arriver que l'effet de certains facteurs dépende du niveau d'autres variables : c'est ce que l'on appelle une interaction. Par exemple, on pourrait imaginer que l'effet du tabagisme soit différent entre les hommes et les femmes, ou encore l'effet de l'IMC pourrait varier selon le niveau d'activitée physique.
+Nous avons pu mettre en avant plusieurs facteurs de risque associés à l'infarctus du myocarde. Cependant, il peut arriver que l'effet de certains facteurs dépende du niveau d'autres variables : c'est ce que l'on appelle une interaction. Par exemple, on pourrait imaginer que l'effet du tabagisme soit différent entre les hommes et les femmes, ou encore l'effet de l'IMC pourrait varier selon le niveau d'activité physique.
 
 Dans la suite, nous allons donc tester plusieurs interactions plausibles.
 
@@ -727,9 +755,9 @@ knitr::kable(interactions_summary,
 
 Aucune des cinq interactions testées n'est statistiquement significative au seuil de 5% (p-value\>0.3). Cela suggère que les effets des facteurs de risque sont additifs plutot que multiplicatifs. Cela signifie par exemple, que l'effet du cholestérol semble constant quel que soit l'age.
 
-L'abscence d'interactions significatives justifie donc le choix du modèle additif retenu précèdemment.
+L'absence d'interactions significatives justifie donc le choix du modèle additif retenu précèdemment.
 
-Cependant, l'abscence d'interactions dans notre échantillon (n=520) ne signifie pas qu'elles n'existent pas dans la population générale.
+Cependant, l'absence d'interactions dans notre échantillon (n=520) ne signifie pas qu'elles n'existent pas dans la population générale.
 
 ## Modèle polytomique
 
@@ -756,8 +784,6 @@ mod_plr_final <- stepAIC(mod_plr_complet, direction="backward", trace=FALSE)
 #Résultat
 coef(mod_plr_final)
 confint(mod_plr_final)
-print("EXP")
-exp(coef(mod_plr_final))
 exp(confint(mod_plr_final))
 ```
 
@@ -771,9 +797,20 @@ Ainsi, à activité physique fixée, être cas multiplie l'odds d'être dans une
 
 Ce résultat était attendu et ne modifie pas l'interprétation causale, le tabagisme reste un facteur de risque de l'infarctus du myocarde.
 
-Des analyses analogues ont été réalisées sur la consommation d'alcool et le niveau d'activité phyisique, mais aussi la réalisation de modèle polytomique non ordonnée (variable Sexe et Region). Cependant cette approche s'est rélévée peu informative dans notre contexte.
+Des analyses analogues ont été réalisées sur la consommation d'alcool et le niveau d'activité physique, mais aussi la réalisation de modèle polytomique non ordonnée (variable Sexe et Region). Cependant cette approche s'est rélévée peu informative dans notre contexte.
 
-# TODO
+## Conclusion 
 
--   Commenter les odds du modele total ?
--   Quelles sorties + quels morceaux de code on affiche ?
+Notre étude cas-témoin avait pour objectif d'identifier les principaux facteurs de risque associés à la survenue de l'infarctus du myocarde à partir d'un échantillon de 520 patients.
+
+Les analyses univariées ont mis en évidence de nombreuses associations entre les facteurs étudiés et la survenue de l'infarctus, notamment l'âge, le tabagisme, l'IMC, l'hypertension artérielle, le diabète, le cholestérol, le niveau d'activité physique et la consommation d'alcool. Ces résultats confirment le rôle central des facteurs de risque cardiovasculaires classiques.
+
+L'analyse multivariée, réalisée afin de tenir compte des facteurs de confusion, montre que la majorité de ces associations persistent. En particulier, **l'âge, le tabagisme actif, un IMC élevé, l'hypertension, le diabète, un taux élevé de cholesterol, une activité physique faible et une consommation élevée d'alcool** sont des facteurs de risque indépendants de l'infarctus du myocarde. En revanche, certaines associations observées en analyse univariée disparaissent après ajustement : le statut d'ancien fumeur n'est plus significatif, suggérant que son effet était en partie dû à des facteurs confondants. De même, le sexe et la région ne présentent pas d'association statistiquement significative.
+
+Ces résultats soulignent l'importance des facteurs de risque modifiables (tabagisme, consommation d'alcool).
+
+Le modèle final présente de bonnes performances discriminantes, distinguant correctement 85% du temps, les cas des témoins. L'absence d'interactions significatives entre les variables valide le choix d'un modèle additif.
+
+Limites : cette étude cas-témoin ne permet pas d'affirmer avec certitude que ces facteurs causent l'infarctus, mais seulement qu'ils y sont associés. De plus, d'autres variables n'étaient pas disponible comme les antécédents familiaux, alimentation, etc.
+
+En perspective, si un suivi des patients dans le temps était disponible, une analyse de survie (modèle de cox) pourrait être réalisée afin d'étudier non seulement la survenue de l'infarctus mais aussi le temps jusqu'à l'évenement.
