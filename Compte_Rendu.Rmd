@@ -5,10 +5,12 @@ date: "2025-12-17"
 output:
   html_document:
     toc: true
+  pdf_document:
+    toc: true
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 
 library(car)
 library(dplyr)
@@ -118,7 +120,7 @@ L'analyse porte sur un échantillon total de 520 sujets, répartis équitablemen
 
 ## Niveau de référence des variables
 
-```{r}
+```{r, include=FALSE}
 lapply( data[, sapply(data, is.factor)], levels)
 
 #Changement référence
@@ -129,11 +131,34 @@ data$statut_cas_temoin <- relevel(data$statut_cas_temoin, ref="Témoin")
 data$tabagisme <- relevel(data$tabagisme, ref = "Jamais")
 ```
 
+Avant de commencer nos analyses et nos modèles de régressions logistiques, on va changer les variables de références pour nos variables qualitatives.
+
+Donc pour cas-temoins, on met **témoins** en référence car on s'intéresse au risque de passé de témoins à cas.
+
 ## Regression logistique simple / univarié
+
+Dans cette partie, nous allons tester de faire des `glm` simple pour chacune de nos variables avec le code suivant :
+
+```{r, eval=FALSE}
+# Définition du Modèle
+mod_age <- glm(statut_cas_temoin ~ age, family = binomial, data = data)
+
+# Statistiques et intervalle de confiance
+summary(mod_age)
+IC_age <- confint(mod_age)
+IC_exp_age <- exp(confint(mod_age))
+
+anova(mod_age, test = "Chisq")
+```
+
+Dans la suite nous afficherons plus le code.
+
 
 ### Variable Age
 
-```{r}
+On obtient les sorties suivantes, dans la suite nous analyserons juste les résultats sans inclure les sorties :
+
+```{r, echo=FALSE}
 # Modèle
 mod_age <- glm(statut_cas_temoin ~ age, family = binomial, data = data)
 
@@ -158,32 +183,7 @@ Comme l'intervalle ne contient pas la valeur 1 (borne inférieure \> 1) et que l
 
 ### Variable IMC
 
-```{r}
-# Modèle
-mod_chol <- glm(statut_cas_temoin ~ cholesterol_total, family = binomial, data = data)
-
-# Statistiques et intervalle de confiance
-summary(mod_chol)
-IC_chol <- confint(mod_chol)
-IC_exp_chol <- exp(confint(mod_chol))
-
-IC_chol
-IC_exp_chol
-
-anova(mod_chol, test = "Chisq")
-```
-
-On obtient $\hat{\beta}_{imc} = 0.148$ qui estime $\beta_{imc}$.
-
-L'intervalle de confiance à 95% de l'odds ratio est : $\exp(\beta_{imc}) \in [1.10; 1.22]$.
-
-Ainsi, une augmentation de 1 point d'IMC (par exemple passer de 24 à 25 kg/m²) multiplie l'odds de maladie par un facteur compris entre **1.10** et **1.22**.
-
-La p-value étant très faible ($6.7 \times 10^{-10}$), l'IMC est **significativement associé** à la maladie : plus l'IMC est élevé, plus le risque augmente.
-
-### Variable Cholesterole
-
-```{r}
+```{r, include=FALSE}
 # Modèle
 mod_imc <- glm(statut_cas_temoin ~ imc, family = binomial, data = data)
 
@@ -206,9 +206,34 @@ L'association est très forte : pour une augmentation d'une unité de cholestér
 
 La p-value est très inférieure au seuil de 0.05, confirmant que l'hypercholestérolémie est un **facteur de risque majeur et significatif** dans cet échantillon.
 
+### Variable Cholesterole
+
+```{r, include=FALSE}
+# Modèle
+mod_chol <- glm(statut_cas_temoin ~ cholesterol_total, family = binomial, data = data)
+
+# Statistiques et intervalle de confiance
+summary(mod_chol)
+IC_chol <- confint(mod_chol)
+IC_exp_chol <- exp(confint(mod_chol))
+
+IC_chol
+IC_exp_chol
+
+anova(mod_chol, test = "Chisq")
+```
+
+On obtient $\hat{\beta}_{imc} = 0.148$ qui estime $\beta_{imc}$.
+
+L'intervalle de confiance à 95% de l'odds ratio est : $\exp(\beta_{imc}) \in [1.10; 1.22]$.
+
+Ainsi, une augmentation de 1 point d'IMC (par exemple passer de 24 à 25 kg/m²) multiplie l'odds de maladie par un facteur compris entre **1.10** et **1.22**.
+
+La p-value étant très faible ($6.7 \times 10^{-10}$), l'IMC est **significativement associé** à la maladie : plus l'IMC est élevé, plus le risque augmente.
+
 ### Variable Sexe
 
-```{r}
+```{r, include=FALSE}
 #Modèle
 mod_sexe <- glm(statut_cas_temoin~sexe, family=binomial, data=data)
 
@@ -227,11 +252,11 @@ La modalité de référence est "Femme".
 
 $\hat{\beta}_{H} = 0.307$ estime le coefficitent $\beta_{H}=ln(\frac{odds(Y=1 \space | \space sexe=Homme)}{odds(Y=1 \space | \space sexe= Femme)})$. L'intervalle de confiance à 95% de l'odds ratio est : $exp(\beta_{H}) \in [e^{-0.05} ; e^{0.67}] = [0.95;1.95]$.
 
-Comme 1 appartient à l'intervalle de confiance, on ne peut pas mettre en évidence d'association statistique. De plus, Nous obtenons une p-value supérieure au seuil de 0.05, ce qui signifie que le sexe n'a pas d'effet statistiquement significatif au seuil de 5% sur l'infarctus.
+Comme 1 appartient à l'intervalle de confiance, on ne peut pas mettre en évidence d'association statistique. De plus, Nous obtenons une p-value supérieure au seuil de 0.05, ce qui signifie que le sexe n'a pas d'effet statistiquement significatif au seuil de 5% sur l'infarctus. On retrouve donc bien la même conclusion que dans notre analyse exploratoire.
 
 ### Variable Tabagisme
 
-```{r}
+```{r, include=FALSE}
 #Modèle
 mod_tabac <- glm(statut_cas_temoin~tabagisme, family=binomial, data=data)
 
@@ -260,7 +285,7 @@ Le test du Chi² nous fournit une p-value inférieure au seuil 0.05 (1.3e-08), c
 
 ### Variable Hypertension
 
-```{r}
+```{r, include=FALSE}
 #Modèle
 mod_hypertension <- glm(statut_cas_temoin~hypertension, family=binomial, data=data)
 
@@ -285,7 +310,7 @@ Le test du Chi² nous fournit une p-value inférieure au seuil 0.05 (3.6e-05), c
 
 ### Variable Diabète
 
-```{r}
+```{r, include=FALSE}
 #Modèle
 mod_diabete <- glm(statut_cas_temoin~diabete, family=binomial, data=data)
 
@@ -310,7 +335,7 @@ Le test du Chi² nous fournit une p-value inférieure au seuil 0.05 (3.2e-4), ce
 
 ### Variable Niveau d'activité physique
 
-```{r}
+```{r, include=FALSE}
 #Modèle
 mod_act_phys <- glm(statut_cas_temoin~ niveau_activite_physique, family=binomial, data=data)
 
@@ -341,7 +366,7 @@ Ces résultats suggèrent qu'une diminution du niveau d'activité physique augme
 
 ### Consommation d'alcool
 
-```{r}
+```{r, include=FALSE}
 #Modèle
 mod_conso_alcool <- glm(statut_cas_temoin~consommation_alcool, family=binomial, data=data)
 
