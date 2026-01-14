@@ -1,0 +1,42 @@
+---
+title: "Étude cas-témoin sur l’infarctus du myocarde"
+subtitle: "Projet de biostatistiques"
+author: "LANCON Cindy, FRISON Victor"
+date: "2026-01-15"
+output: 
+  beamer_presentation:
+    keep_tex: true
+    slide_level: 2
+    includes:
+      in_header: header.tex 
+---
+
+# Introduction
+
+## Introduction
+
+## Définition de l'odds
+
+## Modèle logistique
+
+## Analyse exploratoire et Statistiques Descriptives
+
+# Regression logistique simple / univarié
+
+## Variable Age
+
+## Variable IMC
+
+## Variable Cholesterole
+
+## Variable Sexe
+
+## Variable Tabagisme
+
+## Variable Hypertension
+
+## Variable Diabète
+
+## Variable Niveau d'activité physique
+
+## Consommation d'alcool
