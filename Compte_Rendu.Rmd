@@ -2,11 +2,19 @@
 title: "Projet de biostatistiques"
 author: "LANCON Cindy, FRISON Victor"
 date: "2025-12-17"
+lang: fr-FR
 output:
-  html_document:
-    toc: true
   pdf_document:
     toc: true
+    number_sections: true
+    toc_depth: 3
+  html_document:
+    toc: true
+    toc_float: true
+    number_sections: true
+    theme: flatly
+    highlight: tango
+    code_folding: hide
 ---
 
 ```{r setup, include=FALSE}
@@ -43,7 +51,7 @@ data$consommation_alcool <- factor(data$consommation_alcool)
 data$region <- factor(data$region)
 ```
 
-# ***Étude cas-témoin sur l’infarctus du myocarde***
+# Étude cas-témoin sur l’infarctus du myocarde
 
 Cette étude cas-témoin multicentrique porte sur l'infarctus du myocarde aigu. Les cas sont des patients hospitalisés pour un premier infarctus du myocarde confirmé. Les témoins sont des patients hospitalisés dans les mêmes hopitaux, pour des pathologies non cardiovasculaires, sans antécédent de maladie coronarienne.
 
@@ -91,21 +99,59 @@ $$
 Avant de faire nos régressions logistiques, nous allons commencer par une analyse exploratoire de nos données et regarder quelques statistiques descrptives. Cela nous permettera de voir si l'on a des différence entre nos cas et témoins, mais également regarder si l'on a des interactions entre nos varialbes.
 
 ```{r, echo=FALSE}
-table1 <- data %>%
-  dplyr::select(-id_sujet) %>% 
+# Conversion du premier tableau
+table_clinique_data <- data %>%
+  dplyr::select(statut_cas_temoin, age, sexe, imc, cholesterol_total, hypertension, diabete) %>% 
   tbl_summary(
-    by = statut_cas_temoin, # On compare selon le statut
-    statistic = list(all_continuous() ~ "{mean} ({sd})", 
-                     all_categorical() ~ "{n} ({p}%)"),
+    by = statut_cas_temoin,
+    statistic = list(all_continuous() ~ "{mean} ({sd})", all_categorical() ~ "{n} ({p}%)"),
     digits = all_continuous() ~ 1,
-    label = list(age ~ "Âge (années)", imc ~ "IMC (kg/m²)", cholesterol_total ~ "Cholestérol")
+    label = list(age ~ "Âge (années)", imc ~ "IMC (kg/m²)", cholesterol_total ~ "Cholestérol (mmol/L)")
   ) %>%
-  add_p() %>%      # Ajoute les p-values (test Chi2 ou Wilcoxon/T-test auto)
-  add_overall() %>% # Ajoute une colonne "Total"
-  bold_labels() %>% 
-  modify_caption("**Tableau 1.** Comparaison cas/témoins.  \n*Réalisé avec la librairie **gtsummary** avec l'aide de **Gemini***")
+  add_p() %>%
+  add_overall() %>%
+  as_tibble() # Conversion pour kable
 
-table1
+knitr::kable(
+  table_clinique_data,
+  col.names = c("Variable", "Total (N=520)", "Cas (N=260)", "Témoin (N=260)", "p-value"),
+  caption = "Caractéristiques cliniques et démographiques",
+  booktabs = TRUE, 
+  align = c("l", "c", "c", "c", "c")
+) %>%
+  kableExtra::kable_styling(
+    bootstrap_options = c("striped", "hover"),
+    latex_options = c("striped", "hold_position"),
+    font_size = 9
+  ) %>%
+  kableExtra::column_spec(1, bold = TRUE)
+```
+```{r, echo=FALSE}
+table_vie_data <- data %>%
+  dplyr::select(statut_cas_temoin, tabagisme, niveau_activite_physique, consommation_alcool) %>% 
+  tbl_summary(
+    by = statut_cas_temoin,
+    statistic = list(all_categorical() ~ "{n} ({p}%)"),
+    label = list(tabagisme ~ "Tabagisme", niveau_activite_physique ~ "Activité physique", consommation_alcool ~ "Alcool")
+  ) %>%
+  add_p() %>%
+  add_overall() %>%
+  as_tibble()
+
+knitr::kable(
+  table_vie_data,
+  col.names = c("Variable", "Total (N=520)", "Cas (N=260)", "Témoin (N=260)", "p-value"),
+  caption = "Habitudes de vie et comportements à risque",
+  booktabs = TRUE,
+  align = c("l", "c", "c", "c", "c")
+) %>%
+  kableExtra::kable_styling(
+    bootstrap_options = c("striped", "hover"),
+    latex_options = c("striped", "hold_position"),
+    font_size = 9
+  ) %>%
+  kableExtra::column_spec(1, bold = TRUE) %>%
+  kableExtra::add_header_above(c(" " = 1, "Répartition par statut" = 3, " " = 1))
 ```
 
 **Interprétation des résultats**
@@ -431,7 +477,8 @@ Le modèle final a exclu deux variables : **sexe** et **region**, ces variables 
 ```{r}
 #Modèle final IC et coefficients
 summary(mod_final)
-
+```
+```{r,echo=FALSE}
 IC_final <- confint(mod_final)
 IC_final
 
@@ -568,7 +615,7 @@ resultats <- data.frame(
 knitr::kable(
   resultats,
   col.names = c("Variable", "OR", "IC 95%", "p", "OR", "IC 95%", "p"),
-  caption = "**Tableau.** Comparaison des odds ratios bruts (univariés) et ajustés (multivariés)",
+  caption = "Comparaison des odds ratios bruts (univariés) et ajustés (multivariés)",
   align = c("l", "c", "c", "c", "c", "c", "c")
 ) %>%
   kableExtra::kable_styling(bootstrap_options = c("striped", "hover")) %>%
@@ -603,7 +650,7 @@ L'AUC (aire sous la courbe) mesure la probabilité que le modèle attribue une p
 
 -   0.9 $\leq$ AUC : Excellente discrimination
 
-```{r, message=FALSE, warning=FALSE}
+```{r, message=FALSE, warning=FALSE, echo=FALSE}
 #Courbe ROC
 pred <- predict(mod_final, type="response")
 
@@ -700,7 +747,7 @@ interactions_summary <- data.frame(
 )
 
 knitr::kable(interactions_summary, 
-             caption = "**Tableau X.** Résultats des tests d'interactions (test Anova)")
+             caption = "Résultats des tests d'interactions (test Anova)")
 ```
 
 Aucune des cinq interactions testées n'est statistiquement significative au seuil de 5% (p-value\>0.3). Cela suggère que les effets des facteurs de risque sont additifs plutot que multiplicatifs. Cela signifie par exemple, que l'effet du cholestérol semble constant quel que soit l'age.
@@ -750,6 +797,8 @@ Ainsi, à activité physique fixée, être cas multiplie l'odds d'être dans une
 Ce résultat était attendu et ne modifie pas l'interprétation causale, le tabagisme reste un facteur de risque de l'infarctus du myocarde.
 
 Des analyses analogues ont été réalisées sur la consommation d'alcool et le niveau d'activité phyisique, mais aussi la réalisation de modèle polytomique non ordonnée (variable Sexe et Region). Cependant cette approche s'est rélévée peu informative dans notre contexte.
+
+\appendix
 
 # TODO
 
