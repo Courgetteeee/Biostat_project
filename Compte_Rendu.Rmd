@@ -1,11 +1,12 @@
 ---
 title: "Projet de biostatistiques"
 author: "LANCON Cindy, FRISON Victor"
-date: "2025-12-17"
+date: "2026-01-15"
 output:
-  html_document:
-    toc: true
   pdf_document:
+    toc: true
+    toc_depth: 3
+  html_document:
     toc: true
 ---
 
@@ -42,6 +43,8 @@ data$niveau_activite_physique <- factor(data$niveau_activite_physique)
 data$consommation_alcool <- factor(data$consommation_alcool)
 data$region <- factor(data$region)
 ```
+
+\newpage
 
 # ***Étude cas-témoin sur l’infarctus du myocarde***
 
@@ -89,22 +92,66 @@ $$
 Avant de faire nos régressions logistiques, nous allons commencer par une analyse exploratoire de nos données et regarder quelques statistiques descriptives. Cela nous permettera de voir si l'on a des différence entre nos cas et témoins, mais également regarder si l'on a des interactions entre nos variables.
 
 ```{r, echo=FALSE}
-table1 <- data %>%
-  dplyr::select(-id_sujet) %>% 
+library(kableExtra)
+table_part1 <- data %>%
+  dplyr::select(statut_cas_temoin, age, sexe, region, imc, cholesterol_total) %>% 
   tbl_summary(
-    by = statut_cas_temoin, # On compare selon le statut
+    by = statut_cas_temoin,
     statistic = list(all_continuous() ~ "{mean} ({sd})", 
                      all_categorical() ~ "{n} ({p}%)"),
     digits = all_continuous() ~ 1,
-    label = list(age ~ "Âge (années)", imc ~ "IMC (kg/m²)", cholesterol_total ~ "Cholestérol")
+    label = list(age ~ "Âge", imc ~ "IMC", cholesterol_total ~ "Cholestérol")
   ) %>%
-  add_p() %>%      # Ajoute les p-values (test Chi2 ou Wilcoxon/T-test auto)
-  add_overall() %>% # Ajoute une colonne "Total"
-  bold_labels() %>% 
-  modify_caption("**Tableau 1.** Comparaison cas/témoins.  \n*Réalisé avec la librairie **gtsummary** avec l'aide de **Gemini***")
+  add_p() %>%
+  add_overall() %>%
+  bold_labels() %>%
+  modify_caption("Caractéristiques Démographiques") %>%
+  
+  # --- CONVERSION EN KABLE ---
+  as_kable() %>%  
+  
+  # --- OPTIONS KABLE EXTRA ---
+  kable_styling(
+    latex_options = c("HOLD_position", "striped"), # HOLD_position bloque le tableau ICI
+    font_size = 8,                                 # Taille de police réduite
+    full_width = FALSE
+  )
 
-table1
+table_part1
 ```
+
+```{r, echo=FALSE}
+# --- Tableau 1b : Habitudes de Vie et Antécédents ---
+table_part2 <- data %>%
+  dplyr::select(statut_cas_temoin, tabagisme, hypertension, diabete, 
+                niveau_activite_physique, consommation_alcool) %>% 
+  tbl_summary(
+    by = statut_cas_temoin,
+    statistic = list(all_continuous() ~ "{mean} ({sd})", 
+                     all_categorical() ~ "{n} ({p}%)"),
+    digits = all_continuous() ~ 1,
+    label = list(tabagisme ~ "Tabagisme", 
+                 hypertension ~ "Hypertension", 
+                 diabete ~ "Diabète", 
+                 niveau_activite_physique ~ "Activité Physique", 
+                 consommation_alcool ~ "Consommation d'alcool")
+  ) %>%
+  add_p() %>%
+  add_overall() %>%
+  bold_labels() %>%
+  modify_caption("Habitudes de vie et Antécédents") %>%
+  
+  # --- CONVERSION ET STYLE IDENTIQUES ---
+  as_kable() %>%  
+  kable_styling(
+    latex_options = c("HOLD_position", "striped"), # Bloque la position
+    font_size = 8,                                 # Même taille que le tab 1
+    full_width = FALSE
+  )
+
+table_part2
+```
+
 
 **Interprétation des résultats**
 
@@ -112,7 +159,11 @@ L'analyse porte sur un échantillon total de 520 sujets, répartis équitablemen
 
 **Caractéristiques sociodémographiques** Les cas sont **significativement plus âgés** que les témoins, avec une moyenne d'âge de 64,3 ans contre 58,1 ans ($p < 0,001$). En revanche, aucune différence significative n'a été observée concernant la répartition par **sexe** ($p = 0,10$) ou la **région** d'origine ($p = 0,3$).
 
-**Mode de vie et comportements** Le groupe des cas présente des habitudes de vie plus à risque ($p < 0,001$) : \* **Tabac :** La prévalence du tabagisme actuel est presque deux fois plus élevée chez les cas (48%) que chez les témoins (25%). \* **Activité physique :** La sédentarité est prédominante chez les cas, avec 65% déclarant une activité "Faible", contre 38% chez les témoins. \* **Alcool :** Une consommation élevée (\>3 verres/j) est plus fréquente chez les cas (18% vs 7,3%).
+**Mode de vie et comportements** Le groupe des cas présente des habitudes de vie plus à risque ($p < 0,001$) : 
+
+- **Tabac :** La prévalence du tabagisme actuel est presque deux fois plus élevée chez les cas (48%) que chez les témoins (25%).
+- **Activité physique :** La sédentarité est prédominante chez les cas, avec 65% déclarant une activité "Faible", contre 38% chez les témoins.
+- **Alcool :** Une consommation élevée (\>3 verres/j) est plus fréquente chez les cas (18% vs 7,3%).
 
 **Caractéristiques cliniques** Sur le plan clinique, les cas présentent un profil de santé plus dégradé. Ils affichent un **IMC** moyen supérieur (28,7 vs 26,6 kg/m$^2$) ainsi qu'un taux de **cholestérol total** plus élevé. Les comorbidités sont également plus fréquentes chez les cas, notamment l'**hypertension** (69% vs 51%) et le **diabète** (29% vs 16%). Toutes ces différences cliniques sont statistiquement significatives ($p < 0,001$).
 
@@ -591,15 +642,14 @@ resultats <- data.frame(
 knitr::kable(
   resultats,
   col.names = c("Variable", "OR", "IC 95%", "p", "OR", "IC 95%", "p"),
-  caption = "**Tableau.**
-  Comparaison des odds ratios bruts (univariés) et ajustés (multivariés)",
+  caption = "Comparaison des odds ratios bruts (univariés) et ajustés (multivariés)",
   align = c("l", "c", "c", "c", "c", "c", "c")
 ) %>%
   kableExtra::kable_styling(bootstrap_options = c("striped", "hover")) %>%
   kableExtra::add_header_above(c(" " = 1, "Analyse univariée" = 3, "Analyse multivariée" = 3))
 ```
 
-#### Tabagisme
+### Tabagisme
 
 Modalité de référence : "Jamais".
 
@@ -617,7 +667,7 @@ Modalité de référence : "Jamais".
 
     En univarié, l'intervalle de confiance était : [2.34;5.56]. En passant au modèle multivarié, le tabagisme actif reste significatif et est donc un facteur de risque de l'infarctus du myocarde. La diminution de l'odds ratio (IC et estimation) suggère qu'une partie de l'effet brut était dû à d'autres facteurs.
 
-#### Activité Physique
+### Activité Physique
 
 Modalité de référence : "Elevée".
 
@@ -631,7 +681,7 @@ Modalité de référence : "Elevée".
 
     En univarié, l'intervalle de confiance était [2.48; 7.51]. En passant au modèle multivarié, une activité physique faible reste significatif et est donc un facteur de risque de l'infarctus du myocarde. La diminution de l'odds ratio (IC et estimation) suggère qu'une partie de l'effet brut était dû à d'autres facteurs, mais l'effet propre du tabagisme reste important.
 
-#### Autres variables
+### Autres variables
 
 Pour les variables **Age, IMC, Hypertension, Diabète, Cholesterol et consommation alcool,** les estimations et les intervalles de confiance en multivariée varient très peu par rapport à l'univarié, ce qui signifie que l'effet de ces variables est indépendant des autres facteurs de risque. Le léger élargissement des intervalles de confiance est attendu, car nous estimons un plus grand nombre de paramètres, ce qui réduit donc la précision des estimations individuelles.
 
@@ -639,7 +689,7 @@ Ces variables peuvent être considérées comme des facteurs de risque indépend
 
 Après ajustement, les facteurs associés statistiquement à l'infarctus sont donc : age, tabagisme actif, IMC, hypertension, diabète, cholesterol, faible activité physique et consommation élevée d'alcool.
 
-### Performance du modèle
+## Performance du modèle
 
 La courbe ROC (Receiver Operating Characteristic) est un outil graphique permettant d'évaluer la performance d'un modèle de classification binaire (malade / non malade).
 
@@ -676,7 +726,7 @@ Nous avons pu mettre en avant plusieurs facteurs de risque associés à l'infarc
 
 Dans la suite, nous allons donc tester plusieurs interactions plausibles.
 
-#### Interactions testées
+### Interactions testées
 
 -   Tabagisme x Sexe
 
@@ -750,7 +800,7 @@ interactions_summary <- data.frame(
 )
 
 knitr::kable(interactions_summary, 
-             caption = "**Tableau X.** Résultats des tests d'interactions (test Anova)")
+             caption = "Résultats des tests d'interactions (test Anova)")
 ```
 
 Aucune des cinq interactions testées n'est statistiquement significative au seuil de 5% (p-value\>0.3). Cela suggère que les effets des facteurs de risque sont additifs plutot que multiplicatifs. Cela signifie par exemple, que l'effet du cholestérol semble constant quel que soit l'age.
@@ -765,7 +815,7 @@ A titre exploratoire, nous avons voulu inverser la relation $Y\sim E,F$ en $E \s
 
 Cette approche permet d'étudier les determinants de ces variables dans la population étudiée.
 
-#### Exemple : Tabagisme
+### Exemple : Tabagisme
 
 ```{r}
 #Création de la variable ordonnée
