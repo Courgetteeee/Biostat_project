@@ -76,7 +76,7 @@ $$
 \mathbb P(Y=1 | \space X=x) = F(<\beta,x>) = \frac{exp(<\beta,x>)}{1+exp(<\beta,x>)}
 $$
 
-où F est la fonction de répartition de la loi logistique. De plus, dans le modèle logistique, ona :
+où F est la fonction de répartition de la loi logistique. De plus, dans le modèle logistique, on a :
 
 $$
 odds(Y=1 | \space X=x) = \frac{\mathbb P(Y=1 | \space X=x)}{\mathbb P(Y=0 | \space X=x)} = exp(<\beta,x>)
@@ -382,11 +382,10 @@ mod_complet <- glm(statut_cas_temoin ~ age + sexe + tabagisme + imc +
                      hypertension + diabete + cholesterol_total +
                      niveau_activite_physique + consommation_alcool + region,
                    family = binomial, data=data)
-summary(mod_complet)
 
 #Méthode Descendante
-mod_final <- stepAIC(mod_complet, direction="backward")
-summary(mod_final)
+mod_final <- stepAIC(mod_complet, direction="backward", trace=FALSE)
+coef(mod_final)
 
 #Comparaison AIC
 AIC(mod_complet, mod_final)
@@ -405,8 +404,6 @@ Le modèle final a exclu deux variables : **sexe** et **region**, ces variables 
 
 ```{r}
 #Modèle final IC et coefficients
-summary(mod_final)
-
 IC_final <- confint(mod_final)
 IC_final
 
@@ -543,7 +540,8 @@ resultats <- data.frame(
 knitr::kable(
   resultats,
   col.names = c("Variable", "OR", "IC 95%", "p", "OR", "IC 95%", "p"),
-  caption = "**Tableau.** Comparaison des odds ratios bruts (univariés) et ajustés (multivariés)",
+  caption = "**Tableau.**
+  Comparaison des odds ratios bruts (univariés) et ajustés (multivariés)",
   align = c("l", "c", "c", "c", "c", "c", "c")
 ) %>%
   kableExtra::kable_styling(bootstrap_options = c("striped", "hover")) %>%
@@ -554,15 +552,39 @@ knitr::kable(
 
 Modalité de référence : "Jamais".
 
--   On obtient : $\hat{\beta}_{ancien \space fumeur}$=0.407 qui estime $\beta_{ancien \space fumeur} = ln(\frac{odds(Y=1 \space | \space tabagisme =\text{ancien fumeur, } X_{-tabac} \text{ fixé})}{odds(Y=1 \space | \space tabagisme = Jamais, \space X_{-tabac} \text{ fixé})})$. L'intervalle de confiance à 95% de l'odds ratio est : $exp(\beta_{ancien \space fumeur})\in [e^{-0.13} ; e^{0.95}] = [0.88;2.59]$.
+-   On obtient :
 
-    En analyse univariée, l'effet était significatif (p = 0.024). Après ajustement sur les autres facteurs de risque (âge, IMC, hypertension, diabète, cholestérol, activité physique, consommation d'alcool), cet effet n'est plus significatif. Cela suggère que l'association observée en univarié était en partie due à des facteurs confondants.)
+-   $\hat{\beta}_{ancien \space fumeur}$=0.407 qui estime $\beta_{ancien \space fumeur} = ln(\frac{odds(Y=1 \space | \space tabagisme =\text{ancien fumeur, } X_{-tabac} \text{ fixé})}{odds(Y=1 \space | \space tabagisme = Jamais, \space X_{-tabac} \text{ fixé})})$. L'intervalle de confiance à 95% de l'odds ratio est : $exp(\beta_{ancien \space fumeur})\in [e^{-0.13} ; e^{0.95}] = [0.88;2.59]$.
+
+    En analyse univariée, l'effet était significatif (p = 0.024 et IC = [1.07;2.61]). Après ajustement sur les autres facteurs de risque (âge, IMC, hypertension, diabète, cholestérol, activité physique, consommation d'alcool), cet effet n'est plus significatif. Cela suggère que l'association observée en univarié était en partie due à des facteurs confondants.
 
 -   On obtient : $\hat{\beta}_{fumeur \space actuel} =0.995 \text{ qui estime } \beta_{fumeur \space actuel} = ln(\frac{odds(Y=1 \space | \space tabagisme =\text{Fumeur actuel, }X_{-tabac} \text{ fixé})}{odds(Y=1 \space | \space tabagisme = Jamais, \space X_{-tabac} \text{ fixé})})$. L'intervalle de confiance à 95% de l'odds ratio est : $exp(\beta_{fumeur \space actuel})\in [e^{0.48} ; e^{1.52}] = [1.62;4.57]$.
 
     Ainsi, toutes choses égales par ailleurs, être fumeur actuel va multiplier l'odds d'être cas par au moins exp(0.48)=1.62 et par au plus exp(1.52)=4.57, par rapport à n'avoir jamais fumé. Cette association est très significative (p\<0.001).
 
-    En passant au modèle multivarié, le tabagisme actif reste significatif, mais la diminution de l'odds ration (IC et estimation) peut supposer qu'une partie de l'effet brut était dû à d'autres facteurs....
+    En univarié, l'intervalle de confiance était : [2.34;5.56]. En passant au modèle multivarié, le tabagisme actif reste significatif et est donc un facteur de risque de l'infarctus du myocarde. La diminution de l'odds ratio (IC et estimation) peut supposer qu'une partie de l'effet brut était dû à d'autres facteurs.
+
+#### Activité Physique
+
+Modalité de référence : "Elevée".
+
+-   On obtient : $\hat{\beta}_{act. \space modérée} =0.324 \text{ qui estime } \beta_{act. \space modérée} = ln(\frac{odds(Y=1 \space | \space niveau \space act. \space physique=\text{Modérée)}}{odds(Y=1 \space | \space niveau \space act. \space physique= Elevée)})$. En analyse univariée comme en multivariée, les intervalles de confiance contiennent 1 et la p-value \> 0.05, ce qui signifie que l'association n'est pas statistiquement significative au seuil de 5%. Il n'y a donc pas de différence singificative entre une activité modérée et une activitée élevée en termes de risque d'infarctus.
+
+<!-- -->
+
+-   On obtient : $\hat{\beta}_{act. \space faible}$=1.048 qui estime $\beta_{act. \space faible} = ln(\frac{odds(Y=1 \space | \space niveau \space act. \space physique=\text{Faible,} \space X_{-act.phys.} \text{ fixé})}{odds(Y=1 \space | \space niveau \space act. \space physique= Elevée, \space X_{-act.phys.} \text{ fixé})})$. L'intervalle de confiance à 95% de l'odds ratio est : $exp(\beta_{act. \space faible})\in [e^{0.41} ; e^{1.72}] = [1.50;5.56]$.
+
+    Ainsi, toutes choses égales par ailleurs, avoir un niveau d'activité faible multiplie l'odds d'être cas par au moins exp(0.41)=1.5 et au plus exp(1.72)=5.56, par rapport aux individus avec une activité 'elevée'. Cette association est statistiquement significative (p\<0.05).
+
+    En univarié, l'intervalle de confiance était [2.48; 7.51]. En passant au modèle multivarié, une activité physique faible reste significatif et est donc un facteur de risque de l'infarctus du myocarde. La diminution de l'odds ratio (IC et estimation) peut supposer qu'une partie de l'effet brut était dû à d'autres facteurs.
+
+#### Autres variables
+
+Pour les variables **Age, IMC, Hypertension, Diabète, Cholesterol et consommation alcool,** les estimations et les intervalles de confiance en multivariée ne varient très peu par rapport à l'univarié, ce qui signifie que l'effet de ces variables est indépendant des autres fateurs de risque.
+
+Le léger élargissement des intervalles de confiance est attendu, car nous estimons un plus grand nombre de paramètres, ce qui réduit donc la précision des estimations individuelles.
+
+Ces variables peuvent être considérées comme des facteurs de risque indépendants de l'infarctus du myocarde, leur effet n'étant pas beaucoup influencé par les autres covariables du modèle.
 
 ### Performance du modèle
 
@@ -597,7 +619,7 @@ De plus, la courbe ROC s'éloigne nettement de la diagonale correspondant à un 
 
 ## Interactions dans le modèle
 
-Nous avons pu mettre en avant plusieurs facteurs de risque associés à l'infarctus du myocarde. Cependant, il peut arriver que l'effet de certains facteurs dépende du niveau d'autres variables : c'est ce que l'on appelle une interaction. Par exemple, on pourrait imaginer que l'effet du tabagisme soit différent entre les hommes et les femmes, ou encore l'effet de l'IMC pourrait varier selon le niveau d'activité physique.
+Nous avons pu mettre en avant plusieurs facteurs de risque associés à l'infarctus du myocarde. Cependant, il peut arriver que l'effet de certains facteurs dépende du niveau d'autres variables : c'est ce que l'on appelle une interaction. Par exemple, on pourrait imaginer que l'effet du tabagisme soit différent entre les hommes et les femmes, ou encore l'effet de l'IMC pourrait varier selon le niveau d'activitée physique.
 
 Dans la suite, nous allons donc tester plusieurs interactions plausibles.
 
