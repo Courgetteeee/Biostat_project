@@ -809,7 +809,7 @@ L'analyse multivariée, réalisée afin de tenir compte des facteurs de confusio
 
 Ces résultats soulignent l'importance des facteurs de risque modifiables (tabagisme, consommation d'alcool).
 
-Le modèle final présente de bonnes performances discriminantes, distinguant correctement 85% du temps, les cas des témoins. L'absence d'interactions significatives entre les variables valide le choix d'un modèle additif.
+Le modèle final présente de bonnes performances discriminantes, avec une courbe (AUC) de 0.85. L'absence d'interactions significatives entre les variables valide le choix d'un modèle additif.
 
 Limites : cette étude cas-témoin ne permet pas d'affirmer avec certitude que ces facteurs causent l'infarctus, mais seulement qu'ils y sont associés. De plus, d'autres variables n'étaient pas disponible comme les antécédents familiaux, alimentation, etc.
 
