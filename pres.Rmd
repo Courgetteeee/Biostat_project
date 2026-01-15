@@ -104,8 +104,10 @@ plot_quali <- function(var_name, title, x_label) {
 
 # Regression logistique simple / univarié
 
-## Variable Âge : Analyse Univariée
+## Variable Âge
 
+\small 
+\vspace{0.3cm}
 \textbf{Résultats du modèle logistique :}
 
 \begin{itemize}
@@ -115,21 +117,70 @@ plot_quali <- function(var_name, title, x_label) {
     \item \textbf{Significativité (p-value) :} $p < 0.001$
 \end{itemize}
 
-\vspace{0.5cm}
+\vspace{0.3cm}
 
 \textbf{Analyse de l'Odds Ratio :}
 Pour chaque année d'âge supplémentaire, l'odds de faire un infarctus est multiplié par environ \textbf{1.09}. Concrètement, le risque augmente de \textbf{6\% à 11\%} par an.
 
-\vspace{0.5cm}
+\vspace{0.3cm}
 
 \begin{colorblock}[white]{maincolor}{Conclusion}
+\footnotesize
 L'intervalle de confiance ne contient pas la valeur 1 et la p-value est extrêmement faible.
 \textbf{L'âge est donc un facteur de risque significativement associé à la survenue de l'infarctus.}
 \end{colorblock}
 
-## Variable IMC
+## Variable IMC : Analyse Univariée
 
-## Variable Cholesterole
+\small 
+\vspace{0.3cm}
+\textbf{Résultats du modèle logistique :}
+
+\begin{itemize}
+    \item \textbf{Coefficient estimé ($\hat{\beta}_{imc}$) :} $0.148$
+    \item \textbf{Odds Ratio (OR) :} $1.16$
+    \item \textbf{Intervalle de Confiance à 95\% :} $[1.10\ ;\ 1.22]$
+    \item \textbf{Significativité (p-value) :} $p < 0.001$
+\end{itemize}
+
+\vspace{0.3cm}
+
+\textbf{Analyse de l'Odds Ratio :}
+Pour chaque unité d'IMC supplémentaire, l'odds d'être malade est multiplié par environ \textbf{1.16}. Concrètement, le risque augmente de \textbf{10\% à 22\%} par unité.
+
+\vspace{0.3cm}
+
+\begin{colorblock}[white]{maincolor}{Conclusion}
+\footnotesize
+L'intervalle ne contient pas 1 et la p-value est extrêmement faible ($6.7 \times 10^{-10}$).
+\textbf{L'IMC est donc significativement associé à la survenue de l'infarctus.}
+\end{colorblock}
+
+## Variable Cholestérol
+
+\small 
+\vspace{0.3cm}
+\textbf{Résultats du modèle logistique :}
+
+\begin{itemize}
+    \item \textbf{Coefficient estimé ($\hat{\beta}_{chol}$) :} $0.785$
+    \item \textbf{Odds Ratio (OR) :} $2.19$
+    \item \textbf{Intervalle de Confiance à 95\% :} $[1.79\ ;\ 2.71]$
+    \item \textbf{Significativité (p-value) :} $p < 0.001$
+\end{itemize}
+
+\vspace{0.3cm}
+
+\textbf{Analyse de l'Odds Ratio :}
+Pour chaque unité de cholestérol supplémentaire, l'odds est multiplié par environ \textbf{2.19}. Le risque augmente considérablement, de \textbf{79\% à 171\%} par unité.
+
+\vspace{0.3cm}
+
+\begin{colorblock}[white]{maincolor}{Conclusion}
+\footnotesize
+L'intervalle est nettement supérieur à 1.
+\textbf{Le cholestérol total est un facteur de risque majeur et hautement significatif.}
+\end{colorblock}
 
 ## Variable Sexe
 
