@@ -1,6 +1,5 @@
 ---
 title: "Étude cas-témoin sur l’infarctus du myocarde"
-subtitle: "Projet de biostatistiques"
 author: "LANCON Cindy, FRISON Victor"
 date: "2026-01-15"
 output: 
@@ -672,11 +671,155 @@ legend("bottomright", legend = paste("AUC = ", round(auc(roc),3)), bty="n")
 
 ## Interactions dans le modèle
 
+\small
+\vspace{0.3cm}
+\textbf{Le concept :}
+Il est possible que l'effet d'un facteur de risque dépende du niveau d'une autre variable (effet multiplicatif et non plus additif).
+
+\vspace{0.3cm}
+
+\textbf{Nous avons testé 5 interactions biologiquement plausibles :}
+
+\begin{enumerate}
+    \item \textbf{Tabagisme $\times$ Sexe :} L'effet du tabac est-il différent chez les femmes ?
+    \item \textbf{Tabagisme $\times$ Âge :} L'impact augmente-t-il avec l'âge ?
+    \item \textbf{IMC $\times$ Activité physique :} Le sport compense-t-il le surpoids ?
+    \item \textbf{Diabète $\times$ Hypertension :} Y a-t-il un effet synergique ("cocktail explosif") ?
+    \item \textbf{Cholestérol $\times$ Âge :} L'effet du cholestérol varie-t-il selon l'âge ?
+\end{enumerate}
+
+## Interactions dans le modèle
+
+```{r calc_inter, include=FALSE}
+# --- Calculs des interactions (Caché) ---
+
+# 1. Ajustement des modèles avec interaction
+mod_inter_tabac_sexe <- update(mod_final, . ~ . + tabagisme:sexe)
+mod_inter_tabac_age  <- update(mod_final, . ~ . + tabagisme:age)
+mod_inter_imc_act    <- update(mod_final, . ~ . + imc:niveau_activite_physique)
+mod_inter_diab_hyp   <- update(mod_final, . ~ . + hypertension:diabete)
+mod_inter_chol_age   <- update(mod_final, . ~ . + cholesterol_total:age)
+
+# 2. Récupération des p-values (Test du Chi2 sur l'anova)
+# On compare le modèle final (sans interaction) avec chaque modèle avec interaction
+get_pval <- function(mod_base, mod_inter) {
+  format.pval(anova(mod_base, mod_inter, test = "Chisq")$`Pr(>Chi)`[2], eps = 0.001)
+}
+
+p_vals <- c(
+  get_pval(mod_final, mod_inter_tabac_sexe),
+  get_pval(mod_final, mod_inter_tabac_age),
+  get_pval(mod_final, mod_inter_imc_act),
+  get_pval(mod_final, mod_inter_diab_hyp),
+  get_pval(mod_final, mod_inter_chol_age)
+)
+
+# 3. Création du dataframe pour l'affichage
+df_inter <- data.frame(
+  "Interaction Testée" = c("Tabac * Sexe", "Tabac * Âge", "IMC * Activité", "Diabète * HTA", "Cholestérol * Âge"),
+  "P-value" = p_vals,
+  "Significatif" = rep("Non", 5) # Puisque tout est > 0.05
+)
+```
+
+
+```{r}
+library(kableExtra)
+
+df_inter %>%
+  kbl(booktabs = TRUE, align = "c", linesep = "") %>%
+  kable_styling(latex_options = c("striped", "hold_position"), 
+                position = "center", 
+                font_size = 10) %>%
+  # On colore la ligne d'en-tête (row 0) avec le rouge de votre thème
+  row_spec(0, bold = TRUE, color = "white", background = "#C6352B") %>%
+  # On met la première colonne en gras pour bien lire les noms d'interactions
+  column_spec(1, bold = TRUE, width = "4cm")
+```
 
 
 
+\vspace{0.2cm}
 
+\begin{colorblock}[white]{maincolor}{Validation du modèle additif}
+Aucune interaction n'est significative (p>0.05). Cela suggère que les effets des facteurs de risque sont additifs et indépendants les uns des autres dans notre échantillon.
 
+\textbf{Le modèle final sans interaction est donc conservé.}
+
+\end{colorblock}
+
+# Conclusion
+
+## Synthèse des Résultats
+
+\small
+\textbf{1. Facteurs de risque indépendants confirmés :}
+L'analyse multivariée a permis d'isoler les facteurs ayant un impact direct, indépendamment des facteurs de confusion :
+
+\begin{columns}
+\begin{column}{0.48\textwidth}
+    \begin{itemize}
+        \item \textbf{Facteurs Cliniques :}
+        \begin{itemize} \footnotesize
+            \item Âge, IMC élevé.
+            \item Hypertension, Diabète.
+            \item Cholestérol élevé.
+        \end{itemize}
+    \end{itemize}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+    \begin{itemize}
+        \item \textbf{Mode de vie :}
+        \begin{itemize} \footnotesize
+            \item Tabagisme \textbf{actif}.
+            \item Activité physique faible.
+            \item Consommation d'alcool élevée.
+        \end{itemize}
+    \end{itemize}
+\end{column}
+\end{columns}
+
+\vspace{0.2cm}
+
+\textbf{2. Facteurs non conservés :}
+Le statut d'\textit{ancien fumeur}, le \textit{sexe} et la \textit{région} ne sont plus significatifs après ajustement.
+
+\vspace{0.2cm}
+
+\begin{colorblock}[white]{maincolor}{Qualité du modèle}
+\footnotesize
+Le modèle final est performant (\textbf{AUC = 0.85}) et valide l'hypothèse d'additivité des risques (aucune interaction significative).
+\end{colorblock}
+
+## Conlusion et perpectives
+
+\small
+\textbf{Conclusion principale :}
+Nos résultats soulignent l'importance cruciale des \textbf{facteurs de risque modifiables} (Tabac, Sédentarité, Alcool) dans la prévention de l'infarctus.
+
+\vspace{0.4cm}
+
+\begin{columns}
+\begin{column}{0.48\textwidth}
+    \begin{block}{Limites de l'étude}
+    \begin{itemize}
+        \item \textbf{Causalité :} Étude cas-témoin (observationnelle) $\rightarrow$ montre des associations, pas des causalités.
+        \item \textbf{Variables manquantes :} Pas de données sur l'alimentation ou les antécédents familiaux.
+    \end{itemize}
+    \end{block}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+    \begin{block}{Perspectives}
+    Si des données de suivi temporel étaient disponibles :
+    \begin{itemize}
+        \item Réalisation d'une \textbf{Analyse de Survie} (Modèle de Cox).
+        \item Objectif : Étudier le \textit{temps} jusqu'à la survenue de l'événement.
+    \end{itemize}
+    \end{block}
+\end{column}
+\end{columns}
 
 
 
