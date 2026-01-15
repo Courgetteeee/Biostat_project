@@ -11,6 +11,84 @@ output:
       in_header: header.tex 
 ---
 
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+
+library(car)
+library(dplyr)
+library(ggplot2)
+library(gtsummary)
+library(MASS)
+library(pROC)
+
+data <- read.csv2("data/Table.csv", header=TRUE)
+
+```
+
+```{r, include=FALSE}
+#Vérifier type de données
+str(data)
+
+#Variable quantitative
+data$age <- as.numeric(data$age)
+data$imc <- as.numeric(data$imc)
+data$cholesterol_total <- as.numeric(data$cholesterol_total)
+
+#Variable factor
+data$statut_cas_temoin <- factor(data$statut_cas_temoin)
+data$sexe <- factor(data$sexe)
+data$tabagisme <- factor(data$tabagisme)
+data$hypertension <- factor(data$hypertension)
+data$diabete <- factor(data$diabete)
+data$niveau_activite_physique <- factor(data$niveau_activite_physique)
+data$consommation_alcool <- factor(data$consommation_alcool)
+data$region <- factor(data$region)
+```
+
+```{r, include=FALSE}
+lapply( data[, sapply(data, is.factor)], levels)
+
+#Changement référence
+## Référence = Témoin (car on veut la proba d'être CAS par rapport aux TEMOINS)
+data$statut_cas_temoin <- relevel(data$statut_cas_temoin, ref="Témoin")
+
+#Référence = Jamais
+data$tabagisme <- relevel(data$tabagisme, ref = "Jamais")
+```
+
+```{r theme_setup, include=FALSE}
+# Définition des couleurs de la charte UFC pour R
+ufc_red <- "#C6352B"   # maincolor
+ufc_grey <- "#999999"  # Gris neutre pour les témoins
+
+# Thème ggplot par défaut minimaliste
+theme_set(theme_minimal() +
+          theme(legend.position = "bottom",
+                plot.title = element_text(face = "bold", size = 14),
+                axis.text = element_text(size = 11)))
+
+# Fonction pour les variables Quantitatives (Boxplot)
+plot_quanti <- function(var_name, title, y_label) {
+  ggplot(data, aes(x = statut_cas_temoin, y = .data[[var_name]], fill = statut_cas_temoin)) +
+    geom_boxplot(alpha = 0.8, outlier.colour = ufc_red) +
+    scale_fill_manual(values = c("Témoin" = ufc_grey, "Cas" = ufc_red)) +
+    labs(title = title, x = "", y = y_label)
+}
+
+# Fonction pour les variables Qualitatives (Barplot 100%)
+plot_quali <- function(var_name, title, x_label) {
+  ggplot(data, aes(x = .data[[var_name]], fill = statut_cas_temoin)) +
+    geom_bar(position = "fill", alpha = 0.9) +
+    scale_y_continuous(labels = scales::percent) +
+    scale_fill_manual(values = c("Témoin" = ufc_grey, "Cas" = ufc_red)) +
+    labs(title = title, x = x_label, y = "Proportion", fill = "Statut") +
+    theme(axis.text.x = element_text(angle = 30, hjust = 1))
+}
+```
+
+
 # Introduction
 
 ## Introduction
@@ -21,9 +99,33 @@ output:
 
 ## Analyse exploratoire et Statistiques Descriptives
 
+
+
+
 # Regression logistique simple / univarié
 
-## Variable Age
+## Variable Âge : Analyse Univariée
+
+\textbf{Résultats du modèle logistique :}
+
+\begin{itemize}
+    \item \textbf{Coefficient estimé ($\hat{\beta}_{age}$) :} $0.083$
+    \item \textbf{Odds Ratio (OR) :} $1.09$
+    \item \textbf{Intervalle de Confiance à 95\% :} $[1.06\ ;\ 1.11]$
+    \item \textbf{Significativité (p-value) :} $p < 0.001$
+\end{itemize}
+
+\vspace{0.5cm}
+
+\textbf{Analyse de l'Odds Ratio :}
+Pour chaque année d'âge supplémentaire, l'odds de faire un infarctus est multiplié par environ \textbf{1.09}. Concrètement, le risque augmente de \textbf{6\% à 11\%} par an.
+
+\vspace{0.5cm}
+
+\begin{colorblock}[white]{maincolor}{Conclusion}
+L'intervalle de confiance ne contient pas la valeur 1 et la p-value est extrêmement faible.
+\textbf{L'âge est donc un facteur de risque significativement associé à la survenue de l'infarctus.}
+\end{colorblock}
 
 ## Variable IMC
 
