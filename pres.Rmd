@@ -1,0 +1,432 @@
+---
+title: "Étude cas-témoin sur l’infarctus du myocarde"
+subtitle: "Projet de biostatistiques"
+author: "LANCON Cindy, FRISON Victor"
+date: "2026-01-15"
+output: 
+  beamer_presentation:
+    keep_tex: true
+    slide_level: 2
+    includes:
+      in_header: header.tex 
+---
+
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+
+library(car)
+library(dplyr)
+library(ggplot2)
+library(gtsummary)
+library(MASS)
+library(pROC)
+
+data <- read.csv2("data/Table.csv", header=TRUE)
+
+```
+
+```{r, include=FALSE}
+#Vérifier type de données
+str(data)
+
+#Variable quantitative
+data$age <- as.numeric(data$age)
+data$imc <- as.numeric(data$imc)
+data$cholesterol_total <- as.numeric(data$cholesterol_total)
+
+#Variable factor
+data$statut_cas_temoin <- factor(data$statut_cas_temoin)
+data$sexe <- factor(data$sexe)
+data$tabagisme <- factor(data$tabagisme)
+data$hypertension <- factor(data$hypertension)
+data$diabete <- factor(data$diabete)
+data$niveau_activite_physique <- factor(data$niveau_activite_physique)
+data$consommation_alcool <- factor(data$consommation_alcool)
+data$region <- factor(data$region)
+```
+
+```{r, include=FALSE}
+lapply( data[, sapply(data, is.factor)], levels)
+
+#Changement référence
+## Référence = Témoin (car on veut la proba d'être CAS par rapport aux TEMOINS)
+data$statut_cas_temoin <- relevel(data$statut_cas_temoin, ref="Témoin")
+
+#Référence = Jamais
+data$tabagisme <- relevel(data$tabagisme, ref = "Jamais")
+```
+
+```{r theme_setup, include=FALSE}
+# Définition des couleurs de la charte UFC pour R
+ufc_red <- "#C6352B"   # maincolor
+ufc_grey <- "#999999"  # Gris neutre pour les témoins
+
+# Thème ggplot par défaut minimaliste
+theme_set(theme_minimal() +
+          theme(legend.position = "bottom",
+                plot.title = element_text(face = "bold", size = 14),
+                axis.text = element_text(size = 11)))
+
+# Fonction pour les variables Quantitatives (Boxplot)
+plot_quanti <- function(var_name, title, y_label) {
+  ggplot(data, aes(x = statut_cas_temoin, y = .data[[var_name]], fill = statut_cas_temoin)) +
+    geom_boxplot(alpha = 0.8, outlier.colour = ufc_red) +
+    scale_fill_manual(values = c("Témoin" = ufc_grey, "Cas" = ufc_red)) +
+    labs(title = title, x = "", y = y_label)
+}
+
+# Fonction pour les variables Qualitatives (Barplot 100%)
+plot_quali <- function(var_name, title, x_label) {
+  ggplot(data, aes(x = .data[[var_name]], fill = statut_cas_temoin)) +
+    geom_bar(position = "fill", alpha = 0.9) +
+    scale_y_continuous(labels = scales::percent) +
+    scale_fill_manual(values = c("Témoin" = ufc_grey, "Cas" = ufc_red)) +
+    labs(title = title, x = x_label, y = "Proportion", fill = "Statut") +
+    theme(axis.text.x = element_text(angle = 30, hjust = 1))
+}
+
+library(cowplot) # Pour la grille
+# On réduit un peu la taille des titres pour les grilles
+theme_grid <- theme(
+  plot.title = element_text(size = 10, face="bold"),
+  axis.text = element_text(size = 8),
+  axis.title = element_text(size = 8),
+  legend.position = "none" # On enlève les légendes individuelles pour gagner de la place
+)
+```
+
+
+# Introduction
+
+## Introduction
+
+\small
+\vspace{0.3cm}
+\begin{columns}
+\begin{column}{0.5\textwidth}
+    \textbf{Design et Population :}
+    \begin{itemize}
+        \item \textbf{Type :} Étude multicentrique sur l'infarctus du myocarde aigu.
+        \item \textbf{Echantillon global :} $N = 520$ patients.
+    \end{itemize}
+
+    \vspace{0.2cm}
+
+    \textbf{Constitution des groupes :}
+    \begin{itemize}
+        \item \textbf{260 Cas :} Patients hospitalisés pour un 1\textsuperscript{er} infarctus confirmé.
+        \item \textbf{260 Témoins :} Patients hospitalisés (mêmes centres) pour pathologies non cardio-vasculaires, sans antécédents coronariens.
+    \end{itemize}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+    \begin{colorblock}[white]{maincolor}{Variables et Modélisation}
+    \footnotesize
+    \textbf{Variable réponse ($Y$) :}
+    \begin{itemize}
+        \item Statut du patient
+        \item \textbf{Modalité de référence : Témoin}
+        \item \textit{Objectif : Modéliser la probabilité d'être Cas.}
+    \end{itemize}
+
+    \vspace{0.1cm}
+
+    \textbf{Facteurs de risque étudiés ($X$) :}
+    \begin{itemize}
+        \item \textit{Cliniques :} Âge, Sexe, IMC, HTA, Diabète, Cholestérol.
+        \item \textit{Mode de vie :} Activité physique, Alcool, Région.
+        \item \textit{Tabagisme :} Jamais / Ancien / Actuel.
+        \item \textbf{Réf Tabac : Jamais fumeur}.
+    \end{itemize}
+    \end{colorblock}
+\end{column}
+\end{columns}
+
+## Analyse exploratoire et Statistiques Descriptives
+
+```{r grid_profil, echo=FALSE, fig.height=5.5, fig.width=14, out.width="100%", fig.align='center'}
+# 1. Création des objets graphiques (sans les afficher)
+p1 <- plot_quanti("age", "Âge", "Années") + theme_grid
+p2 <- plot_quali("sexe", "Sexe", "") + theme_grid
+p3 <- plot_quali("region", "Région", "") + theme_grid + theme(axis.text.x = element_text(angle=45, hjust=1))
+p4 <- plot_quanti("imc", "IMC", "kg/m²") + theme_grid
+
+# 2. Assemblage en grille 2x2
+plot_grid(p1, p2, p3, p4, ncol = 2, align = 'hv')
+```
+
+## Analyse exploratoire et Statistiques Descriptives
+
+```{r grid_sante, echo=FALSE, fig.height=5.5, fig.width=14, out.width="100%", fig.align='center'}
+# Préparation des plots
+p5 <- plot_quali("hypertension", "Hypertension", "") + theme_grid
+p6 <- plot_quali("diabete", "Diabète", "") + theme_grid
+p7 <- plot_quanti("cholesterol_total", "Cholestérol Total", "g/L") + theme_grid
+p8 <- plot_quali("tabagisme", "Tabagisme", "") + theme_grid
+
+# Grille
+plot_grid(p5, p6, p7, p8, ncol = 2, align = 'hv')
+```
+
+## Analyse exploratoire et Statistiques Descriptives
+
+```{r grid_vie, echo=FALSE, fig.height=5.5, fig.width=14, out.width="100%", fig.align='center'}
+# Préparation
+p9 <- plot_quali("niveau_activite_physique", "Activité Physique", "") + theme_grid
+p10 <- plot_quali("consommation_alcool", "Conso. Alcool", "") + theme_grid
+
+# Grille (seulement 2 graphiques ici, donc on les centre)
+plot_grid(p9, p10, ncol = 2, align = 'hv')
+```
+
+
+# Regression logistique simple / univarié
+
+## Variable Âge
+
+\small 
+\vspace{0.3cm}
+\textbf{Résultats du modèle logistique :}
+
+\begin{itemize}
+    \item \textbf{Coefficient estimé ($\hat{\beta}_{age}$) :} $0.083$
+    \item \textbf{Odds Ratio (OR) :} $1.09$
+    \item \textbf{Intervalle de Confiance à 95\% :} $[1.06\ ;\ 1.11]$
+    \item \textbf{Significativité (p-value) :} $p < 0.001$
+\end{itemize}
+
+\vspace{0.3cm}
+
+\textbf{Analyse de l'Odds Ratio :}
+Pour chaque année d'âge supplémentaire, l'odds de faire un infarctus est multiplié par environ \textbf{1.09}. Concrètement, le risque augmente de \textbf{6\% à 11\%} par an.
+
+\vspace{0.3cm}
+
+\begin{colorblock}[white]{maincolor}{Conclusion}
+\footnotesize
+L'intervalle de confiance ne contient pas la valeur 1 et la p-value est extrêmement faible.
+\textbf{L'âge est donc un facteur de risque significativement associé à la survenue de l'infarctus.}
+\end{colorblock}
+
+## Variable IMC : Analyse Univariée
+
+\small 
+\vspace{0.3cm}
+\textbf{Résultats du modèle logistique :}
+
+\begin{itemize}
+    \item \textbf{Coefficient estimé ($\hat{\beta}_{imc}$) :} $0.148$
+    \item \textbf{Odds Ratio (OR) :} $1.16$
+    \item \textbf{Intervalle de Confiance à 95\% :} $[1.10\ ;\ 1.22]$
+    \item \textbf{Significativité (p-value) :} $p < 0.001$
+\end{itemize}
+
+\vspace{0.3cm}
+
+\textbf{Analyse de l'Odds Ratio :}
+Pour chaque unité d'IMC supplémentaire, l'odds d'être malade est multiplié par environ \textbf{1.16}. Concrètement, le risque augmente de \textbf{10\% à 22\%} par unité.
+
+\vspace{0.3cm}
+
+\begin{colorblock}[white]{maincolor}{Conclusion}
+\footnotesize
+L'intervalle ne contient pas 1 et la p-value est extrêmement faible ($6.7 \times 10^{-10}$).
+\textbf{L'IMC est donc significativement associé à la survenue de l'infarctus.}
+\end{colorblock}
+
+## Variable Cholestérol
+
+\small 
+\vspace{0.3cm}
+\textbf{Résultats du modèle logistique :}
+
+\begin{itemize}
+    \item \textbf{Coefficient estimé ($\hat{\beta}_{chol}$) :} $0.785$
+    \item \textbf{Odds Ratio (OR) :} $2.19$
+    \item \textbf{Intervalle de Confiance à 95\% :} $[1.79\ ;\ 2.71]$
+    \item \textbf{Significativité (p-value) :} $p < 0.001$
+\end{itemize}
+
+\vspace{0.3cm}
+
+\textbf{Analyse de l'Odds Ratio :}
+Pour chaque unité de cholestérol supplémentaire, l'odds est multiplié par environ \textbf{2.19}. Le risque augmente considérablement, de \textbf{79\% à 171\%} par unité.
+
+\vspace{0.3cm}
+
+\begin{colorblock}[white]{maincolor}{Conclusion}
+\footnotesize
+L'intervalle est nettement supérieur à 1.
+\textbf{Le cholestérol total est un facteur de risque majeur et hautement significatif.}
+\end{colorblock}
+
+## Variable Sexe
+
+\small 
+\vspace{0.3cm}
+\textbf{Résultats du modèle logistique (Réf : Femme) :}
+
+\begin{itemize}
+    \item \textbf{Coefficient estimé ($\hat{\beta}_{Homme}$) :} $0.307$
+    \item \textbf{Intervalle de Confiance de l'OR à 95\% :} $[0.95\ ;\ 1.95]$
+    \item \textbf{Significativité (p-value) :} $> 0.05$ (Non significatif)
+\end{itemize}
+
+\vspace{0.3cm}
+
+\textbf{Analyse :}
+L'intervalle de confiance de l'Odds Ratio contient la valeur 1 ($[0.95; 1.95]$). Cela signifie qu'il n'y a pas de différence de risque statistiquement prouvée entre les hommes et les femmes dans cet échantillon.
+
+\vspace{0.3cm}
+
+\begin{colorblock}[white]{maincolor}{Conclusion}
+\footnotesize
+La p-value est supérieure au seuil de 5\% et l'IC contient 1.
+\textbf{Le sexe n'est pas statistiquement associé à la survenue de l'infarctus.}
+\end{colorblock}
+
+## Variable Tabagisme
+
+\small
+\vspace{0.3cm}
+\textbf{Résultats par rapport aux non-fumeurs (Réf : Jamais) :}
+
+\begin{itemize}
+    \item \textbf{Ancien Fumeur :}
+    \begin{itemize} \footnotesize
+        \item OR IC 95\% : $[1.07\ ;\ 2.61]$ \quad ($p = 0.023$)
+    \end{itemize}
+    \item \textbf{Fumeur Actuel :}
+    \begin{itemize} \footnotesize
+        \item OR IC 95\% : $[2.34\ ;\ 5.56]$ \quad ($p < 0.001$)
+    \end{itemize}
+\end{itemize}
+
+\vspace{0.2cm}
+
+\textbf{Analyse des risques :}
+\begin{itemize}
+    \item Être \textbf{ancien fumeur} augmente le risque (OR min : 1.07).
+    \item Être \textbf{fumeur actuel} l'augmente drastiquement (OR entre 2.34 et 5.56).
+\end{itemize}
+
+\vspace{0.2cm}
+
+\begin{colorblock}[white]{maincolor}{Conclusion}
+\footnotesize
+Le test global est très significatif ($p < 0.001$).
+\textbf{Le tabagisme est fortement associé à la maladie, avec un effet dose-réponse (Actuel > Ancien > Jamais).}
+\end{colorblock}
+
+## Variable Hypertension
+
+\small 
+\vspace{0.3cm}
+\textbf{Résultats du modèle logistique (Réf : Non) :}
+
+\begin{itemize}
+    \item \textbf{Coefficient estimé ($\hat{\beta}_{HTA}$) :} $0.75$
+    \item \textbf{Intervalle de Confiance de l'OR à 95\% :} $[1.47\ ;\ 3.03]$
+    \item \textbf{Significativité (p-value) :} $p < 0.001$ ($3.6 \times 10^{-5}$)
+\end{itemize}
+
+\vspace{0.3cm}
+
+\textbf{Analyse de l'Odds Ratio :}
+Le fait d'être hypertendu multiplie le risque (l'odds) d'être un cas par au moins \textbf{1.47} et au plus \textbf{3.03} par rapport aux sujets sains.
+
+\vspace{0.3cm}
+
+\begin{colorblock}[white]{maincolor}{Conclusion}
+\footnotesize
+L'intervalle de confiance est nettement supérieur à 1.
+\textbf{L'hypertension artérielle est un facteur de risque majeur statistiquement associé à l'infarctus.}
+\end{colorblock}
+
+## Variable Diabète
+
+\small 
+\vspace{0.3cm}
+\textbf{Résultats du modèle logistique (Réf : Non) :}
+
+\begin{itemize}
+    \item \textbf{Coefficient estimé ($\hat{\beta}_{diabète}$) :} $0.77$
+    \item \textbf{Odds Ratio (OR) :} $2.16$ \quad ($e^{0.77}$)
+    \item \textbf{Intervalle de Confiance à 95\% :} $[1.42\ ;\ 3.34]$
+    \item \textbf{Significativité (p-value) :} $p < 0.001$ ($3.2 \times 10^{-4}$)
+\end{itemize}
+
+\vspace{0.3cm}
+
+\textbf{Analyse de l'Odds Ratio :}
+Être diabétique multiplie l'odds d'être un cas par au moins \textbf{1.42} et au plus \textbf{3.34} par rapport à un sujet non diabétique.
+
+\vspace{0.3cm}
+
+\begin{colorblock}[white]{maincolor}{Conclusion}
+\footnotesize
+La p-value est très faible et l'intervalle exclut 1.
+\textbf{Le diabète est statistiquement associé à la contraction de la maladie.}
+\end{colorblock}
+
+## Variable Activité Physique
+
+\small 
+\vspace{0.3cm}
+\textbf{Résultats par rapport à une activité Élevée (Réf) :}
+
+\begin{itemize}
+    \item \textbf{Activité Faible :}
+    \begin{itemize} \footnotesize
+        \item OR IC 95\% : $[2.48\ ;\ 7.51]$ \quad ($p < 0.001$)
+    \end{itemize}
+    \item \textbf{Activité Modérée :}
+    \begin{itemize} \footnotesize
+        \item OR IC 95\% : $[0.91\ ;\ 2.93]$ \quad ($p = 0.104$, Non Sign.)
+    \end{itemize}
+\end{itemize}
+
+\vspace{0.2cm}
+
+\textbf{Analyse des risques :}
+Une activité physique \textbf{faible} augmente drastiquement le risque (OR > 2.48). En revanche, la différence entre activité modérée et élevée n'est pas significative.
+
+\vspace{0.2cm}
+
+\begin{colorblock}[white]{maincolor}{Conclusion}
+\footnotesize
+Le test global est significatif ($p < 0.001$).
+\textbf{La sédentarité (activité faible) est un facteur de risque majeur par rapport à une activité sportive régulière.}
+\end{colorblock}
+
+## Variable Alcool
+
+\small 
+\vspace{0.3cm}
+\textbf{Résultats par rapport à Aucune/Occas. (Réf) :}
+
+\begin{itemize}
+    \item \textbf{Consommation Élevée :}
+    \begin{itemize} \footnotesize
+        \item OR IC 95\% : $[1.80\ ;\ 5.79]$ \quad ($p < 0.001$)
+    \end{itemize}
+    \item \textbf{Consommation Modérée :}
+    \begin{itemize} \footnotesize
+        \item OR IC 95\% : $[0.96\ ;\ 2.08]$ \quad ($p = 0.08$, Non Sign.)
+    \end{itemize}
+\end{itemize}
+
+\vspace{0.2cm}
+
+\textbf{Analyse des risques :}
+Une consommation \textbf{élevée} multiplie le risque par environ 3 (OR estimé à 3.15). Une consommation modérée ne montre pas de sur-risque significatif.
+
+\vspace{0.2cm}
+
+\begin{colorblock}[white]{maincolor}{Conclusion}
+\footnotesize
+Le test global est significatif ($p < 0.001$).
+\textbf{L'abus d'alcool (consommation élevée) est fortement associé à la maladie.}
+\end{colorblock}
