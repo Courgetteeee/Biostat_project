@@ -430,3 +430,254 @@ Une consommation \textbf{élevée} multiplie le risque par environ 3 (OR estimé
 Le test global est significatif ($p < 0.001$).
 \textbf{L'abus d'alcool (consommation élevée) est fortement associé à la maladie.}
 \end{colorblock}
+
+# Regression multivariée logistique multiple
+
+## Création du modèle {.fragile}
+
+\small
+
+:::: {.columns}
+
+::: {.column width="48%"}
+\vspace{0.3cm}
+**1. Objectif**
+\begin{itemize}
+    \item Ajuster l'effet de chaque facteur en contrôlant les \textbf{facteurs de confusion}.
+    \item Obtenir un modèle "nettoyé" des variables non pertinentes.
+\end{itemize}
+
+\vspace{0.4cm}
+
+**2. Méthode de sélection**
+\begin{itemize}
+    \item \textbf{Type :} Descendante (\textit{Backward}).
+    \item \textbf{Critère :} Minimisation de l'\textbf{AIC} (Akaike Information Criterion).
+    \item \textit{Principe : On part du modèle complet et on retire itérativement les variables qui n'apportent pas d'information significative.}
+\end{itemize}
+:::
+
+::: {.column width="50%"}
+**Implémentation R :**
+\vspace{-0.1cm}
+
+```{r code_model, echo=TRUE, eval=FALSE}
+# Modèle complet (toutes variables)
+mod_full <- glm(statut_cas_temoin ~ ., 
+                data = data, 
+                family = binomial)
+
+# Sélection Stepwise (AIC)
+# direction = "backward"
+mod_final <- stepAIC(mod_full, 
+                     trace = FALSE)
+
+# Comparaison des modèles
+AIC(mod_full, mod_final)
+```
+
+\vspace{0.2cm}
+
+:::
+::::
+
+## Résultat de la séléction
+
+\begin{colorblock}[white]{maincolor}{Résultats de la sélection}
+La procédure améliore la qualité du modèle (baisse de l'AIC de \textbf{526.83} à \textbf{525.09}).
+
+\vspace{0.1cm}
+\textbf{Variables exclues (Non Sign.) :} \begin{itemize}
+  \item \textit{Sexe}
+  \item \textit{Région}
+\end{itemize}
+
+\textbf{Variables conservées :} Âge, Tabagisme, IMC, HTA, Diabète, Cholestérol, Activité, Alcool.
+\end{colorblock}
+
+## Comparaison modèle univarié et multivarié
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+## Tableau comparatif manuel
+
+
+# Fonction pour extraire OR et IC d'un modèle
+extraire_OR <- function(modele, nom_var) {
+  coef <- summary(modele)$coefficients
+  OR <- exp(coef(modele))
+  IC <- exp(confint(modele))
+  
+  # Pour les variables catégorielles, on prend les lignes correspondantes
+  if (nom_var %in% rownames(coef)) {
+    data.frame(
+      Variable = nom_var,
+      OR = round(OR[nom_var], 2),
+      IC_inf = round(IC[nom_var, 1], 2),
+      IC_sup = round(IC[nom_var, 2], 2),
+      p_value = round(coef[nom_var, 4], 4)
+    )
+  }
+}
+
+# Créer un data frame avec tous les résultats
+resultats <- data.frame(
+  Variable = c(
+    "Âge (par année)",
+    "Tabagisme - Ancien fumeur",
+    "Tabagisme - Fumeur actuel",
+    "IMC (par kg/m²)",
+    "Hypertension - Oui",
+    "Diabète - Oui",
+    "Cholestérol total (par mmol/L)",
+    "Activité physique - Faible",
+    "Activité physique - Modérée",
+    "Consommation alcool - Élevée",
+    "Consommation alcool - Modérée"
+  ),
+  
+  # OR bruts (de vos analyses univariées)
+  OR_brut = c(
+    1.09,  # age (exp(0.083))
+    1.67,  # ancien fumeur (exp(0.51))
+    3.59,  # fumeur actuel (exp(1.28))
+    1.16,  # imc (exp(0.148))
+    2.11,  # hypertension (exp(0.75))
+    2.16,  # diabete (exp(0.77))
+    2.19,  # cholesterol (exp(0.785))
+    4.26,  # act faible (exp(1.45))
+    1.62,  # act modérée (exp(0.48))
+    3.16,  # alcool élevée (exp(1.15))
+    1.42   # alcool modérée (exp(0.35))
+  ),
+  
+  IC_brut = c(
+    "[1.06 ; 1.11]",
+    "[1.07 ; 2.61]",
+    "[2.34 ; 5.56]",
+    "[1.10 ; 1.22]",
+    "[1.47 ; 3.03]",
+    "[1.42 ; 3.34]",
+    "[1.79 ; 2.71]",
+    "[2.48 ; 7.51]",
+    "[0.91 ; 2.93]",
+    "[1.80 ; 5.79]",
+    "[0.96 ; 2.08]"
+  ),
+  
+  p_brut = c(
+    "<0.001",
+    "0.024",
+    "<0.001",
+    "<0.001",
+    "<0.001",
+    "<0.001",
+    "<0.001",
+    "<0.001",
+    "0.104",
+    "<0.001",
+    "0.080"
+  ),
+  
+  # OR ajustés (de votre modèle final)
+  OR_ajuste = c(
+    1.08,  # exp(0.07871)
+    1.50,  # exp(0.40746)
+    2.70,  # exp(0.99496)
+    1.17,  # exp(0.15562)
+    1.98,  # exp(0.68176)
+    2.19,  # exp(0.78333)
+    2.18,  # exp(0.77941)
+    2.85,  # exp(1.04782)
+    1.38,  # exp(0.32442)
+    2.88,  # exp(1.05850)
+    1.60   # exp(0.47069)
+  ),
+  
+  IC_ajuste = c(
+    "[1.05 ; 1.11]",
+    "[0.88 ; 2.59]",
+    "[1.62 ; 4.57]",
+    "[1.10 ; 1.25]",
+    "[1.27 ; 3.10]",
+    "[1.29 ; 3.75]",
+    "[1.71 ; 2.82]",
+    "[1.50 ; 5.56]",
+    "[0.70 ; 2.79]",
+    "[1.46 ; 5.86]",
+    "[0.98 ; 2.63]"
+  ),
+  
+  p_ajuste = c(
+    "<0.001",
+    "0.140",
+    "<0.001",
+    "<0.001",
+    "0.003",
+    "0.004",
+    "<0.001",
+    "0.002",
+    "0.356",
+    "0.003",
+    "0.061"
+  )
+)
+
+# Afficher le tableau
+knitr::kable(
+  resultats,
+  col.names = c("Variable", "OR", "IC 95%", "p", "OR", "IC 95%", "p"),
+  caption = "Comparaison des odds ratios bruts (univariés) et ajustés (multivariés)",
+  align = c("l", "c", "c", "c", "c", "c", "c")
+) %>%
+  kableExtra::kable_styling(
+    bootstrap_options = c("striped", "hover"),
+    full_width = FALSE,   # Empêche le tableau de prendre toute la largeur
+    position = "center",  # Centre le tableau sur la page
+    font_size = 10        # Optionnel : réduit la taille de la police si nécessaire
+    ) %>%
+  kableExtra::add_header_above(c(" " = 1, "Analyse univariée" = 3, "Analyse multivariée" = 3))
+```
+
+## Performance du modèle
+
+```{r, include=FALSE}
+#Création du modèle avec toutes les variables
+mod_complet <- glm(statut_cas_temoin ~ age + sexe + tabagisme + imc + 
+                     hypertension + diabete + cholesterol_total +
+                     niveau_activite_physique + consommation_alcool + region,
+                   family = binomial, data=data)
+
+#Méthode Descendante
+mod_final <- stepAIC(mod_complet, direction="backward", trace=FALSE)
+coef(mod_final)
+
+#Comparaison AIC
+AIC(mod_complet, mod_final)
+```
+
+
+```{r, message=FALSE, warning=FALSE, echo=FALSE, fig.height=7, fig.width=14, out.width="100%", fig.align='center'}
+
+#Courbe ROC
+pred <- predict(mod_final, type="response")
+
+roc <- roc(data$statut_cas_temoin, pred)
+
+#Graphique
+plot(roc, main = "Courbe ROC du modèle final")
+
+legend("bottomright", legend = paste("AUC = ", round(auc(roc),3)), bty="n")
+
+```
+
+## Interactions dans le modèle
+
+
+
+
+
+
+
+
+
+
